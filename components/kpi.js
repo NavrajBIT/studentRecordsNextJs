@@ -1,9 +1,9 @@
 import React from "react";
-
+import Admindash from "../components/DashboardAdmin/Admindash"
 const KPI = () => {
   return (
     <div>
-      <h1>KPI comes here...</h1>
+      <Admindash/>
     </div>
   );
 };
