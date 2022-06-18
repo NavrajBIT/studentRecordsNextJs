@@ -8,6 +8,7 @@ import Profile from "./profile";
 import TimeTable from "./timeTable";
 import KPI from "./kpi";
 import AttendanceView from "./attendanceView";
+import AttendanceViewStudent from "./attendanceViewStudent";
 
 import { useContext } from "react";
 import userContext from "../context/userContext";
@@ -30,6 +31,7 @@ const AppContent = () => {
         {user.userState.view === 3 && <ViewRecords />}
         {user.userState.view === 4 && <AttendanceMark />}
         {user.userState.view === 4.1 && <AttendanceView />}
+        {user.userState.view === 4.2 && <AttendanceViewStudent />}
         {user.userState.view === 5 && <Assignment />}
         {user.userState.view === 6 && <MarksCard />}
         {user.userState.view === 7 && <TimeTable />}

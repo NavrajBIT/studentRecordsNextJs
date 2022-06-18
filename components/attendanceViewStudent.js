@@ -1,26 +1,35 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+
+import userContext from "../context/userContext";
+
 import {
   getStudentAttendence,
   getStudentsFromGrade,
   getStudentData,
 } from "../api/contractCall";
 
-const AttendanceView = () => {
+const AttendanceViewStudent = () => {
+  const user = useContext(userContext);
   const [status, setStatus] = useState("");
-  const [noOfDays, setNoOfDays] = useState(0);
-  const [selectedGrade, setSelectedGrade] = useState(0);
+
   const [selectedYear, setSelectedYear] = useState(0);
   const [selectedMonth, setSelectedMonth] = useState(0);
   const [students, setStudents] = useState([]);
   const [dates, setDates] = useState([]);
 
+  const attendanceValue = {
+    1: "P",
+    2: "A",
+    3: "H",
+  };
+
   useEffect(() => {
-    if (selectedGrade > 0 && selectedMonth > 0 && selectedYear > 0) {
+    if (selectedMonth > 0 && selectedYear > 0) {
       poppulateDates();
       poppulateAttendanceData();
     }
-  }, [selectedGrade, selectedMonth, selectedYear]);
+  }, [selectedMonth, selectedYear]);
 
   function poppulateDates() {
     let datesArray = [];
@@ -43,63 +52,47 @@ const AttendanceView = () => {
   }
 
   const poppulateAttendanceData = async () => {
+    setStatus("Loading student data...");
+    let studentName = "";
+    let rollNumber = 0;
+    let grade = 0;
+    await getStudentData(user.userState.id).then((res) => {
+      studentName = res.studentName;
+      rollNumber = res.rollNumber;
+      grade = res.grade;
+    });
+    console.log(studentName, rollNumber, grade);
     let noOfDays = getDaysInMonth(selectedYear, selectedMonth);
-    if (selectedGrade > 0) {
-      setStatus("Loading students...");
-      getStudentsFromGrade(parseInt(selectedGrade))
-        .then((res) => {
-          let studentAttendenceData = [];
-          setTimeout(() => {
-            setStatus("Loading attendance...");
-            res.data.forEach(async (student) => {
-              let thisStudent = {
-                studentId: student.studentId,
-                studentName: "",
-                rollNumber: 0,
-                attendenceArray: [],
-              };
-              await getStudentData(student.studentId).then((res) => {
-                thisStudent.studentName = res.studentName;
-                thisStudent.rollNumber = res.rollNumber;
-              });
-              let thisDay = 0;
-              while (thisDay < noOfDays) {
-                let mydate = getEpochTime(
-                  selectedYear,
-                  selectedMonth,
-                  thisDay + 1
-                );
-                await getStudentAttendence(student.studentId, mydate).then(
-                  (res) => {
-                    let attendance = {
-                      date: thisDay + 1,
-                      value: res.attendanceMark,
-                    };
-                    thisStudent.attendenceArray.push(attendance);
-                  }
-                );
-                thisDay++;
-              }
-              studentAttendenceData.push(thisStudent);
-            });
-            console.log(studentAttendenceData);
-            setTimeout(() => {
-              console.log(studentAttendenceData);
-              setStudents(studentAttendenceData);
-              setStatus("");
-            }, 15000);
-          }, 10000);
-        })
-        .catch((err) => {
-          setStatus("Something went wrong. Please refresh.");
-        });
-    }
-  };
 
-  const attendanceValue = {
-    1: "P",
-    2: "A",
-    3: "H",
+    let studentAttendenceData = [];
+    setTimeout(async () => {
+      setStatus("Loading attendance...");
+      let thisStudent = {
+        studentName: studentName,
+        rollNumber: rollNumber,
+        attendenceArray: [],
+      };
+      let thisDay = 0;
+      while (thisDay < noOfDays) {
+        let mydate = getEpochTime(selectedYear, selectedMonth, thisDay + 1);
+        await getStudentAttendence(user.userState.id, mydate).then((res) => {
+          let attendance = {
+            date: thisDay + 1,
+            value: res.attendanceMark,
+          };
+          thisStudent.attendenceArray.push(attendance);
+        });
+        thisDay++;
+      }
+      studentAttendenceData.push(thisStudent);
+
+      console.log(studentAttendenceData);
+      setTimeout(() => {
+        console.log(studentAttendenceData);
+        setStudents(studentAttendenceData);
+        setStatus("");
+      }, 15000);
+    }, 10000);
   };
 
   const AttendanceDisplay = () => {
@@ -112,8 +105,7 @@ const AttendanceView = () => {
       <>
         <div>
           <h2>
-            Attendence for grade {selectedGrade} for {selectedMonth}/
-            {selectedYear}
+            Your attendence for {selectedMonth}/{selectedYear}
           </h2>
         </div>
         <div className="attendanceChart">
@@ -165,28 +157,6 @@ const AttendanceView = () => {
   return (
     <div className="myform">
       <div className="formelement" style={{ width: "320px" }}>
-        <label htmlFor="gradeSelector">Grade :</label>
-        <select
-          name="gradeSelector"
-          id="gradeSelector"
-          onChange={(e) => {
-            setSelectedGrade(e.target.value);
-          }}
-        >
-          <option value="0">Select Grade</option>
-          <option value="1">1st</option>
-          <option value="2">2nd</option>
-          <option value="3">3rd</option>
-          <option value="4">4th</option>
-          <option value="5">5th</option>
-          <option value="6">6th</option>
-          <option value="7">7th</option>
-          <option value="8">8th</option>
-          <option value="9">9th</option>
-          <option value="10">10th</option>
-        </select>
-      </div>
-      <div className="formelement" style={{ width: "320px" }}>
         <label htmlFor="yearSelector">Year : </label>
         <select
           name="yearSelector"
@@ -234,4 +204,4 @@ const AttendanceView = () => {
   );
 };
 
-export default AttendanceView;
+export default AttendanceViewStudent;

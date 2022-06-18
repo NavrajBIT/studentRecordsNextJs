@@ -54,6 +54,7 @@ const Attendance = () => {
           id="dateselector"
           onChange={(e) => {
             let d = new Date(e.target.value);
+            console.log(e.target.value);
             let epochTime = parseInt(d.getTime() / 1000);
             setSelectedDate(epochTime);
           }}
@@ -108,6 +109,7 @@ const Attendance = () => {
                           "attendanceSelector" + student.rollNumber
                         ).style.backgroundColor = "yellow";
                       }
+                      console.log(selectedDate);
                       markAttendance(
                         student.studentId,
                         attendanceValue,

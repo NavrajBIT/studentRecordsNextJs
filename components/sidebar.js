@@ -101,7 +101,7 @@ const Sidebar = () => {
             <div
               className="sidebar-item"
               onClick={() => {
-                user.updateState(user.userState.type, user.userState.id, 4.1);
+                user.updateState(user.userState.type, user.userState.id, 4.2);
               }}
             >
               View Attendence

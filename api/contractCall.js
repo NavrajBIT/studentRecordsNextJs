@@ -596,6 +596,7 @@ export const getStudentsFromGrade = async (grade) => {
     .catch((err) => {
       response.status = "Failed";
     });
+
   return response;
 };
 export const markAttendance = async (studentId, attendanceValue, date) => {
@@ -609,27 +610,12 @@ export const markAttendance = async (studentId, attendanceValue, date) => {
   return response;
 };
 
-export const getStudentAttendence = async (studentId, fromTime, toTime) => {
-  let response = { status: "Success", data: [] };
-  const myFilter = mySignerContract.filters.attendanceMarked(null, null, null);
-  let pastEvents = await mySignerContract
-    .queryFilter(myFilter)
+export const getStudentAttendence = async (studentId, date) => {
+  let response = { status: "Success", attendanceMark: 0 };
+  await mySignerContract
+    .getAttendance(studentId, date)
     .then((res) => {
-      res.map(async (event) => {
-        let studentId = parseInt(ethers.utils.formatUnits(event.topics[1], 0));
-        let attendanceValue = parseInt(
-          ethers.utils.formatUnits(event.topics[2], 0)
-        );
-        let thisdate = parseInt(ethers.utils.formatUnits(event.topics[3], 0));
-        if (thisdate >= fromTime && thisdate <= toTime) {
-          let attendance = {
-            studentId: studentId,
-            attendanceValue: attendanceValue,
-            date: thisdate,
-          };
-          response.data.push(attendance);
-        }
-      });
+      response.attendanceMark = ethers.utils.formatUnits(res, 0);
     })
     .catch((err) => {
       response.status = "Failed";

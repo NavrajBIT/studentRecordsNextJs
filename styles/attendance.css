@@ -7,5 +7,19 @@
 
 .classResultsforAttendance select {
   width: 100%;
-  /* background-color: red; */
+}
+
+.attendanceChart {
+  /* width: 3px; */
+  color: white;
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr repeat(32, 1fr);
+}
+
+.attendanceValue {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
 }
