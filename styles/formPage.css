@@ -1,0 +1,133 @@
+.formPage {
+  /* padding: 20px; */
+  background-image: linear-gradient(
+    40deg,
+    rgba(26, 214, 255, 0.8),
+    #121543 15%,
+    rgba(137, 70, 223, 0.8)
+  );
+  width: 100%;
+}
+
+.myform {
+  background-color: var(--clr2);
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 20px;
+  border-radius: 20px;
+}
+.formelement {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.myform .formelement label {
+  justify-self: start;
+  color: white;
+}
+.myform .formelement label span {
+  color: var(--clr9);
+  font-size: small;
+}
+.myform .formelement input {
+  height: 50px;
+  max-width: 1000px;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0px;
+  padding-left: 20px;
+  align-items: center;
+}
+.myform .formelement input::placeholder {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* .myform .formelement input[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+.myform .formelement input[type="file"] {
+  font-family: "Space Grotesk", sans-serif;
+  max-width: 1000px;
+  display: flex;
+  color: var(--clr5);
+  align-items: center;
+} */
+.radioSelection {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.radioInput {
+  width: max-content;
+  color: white;
+  padding-right: 50px;
+}
+.radioInput input {
+  margin: 0 5px 0 0;
+}
+/* .myform .formelement input::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+} */
+
+.myform .formelement select {
+  height: 50px;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0px;
+  padding-left: 20px;
+  align-items: center;
+  max-width: 1000px;
+}
+
+.myform button {
+  width: 300px;
+  margin: 0;
+  border-radius: 15px;
+  background-image: linear-gradient(90deg, #00e7e7, #8946df);
+  color: white;
+  font-weight: 400;
+  align-self: center;
+}
+.myform button:hover {
+  font-weight: 600;
+  transform: scale(1.1);
+}
+
+.myform h2 {
+  color: white;
+  align-self: center;
+}
+
+.formheading {
+  border-bottom: 1px solid white;
+  margin: 20px 0px 40px 0px;
+}
+
+.myform .formelement .fileselector {
+  width: 100%;
+  height: 50px;
+  max-width: 1000px;
+  background: white;
+  color: rgba(0, 0, 0, 0.6);
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0px;
+  padding-left: 20px;
+  align-items: center;
+}
+
+.myform button {
+  margin: 50px;
+}
+
+.myform .downloadButton {
+  margin: 10px;
+  padding: 10px;
+}

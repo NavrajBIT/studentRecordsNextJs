@@ -1,0 +1,202 @@
+@import url("https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css-1.5.5.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500&display=swap");
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  background-image: linear-gradient(
+    90deg,
+    #4cd964,
+    #5ac8fa,
+    #007aff,
+    #34aadc,
+    #5856d6,
+    #ff2d55
+  );
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  align-items: stretch;
+  overflow-wrap: break-word;
+}
+
+:root {
+  --clr1: rgba(0, 0, 0, 0.5);
+  --clr2: #282162;
+  --clr3: #035283;
+  --clr4: #0b8de3;
+  --clr5: #9ca49a;
+  --clr9: rgb(248, 129, 129);
+  --clr10: white;
+}
+
+.login-page {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(
+    40deg,
+    rgba(26, 214, 255, 0.8),
+    #121543 15%,
+    rgba(137, 70, 223, 0.8)
+  );
+}
+
+.login-container {
+  height: 600px;
+  width: 600px;
+  padding: 30px;
+  margin: 200px 0px;
+  border: 2px solid var(--clr1);
+  border-radius: 10px;
+  background-color: var(--clr1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  color: white;
+  box-shadow: 0px 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.login-container h1 {
+  color: white;
+  font-weight: 600;
+  margin: 50px;
+}
+
+.login-container .imageField {
+  border-bottom: 1px solid var(--clr10);
+  padding: 20px;
+}
+.login-container button {
+  margin: 20px 0px;
+  width: 100%;
+  min-height: 60px;
+  margin: 10px;
+  border-radius: 15px;
+  background-image: linear-gradient(90deg, #00e7e7, #8946df);
+  color: white;
+  font-weight: 600;
+}
+.login-container button:hover {
+  font-weight: 800;
+  transform: scale(1.03);
+}
+
+.login-container .inputField {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  align-items: end;
+  justify-items: end;
+  width: 100%;
+}
+.login-container .checkbox {
+  display: flex;
+}
+.login-container .inputField img {
+  height: 30px;
+  width: 30px;
+  margin: 20px 0;
+}
+.login-container .inputField input {
+  min-height: 100px;
+  min-width: 540px;
+  background: black;
+  color: white;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 20px;
+  background-image: url("../public/password.svg");
+  background-position: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 80px;
+}
+.login-container .inputField input::placeholder {
+  font-size: 20px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.myInput {
+  background-color: black;
+  width: 540px;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+.myInput:hover {
+  background-color: var(--clr1);
+}
+
+.logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  margin: 30px;
+}
+.clientlogo {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  margin: 30px;
+}
+
+.logospace {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100px;
+}
+
+table tr th,
+table tr td {
+  padding: 0.5rem 1rem !important;
+  border: none;
+}
+
+.pageLayout {
+  display: flex;
+}
+
+.myform button {
+  margin-top: 20px;
+}
+
+.status {
+  color: red;
+  height: 20px;
+}
+
+.editButton {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0px;
+  padding: 0px;
+}
+.myform .editButton button {
+  margin: 0px;
+}

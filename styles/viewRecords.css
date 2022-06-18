@@ -1,0 +1,46 @@
+.searchResult {
+  color: white;
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px 0px;
+}
+
+.searchResult:hover {
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  border: 1px solid black;
+  box-shadow: 0px 0px 10px 1px white;
+}
+
+.searchResult .result {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.searchResult .resultsinglerow {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr 2fr;
+  padding: 10px;
+}
+.searchResult .resultsinglerow:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 20px;
+  text-shadow: 1px whitesmoke;
+}
+
+.updownbuttons {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+
+.myform .updownbuttons button {
+  margin: 20px;
+}
+
+.noAss {
+  color: white;
+}

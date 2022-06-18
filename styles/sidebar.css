@@ -1,0 +1,87 @@
+.sidebar {
+  width: 320px;
+  min-height: 100vh;
+  font-size: 30px;
+  white-space: nowrap;
+  padding: 10px 5px;
+  background-color: black;
+  color: var(--clr10);
+  display: flex;
+  flex-direction: column;
+  /* animation-name: leftExit;
+  animation-duration: 0.5s; */
+}
+
+.sidebar h1 {
+  background-image: linear-gradient(90deg, #00e7e7, #8946df);
+  color: white;
+  margin: 5px;
+  /* padding: 10px; */
+  border-radius: 10px;
+  font-size: 35px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes leftEnter {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 320px;
+  }
+}
+@keyframes leftExit {
+  from {
+    width: 320px;
+  }
+  to {
+    width: 0px;
+  }
+}
+
+/* .sidebar:hover {
+  animation-name: leftEnter;
+  animation-duration: 0.5s;
+  width: 20vw;
+} */
+
+.sidebar-item {
+  border: 1px solid var(--clr2);
+  border-radius: 5px;
+  padding: 5px;
+  /* width: 100%; */
+  height: 50px;
+  font-size: 20px;
+  white-space: nowrap;
+  margin: 0px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+.sidebar-item-inner {
+  border: 1px solid var(--clr2);
+  border-radius: 5px;
+  padding: 5px;
+
+  height: 40px;
+  font-size: 15px;
+  white-space: nowrap;
+  margin: 0px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-item:hover {
+  border: 2px solid var(--clr10);
+  cursor: context-menu;
+  font-size: 20px;
+}
+.sidebar-item-inner:hover {
+  border: 2px solid var(--clr10);
+  cursor: context-menu;
+  font-size: 16px;
+}

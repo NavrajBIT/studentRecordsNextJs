@@ -1,0 +1,11 @@
+.classResultsforAttendance {
+  color: white;
+  display: grid;
+  padding: 10px;
+  grid-template-columns: 1fr 2fr 2fr 2fr;
+}
+
+.classResultsforAttendance select {
+  width: 100%;
+  /* background-color: red; */
+}
