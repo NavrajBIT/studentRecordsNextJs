@@ -11,26 +11,26 @@ const Login = () => {
   const router = useRouter();
 
   const loginUser = async () => {
-    setStatus("logging in...");
-    let userName = document.getElementById("userName").value;
-    let password = document.getElementById("userPassword").value;
-    await checkLogin(userName, password)
-      .then((res) => {
-        if (res.status === "Failed") {
-          setStatus("Something went wrong. Please try again.");
-        } else {
-          if (res.loginType === "Unauthorized") {
-            setStatus("Username or Password incorrect.");
-          } else {
-            setStatus("");
-            user.updateState(res.loginType, res.userId, 1);
+    // setStatus("logging in...");
+    // let userName = document.getElementById("userName").value;
+    // let password = document.getElementById("userPassword").value;
+    // await checkLogin(userName, password)
+    //   .then((res) => {
+    //     if (res.status === "Failed") {
+    //       setStatus("Something went wrong. Please try again.");
+    //     } else {
+    //       if (res.loginType === "Unauthorized") {
+    //         setStatus("Username or Password incorrect.");
+    //       } else {
+    //         setStatus("");
+            user.updateState("Admin", 1, 1);
             router.push("/dashboard");
-          }
-        }
-      })
-      .catch((err) => {
-        setStatus("Something went wrong. Please try again.");
-      });
+      //     }
+      //   }
+      // })
+  //     .catch((err) => {
+  //       setStatus("Something went wrong. Please try again.");
+  //     });
   };
   return (
     <>
