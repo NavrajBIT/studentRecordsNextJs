@@ -10,7 +10,7 @@ const client = create("http://localhost:5001");
 const provider = new ethers.providers.JsonRpcProvider("");
 //Signer
 const wallet = new ethers.Wallet(
-  "a8f961ca4bf8a121691c4486d69ef3f88ea1853af3cbdb14aa6495da3c9b1662",
+  "e84de22f5d5726600a1e3fd4df53b0bc8b8844901911961349f7aa9a38c037ad",
   provider
 );
 //Conrtact
@@ -572,7 +572,7 @@ export const getMarksCard = async (studentId) => {
 export const getStudentsFromGrade = async (grade) => {
   let response = { status: "Success", data: [] };
   const myFilter = mySignerContract.filters.studentAdded(null, null, null);
-  let pastEvents = await mySignerContract
+  return await mySignerContract
     .queryFilter(myFilter)
     .then((res) => {
       res.map(async (event) => {
@@ -592,12 +592,14 @@ export const getStudentsFromGrade = async (grade) => {
           response.data.push(student);
         }
       });
+      return response;
     })
     .catch((err) => {
       response.status = "Failed";
+      return response;
     });
 
-  return response;
+  
 };
 export const markAttendance = async (studentId, attendanceValue, date) => {
   let response = { status: "Success" };
@@ -612,13 +614,29 @@ export const markAttendance = async (studentId, attendanceValue, date) => {
 
 export const getStudentAttendence = async (studentId, date) => {
   let response = { status: "Success", attendanceMark: 0 };
-  await mySignerContract
+  return await mySignerContract
     .getAttendance(studentId, date)
     .then((res) => {
       response.attendanceMark = ethers.utils.formatUnits(res, 0);
+      return response;
     })
     .catch((err) => {
       response.status = "Failed";
+      return response;
     });
+  
+};
+
+export const getGenderKPI = async () => {
+  let response = {
+    totalNumber: 0,
+    maleNumber: 0,
+    femaleNumber: 0,
+  };
+  await mySignerContract.getGenderKPI().then((res) => {
+    response.totalNumber = ethers.utils.formatUnits(res.totalNumber, 0);
+    response.maleNumber = ethers.utils.formatUnits(res.maleNumber, 0);
+    response.femaleNumber = ethers.utils.formatUnits(res.femaleNumber, 0);
+  });
   return response;
 };

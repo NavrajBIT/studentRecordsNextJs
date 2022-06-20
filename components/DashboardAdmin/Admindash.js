@@ -1,48 +1,65 @@
-import React from 'react'
-import BarChart from './BarChart'
-import dash from  './dash.module.css'
-import PieChart from './PieChart'
+import React from "react";
+import BarChart from "./BarChart";
+import dash from "./dash.module.css";
+import PieChart from "./PieChart";
+
+import { useState, useEffect } from "react";
+import { getGenderKPI } from "../../api/contractCall";
 
 const AdminDash = () => {
-  const dummyData = {
-    total: 100,
-    male: 60,
-    female: 40,
-    name: 'Yash',
-    class: 12,
-    rollno: 5,
-    section: 'A',
-    id: 73829,
-  }
+  const [totalNumber, settotalNumber] = useState(0);
+  const [maleNumber, setmaleNumber] = useState(0);
+  const [femaleNumber, setfemaleNumber] = useState(0);
+
+  useEffect(() => {
+    getGenderKPI().then((res) => {
+      settotalNumber(res.totalNumber);
+      setmaleNumber(res.maleNumber);
+      setfemaleNumber(res.femaleNumber);
+    });
+  }, []);
 
   return (
     <>
-      <div className={dash.heading1}>
-        <h2>Total Number of Students</h2>
-      </div>
-      <div className={dash.dash_container}>
+      {/* <div className={dash.heading1}>
+        <h2>Total Number of Students : </h2>
+      </div> */}
 
-        <div className={dash.pie} style={{color:"white" }}>
-          <div className={dash.heading} style={{color:"white" }}>
-            <p>Total Number Of Male And Female Students</p>
-          </div>
-          <div className={dash.content1}>
-            <div className={dash.labels}>
-              <h5>Male Students : {dummyData.male} </h5>
-              <h5>Female Students : {dummyData.female} </h5>
-            </div>
-            <div className={dash.piechart} >
-              <PieChart total={dummyData.total} male={dummyData.male} female={dummyData.female} />
-            </div>
+      <div className="myform">
+        <div>
+          <h2>1. Gender distribution of students</h2>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            color: "white",
+            width: "100%",
+            justifyContent: "left",
+            alignItems: "left",
+          }}
+        >
+          <div>Total Students : {totalNumber}</div>
+          <div>Male : {maleNumber}</div>
+          <div>Female : {femaleNumber}</div>
+        </div>
+        <div className={dash.content1}>
+          <div className={dash.piechart}>
+            <PieChart />
           </div>
         </div>
+      </div>
 
+      <div className="myform">
+        <div>
+          <h2>2. Grade distribution of students</h2>
+        </div>
         <div className={dash.bar}>
           <BarChart />
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default AdminDash
+export default AdminDash;

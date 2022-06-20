@@ -9,13 +9,12 @@ function BarChart() {
         <Chart
           type="bar"
           width={600}
-          
           height={400}
           series={[
             {
               name: "Social Media ",
               // data: [1, 2, 3, 4, 5, 6, 7, 8 ],
-              data: [5, 3, 7, 5, 5, 8, 5, 9, 10, 3],
+              data: [50, 30, 70, 50, 50, 80, 50, 90, 100, 30],
 
               // data: [
 
@@ -185,7 +184,7 @@ function BarChart() {
             yaxis: {
               logBase: 10,
               min: 0,
-              max: 10,
+              max: 100,
               labels: {
                 style: {
                   fontSize: "15",
@@ -246,27 +245,23 @@ function BarChart() {
             },
             chart: {
               toolbar: {
-                
                 show: false,
                 offsetX: 10,
                 offsetY: 10,
-                fill:{
-                  colors:["black"]
-              },
-                text:"black",
-                
+                fill: {
+                  colors: ["black"],
+                },
+                text: "black",
+
                 tools: {
-    
                   download: true,
                   selection: false,
                   zoom: false,
                   zoomin: true,
                   zoomout: true,
                   pan: true,
-                   
                 },
               },
-              
             },
             // subtitle: {
             //     text: 'Category Names as DataLabels inside bars',

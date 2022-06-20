@@ -18,7 +18,8 @@ const AttendanceView = () => {
   useEffect(() => {
     if (selectedGrade > 0 && selectedMonth > 0 && selectedYear > 0) {
       poppulateDates();
-      poppulateAttendanceData();
+      // poppulateAttendanceData();
+      (async () => await poppulateAttendanceData())()
     }
   }, [selectedGrade, selectedMonth, selectedYear]);
 
@@ -46,10 +47,11 @@ const AttendanceView = () => {
     let noOfDays = getDaysInMonth(selectedYear, selectedMonth);
     if (selectedGrade > 0) {
       setStatus("Loading students...");
-      getStudentsFromGrade(parseInt(selectedGrade))
+      await getStudentsFromGrade(parseInt(selectedGrade))
         .then((res) => {
+          
           let studentAttendenceData = [];
-          setTimeout(() => {
+          setTimeout(() => {            
             setStatus("Loading attendance...");
             res.data.forEach(async (student) => {
               let thisStudent = {
@@ -81,14 +83,16 @@ const AttendanceView = () => {
                 thisDay++;
               }
               studentAttendenceData.push(thisStudent);
+              console.log(thisStudent)
             });
             console.log(studentAttendenceData);
             setTimeout(() => {
               console.log(studentAttendenceData);
+              
               setStudents(studentAttendenceData);
               setStatus("");
-            }, 15000);
-          }, 10000);
+            }, 40000);
+          }, 40000);
         })
         .catch((err) => {
           setStatus("Something went wrong. Please refresh.");

@@ -233,17 +233,34 @@ const Profile = () => {
                     <div className="formelement" key={label.id}>
                       <label htmlFor={label.id}>
                         {label.label} :
-                        <span>{label.required === "y" && "*"}</span>
+                        {isEditing && (
+                          <span>{label.required === "y" && "*"}</span>
+                        )}
                       </label>
-                      <select name={label.id} id={label.id}>
-                        {label.placeholder.map((option) => {
-                          return (
-                            <option value={option} key={label.id + option}>
-                              {option}
+                      {isEditing ? (
+                        <>
+                          <select
+                            name={label.id}
+                            id={label.id}
+                            default="female"
+                          >
+                            <option value={mystudentData[label.id]}>
+                              {mystudentData[label.id]}
                             </option>
-                          );
-                        })}
-                      </select>
+                            {label.placeholder.map((option) => {
+                              return (
+                                <option value={option} key={label.id + option}>
+                                  {option}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </>
+                      ) : (
+                        <>
+                          <label htmlFor="">{mystudentData[label.id]}</label>
+                        </>
+                      )}
                     </div>
                   );
                 }
