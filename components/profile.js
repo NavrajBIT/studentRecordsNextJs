@@ -59,7 +59,7 @@ const Profile = () => {
   const getDate = (epochValue) => {
     epochValue = parseInt(epochValue) * 1000;
     let d = new Date(epochValue);
-    return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+    return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
   };
 
   const getHtmlDate = (epochValue) => {
@@ -67,7 +67,9 @@ const Profile = () => {
     let d = new Date(epochValue);
     let myYear = d.getFullYear();
     let myMonth =
-      parseInt(d.getMonth()) < 9 ? "0" + d.getMonth() : d.getMonth();
+      parseInt(d.getMonth()) + 1 < 9
+        ? "0" + (d.getMonth() + 1)
+        : d.getMonth() + 1;
     let myDay = parseInt(d.getDate()) < 9 ? "0" + d.getDate() : d.getDate();
 
     console.log(myYear + "-" + myMonth + "-" + myDay);

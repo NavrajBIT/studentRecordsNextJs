@@ -21,13 +21,13 @@ const MarksCard = () => {
       await addMarksCard(rollNumber, grade, file, expiry)
         .then((res) => {
           if (res.status === "Success") {
-            setStatus("Marks card uploaded successfully.");
+            setStatus("Grade card uploaded successfully.");
           } else {
-            setStatus("Could not upload marks card. Check data and try again.");
+            setStatus("Could not upload grade card. Check data and try again.");
           }
         })
         .catch((err) => {
-          setStatus("Could not upload marks card. Check data and try again.");
+          setStatus("Could not upload grade card. Check data and try again.");
         });
     };
     return (
@@ -97,7 +97,7 @@ const MarksCard = () => {
 
   const [myMarks, setMyMarks] = useState([]);
   useEffect(() => {
-    setStatus("loading marks card...");
+    setStatus("loading grade card...");
     getMarksCard(user.userState.id)
       .then((res) => {
         console.log(res);
@@ -115,7 +115,7 @@ const MarksCard = () => {
     if (myMarks.length === 0) {
       return (
         <>
-          <div className="noAss">No marks card available.</div>
+          <div className="noAss">No grade card available.</div>
         </>
       );
     }
@@ -124,14 +124,14 @@ const MarksCard = () => {
         {myMarks.map((marks) => {
           return (
             <div className="searchResult" key={marks.file + marks.id}>
-              Marks card for grade: {marks.grade}
+              Grade card for grade: {marks.grade}
               <button
                 onClick={() => {
                   let url = "http://ipfs.io/ipfs/" + marks.file;
                   window.open(url);
                 }}
               >
-                Download Marks Card
+                Download Grade Card
               </button>
             </div>
           );

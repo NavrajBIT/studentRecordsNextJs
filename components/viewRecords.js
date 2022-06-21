@@ -12,7 +12,7 @@ const ViewRecords = () => {
   const getDate = (epochValue) => {
     epochValue = parseInt(epochValue) * 1000;
     let d = new Date(epochValue);
-    return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+    return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
   };
 
   const searchStudents = async () => {
@@ -81,6 +81,10 @@ const ViewRecords = () => {
         <div className="formelement">
           <label htmlFor="gradeField">Grade :</label>
           <input type="number" placeholder="Enter grade" id="gradeField" />
+        </div>
+        <div className="formelement">
+          <label htmlFor="idField">Roll Number :</label>
+          <input type="number" placeholder="Enter roll number" id="idField" />
         </div>
       </div>
       <button

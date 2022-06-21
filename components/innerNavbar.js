@@ -16,7 +16,7 @@ const InnerNavbar = () => {
     4: "Mark Attendence",
     4.1: "View Attendence",
     5: "Assignment",
-    6: "Marks Card",
+    6: "Grade Card",
     7: "Time Table",
   };
 

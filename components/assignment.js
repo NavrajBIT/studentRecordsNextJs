@@ -187,7 +187,7 @@ const Assignment = () => {
   const getDate = (epochValue) => {
     epochValue = parseInt(epochValue) * 1000;
     let d = new Date(epochValue);
-    return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+    return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
   };
 
   const AssignmentData = () => {

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { getStudentsFromGrade, markAttendance } from "../api/contractCall";
+import StudentName from "./Attendence/studentName";
 
 const Attendance = () => {
   const [status, setStatus] = useState("");
@@ -12,10 +13,8 @@ const Attendance = () => {
       setStatus("Loading students...");
       getStudentsFromGrade(parseInt(selectedGrade))
         .then((res) => {
-          setTimeout(() => {
-            setStudents(res.data);
-            setStatus("");
-          }, 10000);
+          setStudents(res.data);
+          setStatus("");
         })
         .catch((err) => {
           setStatus("Something went wrong. Please refresh.");
@@ -54,8 +53,8 @@ const Attendance = () => {
           id="dateselector"
           onChange={(e) => {
             let d = new Date(e.target.value);
-            console.log(e.target.value);
             let epochTime = parseInt(d.getTime() / 1000);
+            console.log(epochTime);
             setSelectedDate(epochTime);
           }}
         />
@@ -80,7 +79,9 @@ const Attendance = () => {
                 key={student.rollNumber}
               >
                 <div>{sNo}</div>
-                <div>{student.studentName}</div>
+                <div>
+                  <StudentName studentId={student.studentId} />
+                </div>
                 <div>{student.rollNumber}</div>
                 <div>
                   <select

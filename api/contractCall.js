@@ -347,6 +347,11 @@ export const getStudentData = async (studentId) => {
 
   return response;
 };
+export const getStudentName = async (studentId) => {
+  return await mySignerContract.getPrimaryDetails(studentId).then((res) => {
+    return res["_studentName"];
+  });
+};
 
 export const searchStudent = async (name, grade) => {
   let studentData = { status: "Success", data: [] };
@@ -575,7 +580,7 @@ export const getStudentsFromGrade = async (grade) => {
   return await mySignerContract
     .queryFilter(myFilter)
     .then((res) => {
-      res.map(async (event) => {
+      res.map((event) => {
         let studentId = parseInt(ethers.utils.formatUnits(event.topics[1], 0));
         let rollNumber = parseInt(ethers.utils.formatUnits(event.topics[2], 0));
         let thisgrade = parseInt(ethers.utils.formatUnits(event.topics[3], 0));
@@ -584,11 +589,8 @@ export const getStudentsFromGrade = async (grade) => {
             studentId: studentId,
             rollNumber: rollNumber,
             grade: thisgrade,
-            studentName: "",
+            studentName: "student name",
           };
-          await getStudentData(studentId).then((res) => {
-            student.studentName = res.studentName;
-          });
           response.data.push(student);
         }
       });
@@ -598,8 +600,6 @@ export const getStudentsFromGrade = async (grade) => {
       response.status = "Failed";
       return response;
     });
-
-  
 };
 export const markAttendance = async (studentId, attendanceValue, date) => {
   let response = { status: "Success" };
@@ -624,7 +624,6 @@ export const getStudentAttendence = async (studentId, date) => {
       response.status = "Failed";
       return response;
     });
-  
 };
 
 export const getGenderKPI = async () => {

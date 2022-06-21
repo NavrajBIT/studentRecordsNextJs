@@ -85,7 +85,7 @@ const Sidebar = () => {
                 user.updateState(user.userState.type, user.userState.id, 6);
               }}
             >
-              Marks card
+              Grade card
             </div>
             <div
               className="sidebar-item"
@@ -120,7 +120,7 @@ const Sidebar = () => {
                 user.updateState(user.userState.type, user.userState.id, 6);
               }}
             >
-              Marks card
+              Grade card
             </div>
             <div
               className="sidebar-item"

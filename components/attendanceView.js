@@ -5,10 +5,11 @@ import {
   getStudentsFromGrade,
   getStudentData,
 } from "../api/contractCall";
+import IndividualAttendence from "./Attendence/individualAttendence";
+import StudentName from "./Attendence/studentName";
 
 const AttendanceView = () => {
   const [status, setStatus] = useState("");
-  const [noOfDays, setNoOfDays] = useState(0);
   const [selectedGrade, setSelectedGrade] = useState(0);
   const [selectedYear, setSelectedYear] = useState(0);
   const [selectedMonth, setSelectedMonth] = useState(0);
@@ -18,8 +19,8 @@ const AttendanceView = () => {
   useEffect(() => {
     if (selectedGrade > 0 && selectedMonth > 0 && selectedYear > 0) {
       poppulateDates();
-      // poppulateAttendanceData();
-      (async () => await poppulateAttendanceData())()
+      poppulateAttendanceData();
+      // (async () => await poppulateAttendanceData())()
     }
   }, [selectedGrade, selectedMonth, selectedYear]);
 
@@ -38,61 +39,34 @@ const AttendanceView = () => {
 
   function getEpochTime(year, month, date) {
     let myMonth = month <= 9 ? "0" + month : month;
+    date = date <= 9 ? "0" + date : date;
     let dateString = year + "-" + myMonth + "-" + date;
     let mydate = new Date(dateString);
-    return parseInt(mydate.getTime() / 1000);
+    let utcYear =
+      mydate.getUTCFullYear() <= 9
+        ? "0" + mydate.getUTCFullYear()
+        : mydate.getUTCFullYear();
+    let utcMonth =
+      mydate.getUTCMonth() + 1 <= 9
+        ? "0" + (mydate.getUTCMonth() + 1)
+        : mydate.getUTCMonth() + 1;
+    let utcDate =
+      mydate.getUTCDate() <= 9
+        ? "0" + mydate.getUTCDate()
+        : mydate.getUTCDate();
+    let utcdateString = utcYear + "-" + utcMonth + "-" + utcDate;
+
+    return parseInt(new Date(utcdateString).getTime() / 1000);
   }
 
   const poppulateAttendanceData = async () => {
-    let noOfDays = getDaysInMonth(selectedYear, selectedMonth);
     if (selectedGrade > 0) {
       setStatus("Loading students...");
       await getStudentsFromGrade(parseInt(selectedGrade))
         .then((res) => {
-          
-          let studentAttendenceData = [];
-          setTimeout(() => {            
-            setStatus("Loading attendance...");
-            res.data.forEach(async (student) => {
-              let thisStudent = {
-                studentId: student.studentId,
-                studentName: "",
-                rollNumber: 0,
-                attendenceArray: [],
-              };
-              await getStudentData(student.studentId).then((res) => {
-                thisStudent.studentName = res.studentName;
-                thisStudent.rollNumber = res.rollNumber;
-              });
-              let thisDay = 0;
-              while (thisDay < noOfDays) {
-                let mydate = getEpochTime(
-                  selectedYear,
-                  selectedMonth,
-                  thisDay + 1
-                );
-                await getStudentAttendence(student.studentId, mydate).then(
-                  (res) => {
-                    let attendance = {
-                      date: thisDay + 1,
-                      value: res.attendanceMark,
-                    };
-                    thisStudent.attendenceArray.push(attendance);
-                  }
-                );
-                thisDay++;
-              }
-              studentAttendenceData.push(thisStudent);
-              console.log(thisStudent)
-            });
-            console.log(studentAttendenceData);
-            setTimeout(() => {
-              console.log(studentAttendenceData);
-              
-              setStudents(studentAttendenceData);
-              setStatus("");
-            }, 40000);
-          }, 40000);
+          console.log(res);
+          setStudents(res.data);
+          setStatus("");
         })
         .catch((err) => {
           setStatus("Something went wrong. Please refresh.");
@@ -137,27 +111,18 @@ const AttendanceView = () => {
           return (
             <div key={student.studentId} className="attendanceChart">
               <div>{sNo}</div>
-              <div>{student.studentName}</div>
+              <div>
+                <StudentName studentId={student.studentId} />
+              </div>
               <div>{student.rollNumber}</div>
-              {student.attendenceArray.map((date) => {
-                let back = "white";
-                if (date.value == 1) {
-                  back = "green";
-                }
-                if (date.value == 2) {
-                  back = "red";
-                }
-                if (date.value == 3) {
-                  back = "yellow";
-                }
+              {dates.map((date) => {
+                let thisDate = getEpochTime(selectedYear, selectedMonth, date);
                 return (
-                  <div
-                    className="attendanceValue"
-                    key={student.studentId + "with" + date.date}
-                    style={{ backgroundColor: back }}
-                  >
-                    {attendanceValue[date.value]}
-                  </div>
+                  <IndividualAttendence
+                    studentId={student.studentId}
+                    date={thisDate}
+                    key={student.studentId + thisDate}
+                  />
                 );
               })}
             </div>
@@ -232,7 +197,6 @@ const AttendanceView = () => {
         </select>
       </div>
       <div className="status">{status}</div>
-
       <AttendanceDisplay />
     </div>
   );
