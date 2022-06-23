@@ -18,6 +18,7 @@ const InnerNavbar = () => {
     5: "Assignment",
     6: "Marks Card",
     7: "Time Table",
+    8:"View Assignment"
   };
 
   return (

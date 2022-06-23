@@ -10,12 +10,18 @@ import {
 import userContext from "../context/userContext";
 import AssignmentView from "./assignmentAnswers";
 
+import Viewassignment from "./Viewassignment";
+import { useNavigate } from "react-router-dom";
 const Assignment = () => {
+  // const navigate = useNavigaate
+  // const navigate = useNavigate()
   const [status, setStatus] = useState("");
   const user = useContext(userContext);
 
   const [myAssignments, setMyAssignments] = useState([]);
   const [selectedGrade, setSelectedGrade] = useState(0);
+
+  const [click , setClick] = useState('false')
   useEffect(() => {
     if (user.userState.type === "Student") {
       setStatus("loading assignments...");
@@ -94,9 +100,9 @@ const Assignment = () => {
           } else {
             setStatus("Could not upload assignment. Check data and try again.");
           }
-        })
+        })  
         .catch((err) => {
-          setStatus("Could not upload assignment. Check data and try again.");
+          setStatus(`Could not upload assignment. Check data and try again. ${err} ` );
         });
     };
     return (
@@ -132,6 +138,7 @@ const Assignment = () => {
               id="fileField"
               style={{ display: "none" }}
               onChange={async (e) => {
+                alert(e)
                 let domItem = document.getElementById("fileField" + "label");
                 domItem.innerHTML = "Uploading...";
                 await fileHash(e.target.files[0])
@@ -141,6 +148,7 @@ const Assignment = () => {
                   })
                   .catch((err) => {
                     domItem.innerHTML = "Error. Choose file again.";
+                    console.log(err)
                   });
               }}
             />
@@ -179,7 +187,15 @@ const Assignment = () => {
             <option value="10">10th</option>
           </select>
         </div>
+          <button onClick={()=>{
+            setClick(true)
+            // navigate('/')
+            
+          }}>
+            click me
+          </button>
         <AssignmentAnswers />
+        {/* <viewassignment/> */}
       </div>
     );
   }
@@ -190,90 +206,90 @@ const Assignment = () => {
     return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
   };
 
-  const AssignmentData = () => {
-    if (myAssignments.length === 0) {
-      return (
-        <>
-          <div className="noAss">No assignment due.</div>
-        </>
-      );
-    }
-    return (
-      <>
-        {myAssignments.map((assignment) => {
-          return (
-            <div
-              className="searchResult"
-              key={assignment.file + assignment.topic}
-            >
-              <div className="result">
-                <div style={{ borderBottom: "1px solid white" }}>
-                  Subject: {assignment.subject}
-                </div>
-                <div style={{ borderBottom: "1px solid white" }}>
-                  Topic: {assignment.topic}
-                </div>
-                <div style={{ borderBottom: "1px solid white" }}>
-                  Due date: {getDate(assignment.expiry)}
-                </div>
-                <div style={{ borderBottom: "1px solid white" }}>
-                  Grade: {assignment.grade}
-                </div>
-              </div>
-              <div className="updownbuttons">
-                <button
-                  onClick={() => {
-                    let url = "http://ipfs.io/ipfs/" + assignment.file;
-                    window.open(url);
-                  }}
-                >
-                  Download assignment
-                </button>
-                <input
-                  type="file"
-                  id={"fileField" + assignment.id}
-                  style={{ display: "none" }}
-                  onChange={async (e) => {
-                    setStatus("Uploading file...");
-                    await fileHash(e.target.files[0])
-                      .then(async (res) => {
-                        await addAssignmentSolution(
-                          assignment.id,
-                          res,
-                          user.userState.id
-                        )
-                          .then((res) => {
-                            setStatus(
-                              "Assignment on " +
-                                assignment.topic +
-                                " submitted successfully."
-                            );
-                          })
-                          .catch((err) => {
-                            setStatus("Error. Submit file again.");
-                          });
-                      })
-                      .catch((err) => {
-                        setStatus("Error. Submit file again.");
-                      });
-                  }}
-                />
-                <button
-                  onClick={() => {
-                    document
-                      .getElementById("fileField" + assignment.id)
-                      .click();
-                  }}
-                >
-                  Submit assignment
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </>
-    );
-  };
+  // const AssignmentData = () => {
+  //   if (myAssignments.length === 0) {
+  //     return (
+  //       <>
+  //         <div className="noAss">No assignment due.</div>
+  //       </>
+  //     );
+  //   }
+  //   return (
+  //     <>
+  //       {myAssignments.map((assignment) => {
+  //         return (
+  //           <div
+  //             className="searchResult"
+  //             key={assignment.file + assignment.topic}
+  //           >
+  //             <div className="result">
+  //               <div style={{ borderBottom: "1px solid white" }}>
+  //                 Subject: {assignment.subject}
+  //               </div>
+  //               <div style={{ borderBottom: "1px solid white" }}>
+  //                 Topic: {assignment.topic}
+  //               </div>
+  //               <div style={{ borderBottom: "1px solid white" }}>
+  //                 Due date: {getDate(assignment.expiry)}
+  //               </div>
+  //               <div style={{ borderBottom: "1px solid white" }}>
+  //                 Grade: {assignment.grade}
+  //               </div>
+  //             </div>
+  //             <div className="updownbuttons">
+  //               <button
+  //                 onClick={() => {
+  //                   let url = "http://ipfs.io/ipfs/" + assignment.file;
+  //                   window.open(url);
+  //                 }}
+  //               >
+  //                 Download assignment
+  //               </button>
+  //               <input
+  //                 type="file"
+  //                 id={"fileField" + assignment.id}
+  //                 style={{ display: "none" }}
+  //                 onChange={async (e) => {
+  //                   setStatus("Uploading file...");
+  //                   await fileHash(e.target.files[0])
+  //                     .then(async (res) => {
+  //                       await addAssignmentSolution(
+  //                         assignment.id,
+  //                         res,
+  //                         user.userState.id
+  //                       )
+  //                         .then((res) => {
+  //                           setStatus(
+  //                             "Assignment on " +
+  //                               assignment.topic +
+  //                               " submitted successfully."
+  //                           );
+  //                         })
+  //                         .catch((err) => {
+  //                           setStatus("Error. Submit file again.");
+  //                         });
+  //                     })
+  //                     .catch((err) => {
+  //                       setStatus("Error. Submit file again.");
+  //                     });
+  //                 }}
+  //               />
+  //               <button
+  //                 onClick={() => {
+  //                   document
+  //                     .getElementById("fileField" + assignment.id)
+  //                     .click();
+  //                 }}
+  //               >
+  //                 Submit assignment
+  //               </button>
+  //             </div>
+  //           </div>
+  //         );
+  //       })}
+  //     </>
+  //   );
+  // };
 
   return (
     <>

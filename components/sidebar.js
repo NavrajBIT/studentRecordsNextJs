@@ -6,6 +6,8 @@ const Sidebar = () => {
   const user = useContext(userContext);
   const [attendanceToggle, setAttendanceToggle] = useState(false);
 
+  const [assignmentToggle, setAssignmentToggle] = useState(false);
+
   return (
     <>
       <div className="sidebar" id="sidbar">
@@ -71,14 +73,46 @@ const Sidebar = () => {
             ) : (
               <></>
             )}
+
+
             <div
               className="sidebar-item"
               onClick={() => {
-                user.updateState(user.userState.type, user.userState.id, 5);
+                // user.updateState(user.userState.type, user.userState.id, 5);
+                setAssignmentToggle(!assignmentToggle);
+
               }}
             >
               Assignment
             </div>
+            {/* {assignmentToggle ? < */}
+            {assignmentToggle ? (
+              <>
+                <div
+                  className="sidebar-item-inner"
+                  onClick={() => {
+                    user.updateState(user.userState.type, user.userState.id, 5.2);
+                  }}
+                >
+                  - Upload Assignment
+                </div>
+                <div
+                  className="sidebar-item-inner"
+                  onClick={() => {
+                    user.updateState(
+                      user.userState.type,
+                      user.userState.id,
+                      5.1
+                    );
+                  }}
+                >
+                  - View Assignment
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+
             <div
               className="sidebar-item"
               onClick={() => {
@@ -94,6 +128,16 @@ const Sidebar = () => {
               }}
             >
               Time Table
+            </div>
+
+            <div
+              className="sidebar-item"
+              onClick={() => {
+                user.updateState(user.userState.type, user.userState.id, 8);
+                // alert(user.userState.id)
+              }}
+            >
+              View Assignment
             </div>
           </>
         ) : (
