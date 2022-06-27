@@ -19,7 +19,8 @@ const ViewRecords = () => {
     setStatus("Searching...");
     let studentName = document.getElementById("nameField").value;
     let studentGrade = document.getElementById("gradeField").value;
-    searchStudent(studentName, studentGrade).then((res) => {
+    let studentRollNumber = document.getElementById("idField").value;
+    searchStudent(studentName, studentGrade, studentRollNumber).then((res) => {
       setTimeout(() => {
         setSearchData(res.data);
         if (res.data.length === 0) {

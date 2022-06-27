@@ -6,6 +6,8 @@ import "../styles/formPage.css";
 import "../styles/viewRecords.css";
 import "../styles/assignment.css";
 import "../styles/attendance.css";
+import "../styles/modificationrequest.css";
+import "../styles/transactions.css";
 
 import { useContext } from "react";
 import UserState from "../context/UserState";

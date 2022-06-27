@@ -24,6 +24,7 @@ const Profile = () => {
     dob: "loading...",
     rollNumber: "loading...",
     grade: "loading...",
+    section: "loading...",
     email: "loading...",
     religion: "loading...",
     caste: "loading...",
@@ -104,6 +105,7 @@ const Profile = () => {
       dob: dob,
       studentId: user.userState.id,
       grade: document.getElementById("grade").value,
+      section: document.getElementById("section").value,
       email: document.getElementById("email").value,
       religion: document.getElementById("religion").value,
       caste: document.getElementById("caste").value,
@@ -141,8 +143,9 @@ const Profile = () => {
       ).value,
     };
 
-    await modifyStudentData(enteredData)
+    await modifyStudentData(enteredData, user.userState.id)
       .then((res) => {
+        console.log(res);
         if (res.status === "Success") {
           setStatus("Student data saved successfully.");
           setIsEditing(!isEditing);
@@ -157,7 +160,8 @@ const Profile = () => {
   return (
     <>
       <div className="myform">
-        {user.userState.type === "Admin" && (
+        {(user.userState.type === "Admin" ||
+          user.userState.type === "SuperAdmin") && (
           <div className="editButton">
             <button
               onClick={() => {

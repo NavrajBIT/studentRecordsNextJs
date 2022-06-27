@@ -8,7 +8,7 @@ const MarksCard = () => {
   const [status, setStatus] = useState("");
   const user = useContext(userContext);
 
-  if (user.userState.type === "Admin") {
+  if (user.userState.type === "Admin" || user.userState.type === "SuperAdmin") {
     const [fileData, setFileData] = useState("");
     const uploadMarks = async () => {
       setStatus("Uploading marks card...");

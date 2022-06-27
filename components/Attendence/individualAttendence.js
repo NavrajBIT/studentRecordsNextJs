@@ -5,7 +5,7 @@ import { getStudentAttendence } from "../../api/contractCall";
 const IndividualAttendence = (props) => {
   const [attendance, setAttendence] = useState(0);
   const attendanceValue = {
-    0: "",
+    0: "-",
     1: "P",
     2: "A",
     3: "H",

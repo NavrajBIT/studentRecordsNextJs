@@ -31,6 +31,14 @@ export const studentData = [
         id: "grade",
       },
       {
+        label: "Section",
+        type: "string",
+        placeholder: "Enter Section",
+        required: "y",
+        id: "section",
+      },
+
+      {
         label: "Email Id",
         type: "string",
         placeholder: "email id",

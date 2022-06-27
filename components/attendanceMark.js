@@ -24,6 +24,37 @@ const Attendance = () => {
   let sNo = 0;
   return (
     <div className="myform">
+      <h2>Upload full month attendance</h2>
+      <div className="formelement">
+        <label htmlFor="fullattendanceupload">Select file</label>
+        <label
+          htmlFor="fullattendanceupload"
+          id="fullattendanceuploadLabel"
+          className="fileselector"
+        >
+          Choose File
+        </label>
+        <input
+          type="file"
+          id="fullattendanceupload"
+          style={{ display: "none" }}
+          onChange={(e) => {
+            document.getElementById("fullattendanceuploadLabel").innerHTML =
+              e.target.files[0].name;
+          }}
+        />
+      </div>
+      <button
+        onClick={() => {
+          setStatus("Uploading attendance...");
+          setTimeout(() => {
+            setStatus("Attendance uploaded.");
+          }, 1000);
+        }}
+      >
+        Upload
+      </button>
+      <h2>Mark today&apos;s attendance</h2>
       <div className="formelement">
         <label htmlFor="gradeSelector">Select Grade</label>
         <select

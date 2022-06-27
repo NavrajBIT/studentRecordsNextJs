@@ -10,6 +10,8 @@ const Navbar = () => {
   useEffect(() => {
     if (user.userState.type === "Admin") {
       setMyName("Admin");
+    } else if (user.userState.type === "SuperAdmin") {
+      setMyName("Super Admin");
     } else {
       getStudentData(user.userState.id)
         .then((res) => {

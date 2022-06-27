@@ -5,6 +5,7 @@ import userContext from "../context/userContext";
 const Sidebar = () => {
   const user = useContext(userContext);
   const [attendanceToggle, setAttendanceToggle] = useState(false);
+  const [assignmentToggle, setAssignmentToggle] = useState(false);
 
   return (
     <>
@@ -17,7 +18,8 @@ const Sidebar = () => {
           {" "}
           Dashboard
         </h1>
-        {user.userState.type === "Admin" ? (
+        {user.userState.type === "Admin" ||
+        user.userState.type === "SuperAdmin" ? (
           <>
             <div
               className="sidebar-item"
@@ -74,11 +76,35 @@ const Sidebar = () => {
             <div
               className="sidebar-item"
               onClick={() => {
-                user.updateState(user.userState.type, user.userState.id, 5);
+                setAssignmentToggle(!assignmentToggle);
               }}
             >
               Assignment
             </div>
+            {assignmentToggle && (
+              <>
+                <div
+                  className="sidebar-item-inner"
+                  onClick={() => {
+                    user.updateState(user.userState.type, user.userState.id, 5);
+                  }}
+                >
+                  - Upload Assignment
+                </div>
+                <div
+                  className="sidebar-item-inner"
+                  onClick={() => {
+                    user.updateState(
+                      user.userState.type,
+                      user.userState.id,
+                      5.1
+                    );
+                  }}
+                >
+                  - Submitted Assignment
+                </div>
+              </>
+            )}
             <div
               className="sidebar-item"
               onClick={() => {
@@ -94,6 +120,30 @@ const Sidebar = () => {
               }}
             >
               Time Table
+            </div>
+            <div
+              className="sidebar-item"
+              onClick={() => {
+                user.updateState(user.userState.type, user.userState.id, 7.1);
+              }}
+            >
+              Academic Performance
+            </div>
+            <div
+              className="sidebar-item"
+              onClick={() => {
+                user.updateState(user.userState.type, user.userState.id, 8);
+              }}
+            >
+              Modification Requests
+            </div>
+            <div
+              className="sidebar-item"
+              onClick={() => {
+                user.updateState(user.userState.type, user.userState.id, 9);
+              }}
+            >
+              History
             </div>
           </>
         ) : (
@@ -129,6 +179,14 @@ const Sidebar = () => {
               }}
             >
               Time Table
+            </div>
+            <div
+              className="sidebar-item"
+              onClick={() => {
+                user.updateState(user.userState.type, user.userState.id, 8);
+              }}
+            >
+              Request Modification
             </div>
           </>
         )}

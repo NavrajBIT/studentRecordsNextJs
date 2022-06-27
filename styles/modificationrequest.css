@@ -1,0 +1,20 @@
+.myform .request {
+  color: "white";
+  margin: 10px 0px;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.myform .request .requestelement {
+  display: grid;
+  color: "white";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid white;
+  padding: 10px;
+}
+
+.myform .request .requestHeading {
+  padding: 10px;
+  font-size: 25px;
+}

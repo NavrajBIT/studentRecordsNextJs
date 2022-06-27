@@ -26,6 +26,7 @@ const AddStudent = () => {
       dob: dob,
       rollNumber: document.getElementById("rollNumber").value,
       grade: document.getElementById("grade").value,
+      section: document.getElementById("section").value,
       email: document.getElementById("email").value,
       religion: document.getElementById("religion").value,
       caste: document.getElementById("caste").value,
@@ -62,9 +63,10 @@ const AddStudent = () => {
         "personalityDevelopmentAchievements"
       ).value,
     };
-
-    await addStudentData(studentData)
+    console.log("Using user ----------- " + user.userState.id);
+    await addStudentData(studentData, user.userState.id)
       .then((res) => {
+        console.log(res);
         if (res.status === "Success") {
           setStatus("Student data added successfully.");
           user.updateState(user.userState.type, res.studentId, 2.1);
