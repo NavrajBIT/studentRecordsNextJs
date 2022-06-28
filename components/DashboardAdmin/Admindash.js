@@ -2,6 +2,7 @@ import React from "react";
 import BarChart from "./BarChart";
 import dash from "./dash.module.css";
 import PieChart from "./PieChart";
+import PerformanceChart from "./PerformanceChart";
 
 import { useState, useEffect } from "react";
 import {
@@ -56,10 +57,6 @@ const AdminDash = () => {
 
   return (
     <>
-      {/* <div className={dash.heading1}>
-        <h2>Total Number of Students : </h2>
-      </div> */}
-
       <div className="myform">
         <div>
           <h2>1. Gender distribution of students</h2>
@@ -89,27 +86,9 @@ const AdminDash = () => {
         <div>
           <h2>2. Grade distribution of students</h2>
         </div>
-        <button
-          onClick={() => {
-            console.log(gradeSectionData);
-          }}
-        >
-          View
-        </button>
+
         {gradeSectionData.length > 0 && (
-          <div style={{ color: "white" }}>
-            {gradeSectionData.map((gradeData) => {
-              return (
-                <>
-                  <div>Grade: {gradeSectionData.indexOf(gradeData) + 1}</div>
-                  <div>section a : ---- : {gradeData.a}</div>
-                  <div>section b : ---- : {gradeData.b}</div>
-                  <div>section c : ---- : {gradeData.c}</div>
-                  <div>section d : ---- : {gradeData.d}</div>
-                </>
-              );
-            })}
-          </div>
+          <BarChart studentData={gradeSectionData} />
         )}
       </div>
       <div className="myform">
@@ -128,11 +107,11 @@ const AdminDash = () => {
                   .then(async (res) => {
                     if (res > 0) {
                       let performanceIndicators = [];
-                      for (let i = 1; i <= res; i++) {
+                      for (let i = 1; i <= 10; i++) {
                         await getPerformanceIndicator(i, grade)
                           .then((indicator) => {
                             performanceIndicators.push(indicator);
-                            if (i == res) {
+                            if (i == 10) {
                               setPerformanceIndicators(performanceIndicators);
                             }
                           })
@@ -150,6 +129,7 @@ const AdminDash = () => {
               }
             }}
           >
+            <option value="0">Choose Grade</option>
             <option value="1">1st</option>
             <option value="2">2nd</option>
             <option value="3">3rd</option>
@@ -164,18 +144,7 @@ const AdminDash = () => {
         </div>
 
         {performanceIndicators.length > 0 && (
-          <div style={{ color: "white" }}>
-            {performanceIndicators.map((indicator) => {
-              return (
-                <div key={indicator.batch}>
-                  <div style={{ color: "red" }}>Batch: {indicator.batch}</div>
-                  <div>Total Students: {indicator.totalStudents}</div>
-                  <div>Passed Students: {indicator.passedStudents}</div>
-                  <div>Failed Students: {indicator.failedStudents}</div>
-                </div>
-              );
-            })}
-          </div>
+          <PerformanceChart performanceData={performanceIndicators} />
         )}
       </div>
     </>
