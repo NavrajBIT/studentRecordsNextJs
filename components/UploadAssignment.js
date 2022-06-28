@@ -18,7 +18,7 @@ const UploadAssignment = () => {
       },
       {
         name: "Section C",
-        data: [1, 7, 5, 1, 3],
+        data: [2, 7, 5, 2, 3],
       },
       {
         name: "Section D",
@@ -27,6 +27,11 @@ const UploadAssignment = () => {
       
     ],
     options: {
+      tooltip:{
+        enabled:true,
+        followCursor: true,
+        theme: 'dark'
+      },
       title:{
         text:"Student Details",
         style:{
@@ -83,7 +88,7 @@ const UploadAssignment = () => {
         ],
         labels: {
           style:{
-            colors:["white" ,"white","white" ,"white" ,"white" , ]           
+            colors:["white" ,"white","white" ,"white" ,"white"  ]           
           }
         },
       },
@@ -94,10 +99,9 @@ const UploadAssignment = () => {
         max: 22,
         tickAmount: 12, // this will control the jump between the numbers 
         title:{
-          text:"Name of Students",
+          text:"Number of Students",
           offsetX: -5,
           style:{
-            color:"white",
             fontSize:'15',
             color:'white',
 
@@ -118,14 +122,16 @@ const UploadAssignment = () => {
         position: "right",
         labels: {
           style:{
-            colors:["white" ,"white","white" ,"white" ]           
+            colors:["white" ,"white","white" ,"white" ]      ,
+            text: "white"     
           }
         },
 
         // offsetY: 40,
       },
       dataLabels:{
-        enabled:true
+        enabled:true,
+        color:"black"
       },
       
       
@@ -163,7 +169,7 @@ grid: {
 
       stroke: {
         width: 1,
-        colors: ['#fff']
+        colors: ['white']
       },
       fill: {
         opacity: 1,
@@ -172,10 +178,11 @@ grid: {
       theme: {
         monochrome: {
           enabled: false,
-          shadeTo: 'light',
+          shadeTo: 'dark',
           shadeIntensity: 1,
         }
       },
+      
       
 
     },
