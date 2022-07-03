@@ -33,6 +33,37 @@ export const fileHash = async (file) => {
   return response["path"];
 };
 
+export const fileDownload = async (hash, fileName) => {
+  let url = "https://ipfs.io/ipfs/" + hash;
+  // window.open(url);
+  let req = new XMLHttpRequest();
+  req.open("GET", url, true);
+  req.responseType = "blob";
+  req.onload = function () {
+    //Convert the Byte Data to BLOB object.
+    var blob = new Blob([req.response], {
+      type: "application/octetstream",
+    });
+
+    //Check the Browser type and download the File.
+    var isIE = false || !!document.documentMode;
+    if (isIE) {
+      window.navigator.msSaveBlob(blob, fileName);
+    } else {
+      var url = window.URL || window.webkitURL;
+      let link = url.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.setAttribute("download", fileName);
+      a.setAttribute("href", link);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
+
+  req.send();
+};
+
 export const checkLogin = async (name, password) => {
   let response = {
     status: "Success",
@@ -413,6 +444,11 @@ export const getStudentData = async (studentId) => {
 export const getStudentName = async (studentId) => {
   return await mySignerContract.getPrimaryDetails(studentId).then((res) => {
     return res["_studentName"];
+  });
+};
+export const getStudentRollNumber = async (studentId) => {
+  return await mySignerContract.getPrimaryDetails(studentId).then((res) => {
+    return ethers.utils.formatUnits(res["_rollNumber"], 0);
   });
 };
 

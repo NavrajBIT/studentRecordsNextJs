@@ -159,12 +159,12 @@ const BarChart = (props) => {
         },
       },
       legend: {
-        position: "right",
+        position: "bottom",
+        show: true,
         labels: {
-          style: {
-            colors: ["white", "white", "white", "white"],
-            text: "white",
-          },
+          colors: ["white"],
+          useSeriesColors: false,
+          // text: "#90A4AE",
         },
 
         // offsetY: 40,

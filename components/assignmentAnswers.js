@@ -1,6 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getAssignmentSolutions, getStudentData } from "../api/contractCall";
+import {
+  fileDownload,
+  getAssignmentSolutions,
+  getStudentData,
+} from "../api/contractCall";
 
 const AssignmentView = (props) => {
   const [mySolutions, setMySolutions] = useState([]);
@@ -60,8 +64,8 @@ const AssignmentView = (props) => {
                 <div>{solution.rollNumber}</div>
                 <a
                   onClick={() => {
-                    let url = "http://ipfs.io/ipfs/" + solution.file;
-                    window.open(url);
+                    let filename = solution.studentName + "assignment.pdf";
+                    fileDownload(solution.file, filename);
                   }}
                 >
                   Download{" "}

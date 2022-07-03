@@ -1,35 +1,12 @@
 import React from "react";
-import { getLatestBlock, getModifier } from "../api/contractCall";
+
 import { useEffect, useState } from "react";
 import Transactions from "./SmallerComponents/transactions";
-import TransactionsByRollNumber from "./SmallerComponents/transactionsByRollNumber";
 
 const History = () => {
-  const resultsPerPage = 10;
-  const [status, setStatus] = useState("");
-  const [transactions, setTransactions] = useState([]);
-  const [isFiltered, setIsFiltered] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
   const [rollNumber, setRollNumber] = useState(0);
-  useEffect(() => {
-    poppulateTxData();
-  }, [rollNumber]);
 
-  const poppulateTxData = () => {
-    setStatus("Loading transactions...");
-    getLatestBlock().then((res) => {
-      let blockNumber = res;
-      let transactions = [];
-      for (
-        let i = parseInt(blockNumber);
-        i > parseInt(blockNumber) - resultsPerPage;
-        i--
-      ) {
-        transactions.push(i);
-      }
-      setTransactions(transactions);
-      setStatus("");
-    });
-  };
   return (
     <div className="myform">
       <div className="formelement">
@@ -40,35 +17,49 @@ const History = () => {
           id="rollNumberField"
         />
       </div>
-      <button
-        onClick={() => {
-          let myRollNumber = document.getElementById("rollNumberField").value;
-          setIsFiltered(true);
-          setRollNumber(myRollNumber);
-        }}
-      >
-        Filter
-      </button>
-      <div className="status">{status}</div>
-      {transactions.length > 0 && (
-        <>
-          {transactions.map((blockNumber) => {
-            if (rollNumber === 0) {
-              return (
-                <Transactions blockNumber={blockNumber} key={blockNumber} />
-              );
-            } else {
-              return (
-                <TransactionsByRollNumber
-                  blockNumber={blockNumber}
-                  key={blockNumber}
-                  rollNumber={rollNumber}
-                />
-              );
-            }
-          })}
-        </>
-      )}
+      <div className="transactions">
+        <div className="header">
+          <div className="heading1">S.No.</div>
+          <div className="heading1">Modification</div>
+          <div className="heading1">Done by</div>
+          <div className="heading1">Student Name</div>
+          <div className="heading1">Roll No.</div>
+          <div className="heading1">Date</div>
+          <div className="heading1">Time</div>
+        </div>
+      </div>
+      <Transactions resultNumber={currentPage * 10 + 1} />
+      <Transactions resultNumber={currentPage * 10 + 2} />
+      <Transactions resultNumber={currentPage * 10 + 3} />
+      <Transactions resultNumber={currentPage * 10 + 4} />
+      <Transactions resultNumber={currentPage * 10 + 5} />
+      <Transactions resultNumber={currentPage * 10 + 6} />
+      <Transactions resultNumber={currentPage * 10 + 7} />
+      <Transactions resultNumber={currentPage * 10 + 8} />
+      <Transactions resultNumber={currentPage * 10 + 9} />
+      <Transactions resultNumber={currentPage * 10 + 10} />
+      <div>
+        <div className="pageToggle">
+          {currentPage > 0 ? (
+            <button
+              onClick={() => {
+                setCurrentPage(currentPage - 1);
+              }}
+            >
+              {"<"} Previous
+            </button>
+          ) : (
+            <div></div>
+          )}
+          <button
+            onClick={() => {
+              setCurrentPage(currentPage + 1);
+            }}
+          >
+            Next {">"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

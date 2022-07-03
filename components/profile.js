@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { studentData } from "../formData/studentDataForm";
 import {
+  fileDownload,
   fileHash,
   getStudentData,
   modifyStudentData,
@@ -220,10 +221,8 @@ const Profile = () => {
                           <button
                             className="downloadButton"
                             onClick={() => {
-                              let url =
-                                "http://ipfs.io/ipfs/" +
-                                mystudentData[label.id];
-                              window.open(url);
+                              let filename = label.id + ".pdf";
+                              fileDownload(mystudentData[label.id], filename);
                             }}
                           >
                             Download

@@ -1,23 +1,19 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import {
+  getLatestBlock,
   getHistory,
-  getStudentData,
-  getBlockDetail,
   getModifier,
-  mainAdmins,
+  getBlockDetail,
+  getStudentIdFromRollNumber,
 } from "../../api/contractCall";
 import { ethers } from "ethers";
+import StudentName from "../Attendence/studentName";
+import StudentRollNumber from "../Attendence/studentRollNumber";
 
 const Transactions = (props) => {
   const [myFunction, setMyFunction] = useState("");
-  const [studentId, setStudentId] = useState(0);
   const [params, setParams] = useState([]);
-  const [studentName, setStudentName] = useState("");
-  const [rollNumber, setRollNumber] = useState("");
-  const [blockTime, setBlockTime] = useState("");
-  const [blockDate, setBlockDate] = useState("");
-  const [modifier, setModifier] = useState("");
   const [detailerstyle, setDetailerStyle] = useState({
     display: "none",
     animation: "detailerup",
@@ -86,6 +82,7 @@ const Transactions = (props) => {
       "Date of birth",
       "Roll number",
       "Grade",
+      "Section",
       "email",
     ],
     modifyPrimaryDetails: [
@@ -93,6 +90,7 @@ const Transactions = (props) => {
       "Date of birth",
       "Roll Number",
       "Grade",
+      "Section",
       "email",
     ],
     addPersonalDetails: [
@@ -133,8 +131,68 @@ const Transactions = (props) => {
     ],
   };
 
+  const [block, setBlock] = useState(0);
+  const [modification, setModification] = useState("");
+  const [modifier, setModifier] = useState("");
+  const [studentId, setStudentId] = useState(0);
+  const [blockTime, setBlockTime] = useState("");
+  const [blockDate, setBlockDate] = useState("");
+
   useEffect(() => {
-    getBlockDetail(props.blockNumber).then((res) => {
+    setModification("loading...");
+    setStudentId(0);
+    setParams([]);
+    setMyFunction("");
+    setModifier("");
+    setBlockDate("");
+    setBlockTime("");
+    getLatestBlock()
+      .then((res) => {
+        let thisBlock = parseInt(res) - parseInt(props.resultNumber);
+        setBlock(thisBlock);
+        getHistory(thisBlock)
+          .then((res) => {
+            console.log(res);
+            if (functionNames[res.functionFragment.name] != undefined) {
+              setMyFunction(res.functionFragment.name);
+              setModification(functionNames[res.functionFragment.name]);
+              if (res.functionFragment.name == "addStudent") {
+                let rollNumber = ethers.utils.formatUnits(
+                  res.args._rollNumber,
+                  0
+                );
+
+                getStudentIdFromRollNumber(rollNumber).then((res) => {
+                  setStudentId(res);
+                });
+              } else {
+                setStudentId(ethers.utils.formatUnits(res.args._studentId, 0));
+              }
+              poppulateSecondaryDetails(thisBlock);
+              setParams(res.args);
+            } else {
+              setModification("Secondary Operation");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .then((err) => {
+        console.log(err);
+      });
+  }, [props]);
+
+  const poppulateSecondaryDetails = async (thisBlock) => {
+    getModifier(thisBlock)
+      .then((res) => {
+        setModifier(res.name);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    getBlockDetail(thisBlock).then((res) => {
       let mydate = new Date(parseInt(res.timestamp) * 1000);
       let myTimeString = mydate.getHours() + ":" + mydate.getMinutes();
       let mydateString =
@@ -146,42 +204,14 @@ const Transactions = (props) => {
       setBlockTime(myTimeString);
       setBlockDate(mydateString);
     });
-    getModifier(props.blockNumber).then((res) => {
-      setModifier(res.name);
-    });
-    getHistory(props.blockNumber)
-      .then((res) => {
-        if (functionNames[res.functionFragment.name] == undefined) {
-          return null;
-        }
-        setMyFunction(res.functionFragment.name);
-        setStudentId(ethers.utils.formatUnits(res.args._studentId, 0));
-        getStudentData(ethers.utils.formatUnits(res.args._studentId, 0)).then(
-          (res) => {
-            setStudentName(res.studentName);
-            setRollNumber(res.rollNumber);
-          }
-        );
-        let params = [];
-        functionArgs[res.functionFragment.name].map((arg) => {
-          let thisParam = res.args[arg];
-          if (typeof res.args[arg] == "object") {
-            thisParam = ethers.utils.formatUnits(res.args[arg], 0);
-          }
-          params.push(thisParam);
-        });
-        setParams(params);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  }, []);
+  };
 
   const toggledetails = () => {
     if (detailerstyle.display === "none") {
       setDetailerStyle({
         display: "flex",
         flexDirection: "column",
+        padding: "0px 20px",
       });
     } else {
       setDetailerStyle({
@@ -190,51 +220,57 @@ const Transactions = (props) => {
     }
   };
 
-  if (myFunction === "") {
-    return <></>;
-  }
-  return (
-    <div
-      className="transactions"
-      onClick={() => {
-        toggledetails();
-      }}
-    >
-      <div className="header">
-        <div>
-          <div className="heading1">Modification:</div>
-          <div>{functionNames[myFunction]}</div>
+  if (modification !== "" && modification !== "Secondary Operation") {
+    return (
+      <div
+        className="transactions"
+        onClick={() => {
+          toggledetails();
+        }}
+      >
+        <div className="header">
+          <div>{props.resultNumber}</div>
+          <div>{modification}</div>
+          <div>{modifier}</div>
+          <div>
+            <StudentName studentId={studentId} />
+          </div>
+          <div>
+            <StudentRollNumber studentId={studentId} />
+          </div>
+          <div>{blockDate}</div>
+          <div>{blockTime}</div>
         </div>
-        <div>
-          <div className="heading1">Student Details:</div>
-          <div>Name: {studentName}</div>
-          <div>Roll number: {rollNumber}</div>
-        </div>
-        <div>
-          <div className="heading1">Time:</div>
-          <div>Time: {blockTime} </div>
-          <div>Date: {blockDate} </div>
-        </div>
-        <div>
-          <div className="heading1">Modified by:</div>
-          <div>{modifier} </div>
-        </div>
-      </div>
-      <div className="detailer" id="detailer" style={detailerstyle}>
         {params.length > 0 && (
-          <>
-            <div className="heading1">Modified details:</div>
-            {params.map((param) => {
-              let index = params.indexOf(param);
+          <div style={detailerstyle}>
+            {functionArgLabels[myFunction].map((param) => {
+              let index = parseInt(
+                functionArgLabels[myFunction].indexOf(param) + 1
+              );
+              if (myFunction == "addStudent") {
+                index--;
+              }
               return (
                 <div className="formelement">
-                  <div>{functionArgLabels[myFunction][index]} :</div>
-                  <div>{param}</div>
+                  <div>{param} :</div>
+                  <div>
+                    {typeof params[index] == "object"
+                      ? ethers.utils.formatUnits(params[index], 0)
+                      : params[index]}
+                  </div>
                 </div>
               );
             })}
-          </>
+          </div>
         )}
+      </div>
+    );
+  }
+  return (
+    <div className="transactions">
+      <div className="header">
+        <div>{props.resultNumber}</div>
+        <div>Secondary Operation...</div>
       </div>
     </div>
   );

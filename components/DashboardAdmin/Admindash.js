@@ -30,14 +30,12 @@ const AdminDash = () => {
   }, []);
 
   const poppulateKPI = async () => {
-    getStudentsInGradeSection(7, "a").then((res) => {
-      console.log(res);
-    });
-
     gradeSectionData = [];
+    setGradeSectionData(gradeSectionData);
 
     for (let grade = 1; grade <= 10; grade++) {
       let gradeData = { a: 0, b: 0, c: 0, d: 0 };
+
       await getStudentsInGradeSection(grade, "a").then((res) => {
         gradeData.a = res;
       });
@@ -52,6 +50,7 @@ const AdminDash = () => {
       });
       gradeSectionData.push(gradeData);
     }
+
     setGradeSectionData(gradeSectionData);
   };
 
@@ -87,6 +86,14 @@ const AdminDash = () => {
           <h2>2. Grade distribution of students</h2>
         </div>
 
+        {/* <button
+          onClick={() => {
+            console.log(gradeSectionData);
+          }}
+        >
+          View
+        </button> */}
+
         {gradeSectionData.length > 0 && (
           <BarChart studentData={gradeSectionData} />
         )}
@@ -95,6 +102,16 @@ const AdminDash = () => {
         <div>
           <h2>3. Academic Performance Indicators</h2>
         </div>
+        <button
+          onClick={async () => {
+            // console.log(gradeSectionData);
+            await getStudentsInGradeSection(7, "a").then((res) => {
+              console.log(res);
+            });
+          }}
+        >
+          View
+        </button>
         <div className="formelement">
           <label htmlFor="gradeField">Grade: </label>
           <select

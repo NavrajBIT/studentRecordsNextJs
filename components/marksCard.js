@@ -1,5 +1,5 @@
 import React from "react";
-import { fileHash } from "../api/contractCall";
+import { fileDownload, fileHash } from "../api/contractCall";
 import { useState, useContext, useEffect } from "react";
 import { addMarksCard, getMarksCard } from "../api/contractCall";
 import userContext from "../context/userContext";
@@ -127,8 +127,7 @@ const MarksCard = () => {
               Grade card for grade: {marks.grade}
               <button
                 onClick={() => {
-                  let url = "http://ipfs.io/ipfs/" + marks.file;
-                  window.open(url);
+                  fileDownload(marks.file, "gradecard.pdf");
                 }}
               >
                 Download Grade Card

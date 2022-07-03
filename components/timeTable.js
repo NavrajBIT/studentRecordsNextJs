@@ -6,6 +6,7 @@ import {
   getStudentData,
   viewExamTimeTable,
   viewClassTimeTable,
+  fileDownload,
 } from "../api/contractCall";
 import userContext from "../context/userContext";
 
@@ -142,10 +143,10 @@ const TimeTable = () => {
             <p style={{ color: "white" }}>
               Class Time table added on {getDate(myClassTableTime)}
             </p>
+
             <button
               onClick={() => {
-                let url = "https://ipfs.io/ipfs/" + myClassTable;
-                window.open(url);
+                fileDownload(myClassTable, "classtimetable.pdf");
               }}
             >
               Download
@@ -160,8 +161,7 @@ const TimeTable = () => {
             </p>
             <button
               onClick={() => {
-                let url = "https://ipfs.io/ipfs/" + myExamTable;
-                window.open(url);
+                fileDownload(myExamTable, "examtimetable.pdf");
               }}
             >
               Download

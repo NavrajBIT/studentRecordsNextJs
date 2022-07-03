@@ -1,5 +1,5 @@
 import React from "react";
-import { getRequestData } from "../../api/contractCall";
+import { getRequestData, fileDownload } from "../../api/contractCall";
 import { useState, useEffect } from "react";
 import StudentName from "../Attendence/studentName";
 import {
@@ -47,7 +47,7 @@ const ModificationRequest = (props) => {
           <button
             style={{ margin: "0px", width: "200px" }}
             onClick={() => {
-              window.open("http://ipfs.io/ipfs/" + file);
+              fileDownload(file, "supportingdocument.pdf");
             }}
           >
             download

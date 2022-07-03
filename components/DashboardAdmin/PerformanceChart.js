@@ -68,6 +68,7 @@ const PerformanceChart = (props) => {
               position: "bottom",
               offsetX: -10,
               offsetY: 0,
+              labels: { colors: "white", useSeriesColors: true },
             },
           },
         },
@@ -140,19 +141,21 @@ const PerformanceChart = (props) => {
         },
       },
       legend: {
-        position: "right",
+        position: "bottom",
+        show: true,
         labels: {
-          style: {
-            colors: ["white", "white", "white", "white"],
-            text: "white",
-          },
+          colors: ["white"],
+          useSeriesColors: false,
+          // text: "#90A4AE",
         },
 
         // offsetY: 40,
       },
       dataLabels: {
         enabled: true,
-        color: "white",
+        style: {
+          colors: ["white"],
+        },
       },
 
       grid: {

@@ -1,15 +1,15 @@
 .transactions {
   color: white;
-  border: 1px solid white;
-  margin: 10px;
-  padding: 10px;
+  /* border: 1px solid white; */
+  /* margin: 10px; */
+  /* padding: 10px; */
   font-weight: 100;
   font-size: 15px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 .transactions:hover {
   background-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 0px 2px white;
+  /* box-shadow: 0px 0px 0px 2px white; */
 }
 .myform .heading1 {
   background-image: linear-gradient(
@@ -29,5 +29,10 @@
 
 .transactions .header {
   display: grid;
-  grid-template-columns: 3fr 2fr 2fr 1fr;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.pageToggle {
+  display: flex;
+  justify-content: space-between;
 }

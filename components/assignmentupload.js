@@ -1,5 +1,5 @@
 import React from "react";
-import { fileHash } from "../api/contractCall";
+import { fileDownload, fileHash } from "../api/contractCall";
 import { useState, useContext, useEffect } from "react";
 import {
   addAssignment,
@@ -159,8 +159,8 @@ const Assignment = () => {
               <div className="updownbuttons">
                 <button
                   onClick={() => {
-                    let url = "http://ipfs.io/ipfs/" + assignment.file;
-                    window.open(url);
+                    let filename = assignment.subject + "assignment.pdf";
+                    fileDownload(assignment.file, filename);
                   }}
                 >
                   Download assignment
