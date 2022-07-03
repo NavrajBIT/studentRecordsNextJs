@@ -239,7 +239,7 @@ const TransactionsByRollNumber = (props) => {
             {params.map((param) => {
               let index = params.indexOf(param);
               return (
-                <div className="formelement">
+                <div className="formelement" key={param + index}>
                   <div>{functionArgLabels[myFunction][index]} :</div>
                   <div>{param}</div>
                 </div>

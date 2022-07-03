@@ -38,8 +38,8 @@ const Assignment = () => {
     }
   }, [selectedGrade]);
 
+  const [fileData, setFileData] = useState("");
   if (user.userState.type === "Admin" || user.userState.type === "SuperAdmin") {
-    const [fileData, setFileData] = useState("");
     const uploadAssignment = async () => {
       setStatus("Uploading assignment...");
       let grade = document.getElementById("gradeField").value;

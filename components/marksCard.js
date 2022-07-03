@@ -7,9 +7,26 @@ import userContext from "../context/userContext";
 const MarksCard = () => {
   const [status, setStatus] = useState("");
   const user = useContext(userContext);
+  const [fileData, setFileData] = useState("");
+
+  ////student hooks
+  const [myMarks, setMyMarks] = useState([]);
+  useEffect(() => {
+    setStatus("loading grade card...");
+    getMarksCard(user.userState.id)
+      .then((res) => {
+        console.log(res);
+        setTimeout(() => {
+          setMyMarks(res.data);
+          setStatus("");
+        }, 1000);
+      })
+      .catch((err) => {
+        setStatus("");
+      });
+  }, []);
 
   if (user.userState.type === "Admin" || user.userState.type === "SuperAdmin") {
-    const [fileData, setFileData] = useState("");
     const uploadMarks = async () => {
       setStatus("Uploading marks card...");
       let rollNumber = document.getElementById("rollNumberField").value;
@@ -94,22 +111,6 @@ const MarksCard = () => {
       </div>
     );
   }
-
-  const [myMarks, setMyMarks] = useState([]);
-  useEffect(() => {
-    setStatus("loading grade card...");
-    getMarksCard(user.userState.id)
-      .then((res) => {
-        console.log(res);
-        setTimeout(() => {
-          setMyMarks(res.data);
-          setStatus("");
-        }, 1000);
-      })
-      .catch((err) => {
-        setStatus("");
-      });
-  }, []);
 
   const MarksCardData = () => {
     if (myMarks.length === 0) {

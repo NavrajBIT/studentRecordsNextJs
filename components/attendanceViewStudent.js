@@ -86,7 +86,11 @@ const AttendanceViewStudent = () => {
           {dates.length > 0 && (
             <>
               {dates.map((date) => {
-                return <div className="attendanceValue">{date}</div>;
+                return (
+                  <div className="attendanceValue" key={date}>
+                    {date}
+                  </div>
+                );
               })}
             </>
           )}

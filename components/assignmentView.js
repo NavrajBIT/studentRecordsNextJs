@@ -48,6 +48,7 @@ const SubmittedAssignmentView = () => {
                   assignmentId={assignment.id}
                   assignmentSubject={assignment.subject}
                   assignmentTopic={assignment.topic}
+                  key={assignment.id}
                 />
               );
             })}

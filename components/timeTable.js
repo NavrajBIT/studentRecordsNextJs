@@ -14,8 +14,45 @@ const TimeTable = () => {
   const [status, setStatus] = useState("");
   const user = useContext(userContext);
 
+  const [fileData, setFileData] = useState("");
+
+  /// student hooks
+
+  const [myClassTable, setMyClassTable] = useState("");
+  const [myClassTableTime, setMyClassTableTime] = useState(0);
+  const [myExamTable, setMyExamTable] = useState("");
+  const [myExamTableTime, setMyExamTableTime] = useState(0);
+
+  useEffect(() => {
+    setStatus("loading time tables...");
+    getStudentData(user.userState.id)
+      .then((res) => {
+        let grade = res.grade;
+        viewClassTimeTable(grade)
+          .then((res) => {
+            setMyClassTable(res.file);
+            setMyClassTableTime(res.time);
+            setStatus("");
+          })
+          .catch((err) => {
+            setStatus("Could not find class time table.");
+          });
+        viewExamTimeTable(grade)
+          .then((res) => {
+            setMyExamTable(res.file);
+            setMyExamTableTime(res.time);
+            setStatus("");
+          })
+          .catch((err) => {
+            setStatus("Could not find exam time table.");
+          });
+      })
+      .catch((err) => {
+        setStatus("Something went wrong. Please refresh the page.");
+      });
+  }, []);
+
   if (user.userState.type === "Admin" || user.userState.type === "SuperAdmin") {
-    const [fileData, setFileData] = useState("");
     const uploadTimeTable = async () => {
       setStatus("Uploading time table...");
       let exam = document.getElementById("typeField").value;
@@ -93,45 +130,11 @@ const TimeTable = () => {
     );
   }
 
-  const [myClassTable, setMyClassTable] = useState("");
-  const [myClassTableTime, setMyClassTableTime] = useState(0);
-  const [myExamTable, setMyExamTable] = useState("");
-  const [myExamTableTime, setMyExamTableTime] = useState(0);
-
   const getDate = (epochValue) => {
     epochValue = parseInt(epochValue) * 1000;
     let d = new Date(epochValue);
     return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
   };
-
-  useEffect(() => {
-    setStatus("loading time tables...");
-    getStudentData(user.userState.id)
-      .then((res) => {
-        let grade = res.grade;
-        viewClassTimeTable(grade)
-          .then((res) => {
-            setMyClassTable(res.file);
-            setMyClassTableTime(res.time);
-            setStatus("");
-          })
-          .catch((err) => {
-            setStatus("Could not find class time table.");
-          });
-        viewExamTimeTable(grade)
-          .then((res) => {
-            setMyExamTable(res.file);
-            setMyExamTableTime(res.time);
-            setStatus("");
-          })
-          .catch((err) => {
-            setStatus("Could not find exam time table.");
-          });
-      })
-      .catch((err) => {
-        setStatus("Something went wrong. Please refresh the page.");
-      });
-  }, []);
 
   return (
     <>

@@ -251,7 +251,10 @@ const Transactions = (props) => {
                 index--;
               }
               return (
-                <div className="formelement">
+                <div
+                  className="formelement"
+                  key={param + props.resultNumber + studentId}
+                >
                   <div>{param} :</div>
                   <div>
                     {typeof params[index] == "object"
