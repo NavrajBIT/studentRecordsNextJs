@@ -1,68 +1,394 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 // import box from "./box.module.css";
+import { useState, useEffect } from "react";
+import { getStudentsInGradeSection } from "../../api/contractCall";
 
-const BarChart = (props) => {
+const BarChart = () => {
+  const [count1a, setCount1a] = useState(0);
+  const [count1b, setCount1b] = useState(0);
+  const [count1c, setCount1c] = useState(0);
+  const [count1d, setCount1d] = useState(0);
+  const [count2a, setCount2a] = useState(0);
+  const [count2b, setCount2b] = useState(0);
+  const [count2c, setCount2c] = useState(0);
+  const [count2d, setCount2d] = useState(0);
+  const [count3a, setCount3a] = useState(0);
+  const [count3b, setCount3b] = useState(0);
+  const [count3c, setCount3c] = useState(0);
+  const [count3d, setCount3d] = useState(0);
+  const [count4a, setCount4a] = useState(0);
+  const [count4b, setCount4b] = useState(0);
+  const [count4c, setCount4c] = useState(0);
+  const [count4d, setCount4d] = useState(0);
+  const [count5a, setCount5a] = useState(0);
+  const [count5b, setCount5b] = useState(0);
+  const [count5c, setCount5c] = useState(0);
+  const [count5d, setCount5d] = useState(0);
+  const [count6a, setCount6a] = useState(0);
+  const [count6b, setCount6b] = useState(0);
+  const [count6c, setCount6c] = useState(0);
+  const [count6d, setCount6d] = useState(0);
+  const [count7a, setCount7a] = useState(0);
+  const [count7b, setCount7b] = useState(0);
+  const [count7c, setCount7c] = useState(0);
+  const [count7d, setCount7d] = useState(0);
+  const [count8a, setCount8a] = useState(0);
+  const [count8b, setCount8b] = useState(0);
+  const [count8c, setCount8c] = useState(0);
+  const [count8d, setCount8d] = useState(0);
+  const [count9a, setCount9a] = useState(0);
+  const [count9b, setCount9b] = useState(0);
+  const [count9c, setCount9c] = useState(0);
+  const [count9d, setCount9d] = useState(0);
+  const [count10a, setCount10a] = useState(0);
+  const [count10b, setCount10b] = useState(0);
+  const [count10c, setCount10c] = useState(0);
+  const [count10d, setCount10d] = useState(0);
+
+  useEffect(() => {
+    getStudentsInGradeSection(1, "a")
+      .then((res) => {
+        setCount1a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(1, "b")
+      .then((res) => {
+        setCount1b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(1, "c")
+      .then((res) => {
+        setCount1c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(1, "d")
+      .then((res) => {
+        setCount1d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(2, "a")
+      .then((res) => {
+        setCount2a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(2, "b")
+      .then((res) => {
+        setCount2b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(2, "c")
+      .then((res) => {
+        setCount2c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(2, "d")
+      .then((res) => {
+        setCount2d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(3, "a")
+      .then((res) => {
+        setCount3a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(3, "b")
+      .then((res) => {
+        setCount3b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(3, "c")
+      .then((res) => {
+        setCount3c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(3, "d")
+      .then((res) => {
+        setCount3d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(4, "a")
+      .then((res) => {
+        setCount4a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(4, "b")
+      .then((res) => {
+        setCount4b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(4, "c")
+      .then((res) => {
+        setCount4c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(4, "d")
+      .then((res) => {
+        setCount4d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(5, "a")
+      .then((res) => {
+        setCount5a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(5, "b")
+      .then((res) => {
+        setCount5b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(5, "c")
+      .then((res) => {
+        setCount5c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(5, "d")
+      .then((res) => {
+        setCount5d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(6, "a")
+      .then((res) => {
+        setCount6a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(6, "b")
+      .then((res) => {
+        setCount6b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(6, "c")
+      .then((res) => {
+        setCount6c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(6, "d")
+      .then((res) => {
+        setCount6d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(7, "a")
+      .then((res) => {
+        setCount7a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(7, "b")
+      .then((res) => {
+        setCount7b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(7, "c")
+      .then((res) => {
+        setCount7c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(7, "d")
+      .then((res) => {
+        setCount7d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(8, "a")
+      .then((res) => {
+        setCount8a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(8, "b")
+      .then((res) => {
+        setCount8b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(8, "c")
+      .then((res) => {
+        setCount8c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(8, "d")
+      .then((res) => {
+        setCount8d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(9, "a")
+      .then((res) => {
+        setCount9a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(9, "b")
+      .then((res) => {
+        setCount9b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(9, "c")
+      .then((res) => {
+        setCount9c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(9, "d")
+      .then((res) => {
+        setCount9d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(10, "a")
+      .then((res) => {
+        setCount10a(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(10, "b")
+      .then((res) => {
+        setCount10b(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(10, "c")
+      .then((res) => {
+        setCount10c(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getStudentsInGradeSection(10, "d")
+      .then((res) => {
+        setCount10d(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
   const state = {
     series: [
       {
         name: "Section A",
         data: [
-          props.studentData[0]["a"],
-          props.studentData[1]["a"],
-          props.studentData[2]["a"],
-          props.studentData[3]["a"],
-          props.studentData[4]["a"],
-          props.studentData[5]["a"],
-          props.studentData[6]["a"],
-          props.studentData[7]["a"],
-          props.studentData[8]["a"],
-          props.studentData[9]["a"],
+          count1a,
+          count2a,
+          count3a,
+          count4a,
+          count5a,
+          count6a,
+          count7a,
+          count8a,
+          count9a,
+          count10a,
         ],
       },
       {
         name: "Section B",
         data: [
-          props.studentData[0]["b"],
-          props.studentData[1]["b"],
-          props.studentData[2]["b"],
-          props.studentData[3]["b"],
-          props.studentData[4]["b"],
-          props.studentData[5]["b"],
-          props.studentData[6]["b"],
-          props.studentData[7]["b"],
-          props.studentData[8]["b"],
-          props.studentData[9]["b"],
+          count1b,
+          count2b,
+          count3b,
+          count4b,
+          count5b,
+          count6b,
+          count7b,
+          count8b,
+          count9b,
+          count10b,
         ],
       },
       {
         name: "Section C",
         data: [
-          props.studentData[0]["c"],
-          props.studentData[1]["c"],
-          props.studentData[2]["c"],
-          props.studentData[3]["c"],
-          props.studentData[4]["c"],
-          props.studentData[5]["c"],
-          props.studentData[6]["c"],
-          props.studentData[7]["c"],
-          props.studentData[8]["c"],
-          props.studentData[9]["c"],
+          count1c,
+          count2c,
+          count3c,
+          count4c,
+          count5c,
+          count6c,
+          count7c,
+          count8c,
+          count9c,
+          count10c,
         ],
       },
       {
         name: "Section D",
         data: [
-          props.studentData[0]["d"],
-          props.studentData[1]["d"],
-          props.studentData[2]["d"],
-          props.studentData[3]["d"],
-          props.studentData[4]["d"],
-          props.studentData[5]["d"],
-          props.studentData[6]["d"],
-          props.studentData[7]["d"],
-          props.studentData[8]["d"],
-          props.studentData[9]["d"],
+          count1d,
+          count2d,
+          count3d,
+          count4d,
+          count5d,
+          count6d,
+          count7d,
+          count8d,
+          count9d,
+          count10d,
         ],
       },
     ],

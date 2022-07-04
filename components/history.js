@@ -15,11 +15,15 @@ const History = () => {
           type="number"
           placeholder="Enter Roll number"
           id="rollNumberField"
+          onChange={(e) => {
+            setRollNumber(parseInt(e.target.value));
+          }}
         />
       </div>
+      <div style={{ height: "100px" }}></div>
       <div className="transactions">
         <div className="header">
-          <div className="heading1">S.No.</div>
+          <div className="heading1">Block</div>
           <div className="heading1">Modification</div>
           <div className="heading1">Done by</div>
           <div className="heading1">Student Name</div>
@@ -28,16 +32,86 @@ const History = () => {
           <div className="heading1">Time</div>
         </div>
       </div>
-      <Transactions resultNumber={currentPage * 10 + 1} />
-      <Transactions resultNumber={currentPage * 10 + 2} />
-      <Transactions resultNumber={currentPage * 10 + 3} />
-      <Transactions resultNumber={currentPage * 10 + 4} />
-      <Transactions resultNumber={currentPage * 10 + 5} />
-      <Transactions resultNumber={currentPage * 10 + 6} />
-      <Transactions resultNumber={currentPage * 10 + 7} />
-      <Transactions resultNumber={currentPage * 10 + 8} />
-      <Transactions resultNumber={currentPage * 10 + 9} />
-      <Transactions resultNumber={currentPage * 10 + 10} />
+      <Transactions
+        resultNumber={currentPage * 20 + 1}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 2}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 3}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 4}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 5}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 6}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 7}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 8}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 9}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 10}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 11}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 12}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 13}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 14}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 15}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 16}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 17}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 18}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 19}
+        rollNumber={rollNumber}
+      />
+      <Transactions
+        resultNumber={currentPage * 20 + 20}
+        rollNumber={rollNumber}
+      />
       <div>
         <div className="pageToggle">
           {currentPage > 0 ? (

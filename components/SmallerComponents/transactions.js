@@ -6,6 +6,7 @@ import {
   getModifier,
   getBlockDetail,
   getStudentIdFromRollNumber,
+  getStudentRollNumber,
 } from "../../api/contractCall";
 import { ethers } from "ethers";
 import StudentName from "../Attendence/studentName";
@@ -137,9 +138,10 @@ const Transactions = (props) => {
   const [studentId, setStudentId] = useState(0);
   const [blockTime, setBlockTime] = useState("");
   const [blockDate, setBlockDate] = useState("");
+  const [rollNumber, setRollnumber] = useState(0);
 
   useEffect(() => {
-    setModification("loading...");
+    setModification("");
     setStudentId(0);
     setParams([]);
     setMyFunction("");
@@ -161,12 +163,27 @@ const Transactions = (props) => {
                   res.args._rollNumber,
                   0
                 );
-
                 getStudentIdFromRollNumber(rollNumber).then((res) => {
                   setStudentId(res);
+                  getStudentRollNumber(res)
+                    .then((res) => {
+                      setRollnumber(res);
+                    })
+                    .catch((err) => {
+                      setRollnumber(0);
+                    });
                 });
               } else {
                 setStudentId(ethers.utils.formatUnits(res.args._studentId, 0));
+                getStudentRollNumber(
+                  ethers.utils.formatUnits(res.args._studentId, 0)
+                )
+                  .then((res) => {
+                    setRollnumber(res);
+                  })
+                  .catch((err) => {
+                    setRollnumber(0);
+                  });
               }
               poppulateSecondaryDetails(thisBlock);
               setParams(res.args);
@@ -221,62 +238,55 @@ const Transactions = (props) => {
   };
 
   if (modification !== "" && modification !== "Secondary Operation") {
-    return (
-      <div
-        className="transactions"
-        onClick={() => {
-          toggledetails();
-        }}
-      >
-        <div className="header">
-          <div>{props.resultNumber}</div>
-          <div>{modification}</div>
-          <div>{modifier}</div>
-          <div>
-            <StudentName studentId={studentId} />
+    if (props.rollNumber === 0 || props.rollNumber == rollNumber) {
+      return (
+        <div
+          className="transactions"
+          onClick={() => {
+            toggledetails();
+          }}
+        >
+          <div className="header">
+            <div>{block}</div>
+            <div>{modification}</div>
+            <div>{modifier}</div>
+            <div>
+              <StudentName studentId={studentId} />
+            </div>
+            <div>{rollNumber}</div>
+            <div>{blockDate}</div>
+            <div>{blockTime}</div>
           </div>
-          <div>
-            <StudentRollNumber studentId={studentId} />
-          </div>
-          <div>{blockDate}</div>
-          <div>{blockTime}</div>
-        </div>
-        {params.length > 0 && (
-          <div style={detailerstyle}>
-            {functionArgLabels[myFunction].map((param) => {
-              let index = parseInt(
-                functionArgLabels[myFunction].indexOf(param) + 1
-              );
-              if (myFunction == "addStudent") {
-                index--;
-              }
-              return (
-                <div
-                  className="formelement"
-                  key={param + props.resultNumber + studentId}
-                >
-                  <div>{param} :</div>
-                  <div>
-                    {typeof params[index] == "object"
-                      ? ethers.utils.formatUnits(params[index], 0)
-                      : params[index]}
+          {params.length > 0 && (
+            <div style={detailerstyle}>
+              {functionArgLabels[myFunction].map((param) => {
+                let index = parseInt(
+                  functionArgLabels[myFunction].indexOf(param) + 1
+                );
+                if (myFunction == "addStudent") {
+                  index--;
+                }
+                return (
+                  <div
+                    className="formelement"
+                    key={param + props.resultNumber + studentId}
+                  >
+                    <div>{param} :</div>
+                    <div>
+                      {typeof params[index] == "object"
+                        ? ethers.utils.formatUnits(params[index], 0)
+                        : params[index]}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    );
+                );
+              })}
+            </div>
+          )}
+        </div>
+      );
+    }
   }
-  return (
-    <div className="transactions">
-      <div className="header">
-        <div>{props.resultNumber}</div>
-        <div>Secondary Operation...</div>
-      </div>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Transactions;

@@ -86,32 +86,13 @@ const AdminDash = () => {
           <h2>2. Grade distribution of students</h2>
         </div>
 
-        {/* <button
-          onClick={() => {
-            console.log(gradeSectionData);
-          }}
-        >
-          View
-        </button> */}
-
-        {gradeSectionData.length > 0 && (
-          <BarChart studentData={gradeSectionData} />
-        )}
+        <BarChart />
       </div>
       <div className="myform">
         <div>
           <h2>3. Academic Performance Indicators</h2>
         </div>
-        <button
-          onClick={async () => {
-            // console.log(gradeSectionData);
-            await getStudentsInGradeSection(7, "a").then((res) => {
-              console.log(res);
-            });
-          }}
-        >
-          View
-        </button>
+
         <div className="formelement">
           <label htmlFor="gradeField">Grade: </label>
           <select

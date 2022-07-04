@@ -1,28 +1,23 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import {
+  getLatestBlock,
   getHistory,
+  getModifier,
   getBlockDetail,
   getStudentIdFromRollNumber,
-  getModifier,
 } from "../../api/contractCall";
 import { ethers } from "ethers";
 import StudentName from "../Attendence/studentName";
+import StudentRollNumber from "../Attendence/studentRollNumber";
 
-const TransactionsByRollNumber = (props) => {
+const Transactions = (props) => {
   const [myFunction, setMyFunction] = useState("");
-  const [studentId, setStudentId] = useState(0);
   const [params, setParams] = useState([]);
-  const [studentName, setStudentName] = useState("");
-  const [rollNumber, setRollNumber] = useState("");
-  const [modifier, setModifier] = useState("");
-  const [blockTime, setBlockTime] = useState("");
-  const [blockDate, setBlockDate] = useState("");
   const [detailerstyle, setDetailerStyle] = useState({
     display: "none",
     animation: "detailerup",
   });
-  const [isFiltered, setIsFiltered] = useState(false);
 
   const functionNames = {
     addNonAcademic: "Modified non academic details",
@@ -87,6 +82,7 @@ const TransactionsByRollNumber = (props) => {
       "Date of birth",
       "Roll number",
       "Grade",
+      "Section",
       "email",
     ],
     modifyPrimaryDetails: [
@@ -94,6 +90,7 @@ const TransactionsByRollNumber = (props) => {
       "Date of birth",
       "Roll Number",
       "Grade",
+      "Section",
       "email",
     ],
     addPersonalDetails: [
@@ -134,64 +131,87 @@ const TransactionsByRollNumber = (props) => {
     ],
   };
 
+  const [block, setBlock] = useState(0);
+  const [modification, setModification] = useState("");
+  const [modifier, setModifier] = useState("");
+  const [studentId, setStudentId] = useState(0);
+  const [blockTime, setBlockTime] = useState("");
+  const [blockDate, setBlockDate] = useState("");
+
   useEffect(() => {
-    setIsFiltered(false);
-    getStudentIdFromRollNumber(props.rollNumber)
-      .then((res1) => {
-        let studentId = parseInt(res1);
-        setStudentId(studentId);
-        getBlockDetail(props.blockNumber).then((res) => {
-          let mydate = new Date(parseInt(res.timestamp) * 1000);
-          let myTimeString = mydate.getHours() + ":" + mydate.getMinutes();
-          let mydateString =
-            mydate.getDate() +
-            "/" +
-            (mydate.getMonth() + 1) +
-            "/" +
-            mydate.getFullYear();
-          setBlockTime(myTimeString);
-          setBlockDate(mydateString);
-        });
-        getModifier(props.blockNumber).then((res) => {
-          setModifier(res.name);
-        });
-        getHistory(props.blockNumber)
+    setModification("loading...");
+    setStudentId(0);
+    setParams([]);
+    setMyFunction("");
+    setModifier("");
+    setBlockDate("");
+    setBlockTime("");
+    getLatestBlock()
+      .then((res) => {
+        let thisBlock = parseInt(res) - parseInt(props.resultNumber);
+        setBlock(thisBlock);
+        getHistory(thisBlock)
           .then((res) => {
-            if (functionNames[res.functionFragment.name] == undefined) {
-              return null;
-            }
-            setMyFunction(res.functionFragment.name);
-            if (
-              parseInt(ethers.utils.formatUnits(res.args._studentId, 0)) ===
-              studentId
-            ) {
-              console.log("here....");
-              setIsFiltered(true);
-            }
-            let params = [];
-            functionArgs[res.functionFragment.name].map((arg) => {
-              let thisParam = res.args[arg];
-              if (typeof res.args[arg] == "object") {
-                thisParam = ethers.utils.formatUnits(res.args[arg], 0);
+            console.log(res);
+            if (functionNames[res.functionFragment.name] != undefined) {
+              setMyFunction(res.functionFragment.name);
+              setModification(functionNames[res.functionFragment.name]);
+              if (res.functionFragment.name == "addStudent") {
+                let rollNumber = ethers.utils.formatUnits(
+                  res.args._rollNumber,
+                  0
+                );
+
+                getStudentIdFromRollNumber(rollNumber).then((res) => {
+                  setStudentId(res);
+                });
+              } else {
+                setStudentId(ethers.utils.formatUnits(res.args._studentId, 0));
               }
-              params.push(thisParam);
-            });
-            setParams(params);
+              poppulateSecondaryDetails(thisBlock);
+              setParams(res.args);
+            } else {
+              setModification("Secondary Operation");
+            }
           })
           .catch((err) => {
-            // console.log(err);
+            console.log(err);
           });
+      })
+      .then((err) => {
+        console.log(err);
+      });
+  }, [props]);
+
+  const poppulateSecondaryDetails = async (thisBlock) => {
+    getModifier(thisBlock)
+      .then((res) => {
+        setModifier(res.name);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [props]);
+
+    getBlockDetail(thisBlock).then((res) => {
+      let mydate = new Date(parseInt(res.timestamp) * 1000);
+      let myTimeString = mydate.getHours() + ":" + mydate.getMinutes();
+      let mydateString =
+        mydate.getDate() +
+        "/" +
+        (mydate.getMonth() + 1) +
+        "/" +
+        mydate.getFullYear();
+      setBlockTime(myTimeString);
+      setBlockDate(mydateString);
+    });
+  };
 
   const toggledetails = () => {
     if (detailerstyle.display === "none") {
       setDetailerStyle({
         display: "flex",
         flexDirection: "column",
+        padding: "0px 20px",
       });
     } else {
       setDetailerStyle({
@@ -200,56 +220,56 @@ const TransactionsByRollNumber = (props) => {
     }
   };
 
-  if (myFunction === "" || !isFiltered) {
-    return <></>;
-  }
-  return (
-    <div
-      className="transactions"
-      onClick={() => {
-        toggledetails();
-      }}
-    >
-      <div className="header">
-        <div>
-          <div className="heading1">Modification:</div>
-          <div>{functionNames[myFunction]}</div>
-        </div>
-        <div>
-          <div className="heading1">Student Details:</div>
+  if (modification !== "" && modification !== "Secondary Operation") {
+    return (
+      <div
+        className="transactions"
+        onClick={() => {
+          toggledetails();
+        }}
+      >
+        <div className="header">
+          <div>{block}</div>
+          <div>{modification}</div>
+          <div>{modifier}</div>
           <div>
-            Name: <StudentName studentId={studentId} />
+            <StudentName studentId={studentId} />
           </div>
-          <div>Roll number: {props.rollNumber}</div>
+          <div>
+            <StudentRollNumber studentId={studentId} />
+          </div>
+          <div>{blockDate}</div>
+          <div>{blockTime}</div>
         </div>
-        <div>
-          <div className="heading1">Time:</div>
-          <div>Time: {blockTime} </div>
-          <div>Date: {blockDate} </div>
-        </div>
-        <div>
-          <div className="heading1">Modified by:</div>
-          <div>{modifier} </div>
-        </div>
-      </div>
-      <div className="detailer" id="detailer" style={detailerstyle}>
         {params.length > 0 && (
-          <>
-            <div className="heading1">Modified details:</div>
-            {params.map((param) => {
-              let index = params.indexOf(param);
+          <div style={detailerstyle}>
+            {functionArgLabels[myFunction].map((param) => {
+              let index = parseInt(
+                functionArgLabels[myFunction].indexOf(param) + 1
+              );
+              if (myFunction == "addStudent") {
+                index--;
+              }
               return (
-                <div className="formelement" key={param + index}>
-                  <div>{functionArgLabels[myFunction][index]} :</div>
-                  <div>{param}</div>
+                <div
+                  className="formelement"
+                  key={param + props.resultNumber + studentId}
+                >
+                  <div>{param} :</div>
+                  <div>
+                    {typeof params[index] == "object"
+                      ? ethers.utils.formatUnits(params[index], 0)
+                      : params[index]}
+                  </div>
                 </div>
               );
             })}
-          </>
+          </div>
         )}
       </div>
-    </div>
-  );
+    );
+  }
+  return <div></div>;
 };
 
-export default TransactionsByRollNumber;
+export default Transactions;
