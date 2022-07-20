@@ -1,13 +1,19 @@
 import { ethers } from "ethers";
 import contractData from "./contractData.json";
 import compiledContract from "./compiledContract.json";
-
 import { create } from "ipfs-http-client";
+
+export const mainAdmins = {
+  1: "e84de22f5d5726600a1e3fd4df53b0bc8b8844901911961349f7aa9a38c037ad",
+  2: "3b08e5d5339499a5dcaf562e5617b64125be1eddcb0dda513c737125c794cd97",
+  3: "f56573e1593727f1eb09e42567ee603dcf5c1a5c3a848bbcca1aac25ff39216c",
+};
 
 const client = create("http://localhost:5001");
 
 //Provider
 const provider = new ethers.providers.JsonRpcProvider("");
+const iface = new ethers.utils.Interface(compiledContract["abi"]);
 //Signer
 const wallet = new ethers.Wallet(
   "e84de22f5d5726600a1e3fd4df53b0bc8b8844901911961349f7aa9a38c037ad",
@@ -27,6 +33,37 @@ export const fileHash = async (file) => {
   return response["path"];
 };
 
+export const fileDownload = async (hash, fileName) => {
+  let url = "https://ipfs.io/ipfs/" + hash;
+  // window.open(url);
+  let req = new XMLHttpRequest();
+  req.open("GET", url, true);
+  req.responseType = "blob";
+  req.onload = function () {
+    //Convert the Byte Data to BLOB object.
+    var blob = new Blob([req.response], {
+      type: "application/octetstream",
+    });
+
+    //Check the Browser type and download the File.
+    var isIE = false || !!document.documentMode;
+    if (isIE) {
+      window.navigator.msSaveBlob(blob, fileName);
+    } else {
+      var url = window.URL || window.webkitURL;
+      let link = url.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.setAttribute("download", fileName);
+      a.setAttribute("href", link);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
+
+  req.send();
+};
+
 export const checkLogin = async (name, password) => {
   let response = {
     status: "Success",
@@ -44,8 +81,20 @@ export const checkLogin = async (name, password) => {
     });
   return response;
 };
+export const getAdminData = async (address) => {
+  return await mySignerContract
+    .getAdminData(address)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
 
-export const addStudent = async (studentParams) => {
+export const addStudent = async (studentParams, modifierId) => {
+  const myWallet = new ethers.Wallet(mainAdmins[modifierId], provider);
+  mySignerContract = myContract.connect(myWallet);
   let response = { studentId: 0, status: "Failed" };
   let tx = await mySignerContract
     .addStudent(
@@ -53,6 +102,7 @@ export const addStudent = async (studentParams) => {
       studentParams.dob,
       studentParams.rollNumber,
       studentParams.grade,
+      studentParams.section,
       studentParams.email
     )
     .catch((err) => {});
@@ -71,13 +121,20 @@ export const addStudent = async (studentParams) => {
   return response;
 };
 
-export const modifyPrimaryDetails = async (studentParams, studentId) => {
+export const modifyPrimaryDetails = async (
+  studentParams,
+  studentId,
+  modifierId
+) => {
+  const myWallet = new ethers.Wallet(mainAdmins[modifierId], provider);
+  mySignerContract = myContract.connect(myWallet);
   let response = await mySignerContract
     .modifyPrimaryDetails(
       studentParams.studentId,
       studentParams.studentName,
       studentParams.dob,
       studentParams.grade,
+      studentParams.section,
       studentParams.email
     )
     .then((res) => {
@@ -89,7 +146,13 @@ export const modifyPrimaryDetails = async (studentParams, studentId) => {
   return response;
 };
 
-export const addPersonalDetails = async (studentParams, studentId) => {
+export const addPersonalDetails = async (
+  studentParams,
+  studentId,
+  modifierId
+) => {
+  const myWallet = new ethers.Wallet(mainAdmins[modifierId], provider);
+  mySignerContract = myContract.connect(myWallet);
   let response = await mySignerContract
     .addPersonalDetails(
       studentId,
@@ -108,7 +171,13 @@ export const addPersonalDetails = async (studentParams, studentId) => {
   return response;
 };
 
-export const addPaternalDetails = async (studentParams, studentId) => {
+export const addPaternalDetails = async (
+  studentParams,
+  studentId,
+  modifierId
+) => {
+  const myWallet = new ethers.Wallet(mainAdmins[modifierId], provider);
+  mySignerContract = myContract.connect(myWallet);
   let response = await mySignerContract
     .addPaternalDetails(
       studentId,
@@ -127,7 +196,13 @@ export const addPaternalDetails = async (studentParams, studentId) => {
   return response;
 };
 
-export const addMaternalDetails = async (studentParams, studentId) => {
+export const addMaternalDetails = async (
+  studentParams,
+  studentId,
+  modifierId
+) => {
+  const myWallet = new ethers.Wallet(mainAdmins[modifierId], provider);
+  mySignerContract = myContract.connect(myWallet);
   let response = await mySignerContract
     .addMaternalDetails(
       studentId,
@@ -144,7 +219,13 @@ export const addMaternalDetails = async (studentParams, studentId) => {
   return response;
 };
 
-export const addGuardianDetails = async (studentParams, studentId) => {
+export const addGuardianDetails = async (
+  studentParams,
+  studentId,
+  modifierId
+) => {
+  const myWallet = new ethers.Wallet(mainAdmins[modifierId], provider);
+  mySignerContract = myContract.connect(myWallet);
   let response = await mySignerContract
     .addGuardianDetails(
       studentId,
@@ -160,7 +241,13 @@ export const addGuardianDetails = async (studentParams, studentId) => {
   return response;
 };
 
-export const addFamilyDetails = async (studentParams, studentId) => {
+export const addFamilyDetails = async (
+  studentParams,
+  studentId,
+  modifierId
+) => {
+  const myWallet = new ethers.Wallet(mainAdmins[modifierId], provider);
+  mySignerContract = myContract.connect(myWallet);
   let response = await mySignerContract
     .addFamilyDetails(
       studentId,
@@ -177,7 +264,9 @@ export const addFamilyDetails = async (studentParams, studentId) => {
   return response;
 };
 
-export const addFiles = async (studentParams, studentId) => {
+export const addFiles = async (studentParams, studentId, modifierId) => {
+  const myWallet = new ethers.Wallet(mainAdmins[modifierId], provider);
+  mySignerContract = myContract.connect(myWallet);
   let response = await mySignerContract
     .addFiles(
       studentId,
@@ -196,7 +285,9 @@ export const addFiles = async (studentParams, studentId) => {
   return response;
 };
 
-export const addNonAcademic = async (studentParams, studentId) => {
+export const addNonAcademic = async (studentParams, studentId, modifierId) => {
+  const myWallet = new ethers.Wallet(mainAdmins[modifierId], provider);
+  mySignerContract = myContract.connect(myWallet);
   let response = await mySignerContract
     .addNonAcademic(
       studentId,
@@ -215,36 +306,37 @@ export const addNonAcademic = async (studentParams, studentId) => {
     });
 };
 
-export const modifyStudentData = async (studentParams) => {
+export const modifyStudentData = async (studentParams, modifierId) => {
   let response = { status: "Success", studentId: 0 };
-  await modifyPrimaryDetails(studentParams);
+  await modifyPrimaryDetails(studentParams, 0, modifierId);
   let studentId = studentParams.studentId;
   response.studentId = studentId;
-  await addPersonalDetails(studentParams, studentId);
-  await addPaternalDetails(studentParams, studentId);
-  await addMaternalDetails(studentParams, studentId);
-  await addGuardianDetails(studentParams, studentId);
-  await addFamilyDetails(studentParams, studentId);
-  await addFiles(studentParams, studentId);
-  await addNonAcademic(studentParams, studentId);
+  await addPersonalDetails(studentParams, studentId, modifierId);
+  await addPaternalDetails(studentParams, studentId, modifierId);
+  await addMaternalDetails(studentParams, studentId, modifierId);
+  await addGuardianDetails(studentParams, studentId, modifierId);
+  await addFamilyDetails(studentParams, studentId, modifierId);
+  await addFiles(studentParams, studentId, modifierId);
+  await addNonAcademic(studentParams, studentId, modifierId);
   return response;
 };
-export const addStudentData = async (studentParams) => {
+export const addStudentData = async (studentParams, modifierId) => {
   let response = { status: "Success", studentId: 0 };
-  let addStudentResponse = await addStudent(studentParams);
+
+  let addStudentResponse = await addStudent(studentParams, modifierId);
   if (addStudentResponse.status === "Failed") {
     response.status = "Failed";
     return response;
   }
   let studentId = addStudentResponse.studentId;
   response.studentId = studentId;
-  await addPersonalDetails(studentParams, studentId);
-  await addPaternalDetails(studentParams, studentId);
-  await addMaternalDetails(studentParams, studentId);
-  await addGuardianDetails(studentParams, studentId);
-  await addFamilyDetails(studentParams, studentId);
-  await addFiles(studentParams, studentId);
-  await addNonAcademic(studentParams, studentId);
+  await addPersonalDetails(studentParams, studentId, modifierId);
+  await addPaternalDetails(studentParams, studentId, modifierId);
+  await addMaternalDetails(studentParams, studentId, modifierId);
+  await addGuardianDetails(studentParams, studentId, modifierId);
+  await addFamilyDetails(studentParams, studentId, modifierId);
+  await addFiles(studentParams, studentId, modifierId);
+  await addNonAcademic(studentParams, studentId, modifierId);
   return response;
 };
 
@@ -255,6 +347,7 @@ export const getStudentData = async (studentId) => {
     dob: "",
     rollNumber: "",
     grade: "",
+    section: "",
     email: "",
     religion: "",
     caste: "",
@@ -291,6 +384,7 @@ export const getStudentData = async (studentId) => {
     response.dob = ethers.utils.formatUnits(res["_dob"], 0);
     response.rollNumber = ethers.utils.formatUnits(res["_rollNumber"], 0);
     response.grade = ethers.utils.formatUnits(res["_grade"], 0);
+    response.section = res["_section"];
     response.email = res["_email"];
   });
   await mySignerContract.getPersonalDetails(studentId).then((res) => {
@@ -347,8 +441,29 @@ export const getStudentData = async (studentId) => {
 
   return response;
 };
+export const getStudentName = async (studentId) => {
+  return await mySignerContract.getPrimaryDetails(studentId).then((res) => {
+    return res["_studentName"];
+  });
+};
+export const getStudentRollNumber = async (studentId) => {
+  return await mySignerContract.getPrimaryDetails(studentId).then((res) => {
+    return ethers.utils.formatUnits(res["_rollNumber"], 0);
+  });
+};
 
-export const searchStudent = async (name, grade) => {
+export const getStudentIdFromRollNumber = async (rollNummber) => {
+  return await mySignerContract
+    .rollNumberToStudentId(rollNummber)
+    .then((res) => {
+      return ethers.utils.formatUnits(res, 0);
+    })
+    .catch((err) => {
+      return 0;
+    });
+};
+
+export const searchStudent = async (name, grade, rollNumber) => {
   let studentData = { status: "Success", data: [] };
   const tx = await mySignerContract.searchStudent(name, grade);
   const receipt = await tx.wait();
@@ -376,6 +491,28 @@ export const searchStudent = async (name, grade) => {
 
     studentData.data.push(thisStudentData);
   });
+
+  if (parseInt(rollNumber) > 0) {
+    await mySignerContract
+      .rollNumberToStudentId(rollNumber)
+      .then(async (res) => {
+        let studentId = ethers.utils.formatUnits(res, 0);
+        let thisStudentData = {
+          studentId: studentId,
+          studentName: "",
+          dob: "",
+          rollNumber: rollNumber,
+          grade: "",
+          email: "",
+        };
+        await mySignerContract.getPrimaryDetails(studentId).then((res) => {
+          thisStudentData.studentName = res["_studentName"];
+          thisStudentData.dob = ethers.utils.formatUnits(res["_dob"], 0);
+          thisStudentData.grade = ethers.utils.formatUnits(res["_grade"], 0);
+        });
+        studentData.data.push(thisStudentData);
+      });
+  }
 
   return studentData;
 };
@@ -575,7 +712,7 @@ export const getStudentsFromGrade = async (grade) => {
   return await mySignerContract
     .queryFilter(myFilter)
     .then((res) => {
-      res.map(async (event) => {
+      res.map((event) => {
         let studentId = parseInt(ethers.utils.formatUnits(event.topics[1], 0));
         let rollNumber = parseInt(ethers.utils.formatUnits(event.topics[2], 0));
         let thisgrade = parseInt(ethers.utils.formatUnits(event.topics[3], 0));
@@ -584,11 +721,8 @@ export const getStudentsFromGrade = async (grade) => {
             studentId: studentId,
             rollNumber: rollNumber,
             grade: thisgrade,
-            studentName: "",
+            studentName: "student name",
           };
-          await getStudentData(studentId).then((res) => {
-            student.studentName = res.studentName;
-          });
           response.data.push(student);
         }
       });
@@ -598,8 +732,6 @@ export const getStudentsFromGrade = async (grade) => {
       response.status = "Failed";
       return response;
     });
-
-  
 };
 export const markAttendance = async (studentId, attendanceValue, date) => {
   let response = { status: "Success" };
@@ -624,7 +756,6 @@ export const getStudentAttendence = async (studentId, date) => {
       response.status = "Failed";
       return response;
     });
-  
 };
 
 export const getGenderKPI = async () => {
@@ -639,4 +770,270 @@ export const getGenderKPI = async () => {
     response.femaleNumber = ethers.utils.formatUnits(res.femaleNumber, 0);
   });
   return response;
+};
+
+export const raiseRequest = async (studentId, title, file, description) => {
+  return await mySignerContract
+    .raiseRequest(studentId, title, file, description)
+    .then((res) => {
+      return { status: "Success", res: res };
+    })
+    .catch((err) => {
+      return { status: "Failed", res: err };
+    });
+};
+export const closeRequest = async (requestId) => {
+  return await mySignerContract
+    .closeRequest(requestId)
+    .then((res) => {
+      return { status: "Success", res: res };
+    })
+    .catch((err) => {
+      return { status: "Failed", res: err };
+    });
+};
+export const rejectRequest = async (requestId) => {
+  return await mySignerContract
+    .rejectRequest(requestId)
+    .then((res) => {
+      return { status: "Success", res: res };
+    })
+    .catch((err) => {
+      return { status: "Failed", res: err };
+    });
+};
+export const approveRequest = async (requestId) => {
+  return await mySignerContract
+    .approveRequest(requestId)
+    .then((res) => {
+      return { status: "Success", res: res };
+    })
+    .catch((err) => {
+      return { status: "Failed", res: err };
+    });
+};
+
+export const getRequestCount = async () => {
+  return await mySignerContract
+    .getRequestCount()
+    .then((res) => {
+      return {
+        status: "Success",
+        totalRequests: ethers.utils.formatUnits(res["requestCount"], 0),
+        pendingRequestCount: ethers.utils.formatUnits(
+          res["pendingRequestCount"],
+          0
+        ),
+        rejectedRequestCount: ethers.utils.formatUnits(
+          res["rejectedRequestCount"],
+          0
+        ),
+        approvedRequestCount: ethers.utils.formatUnits(
+          res["approvedRequestCount"],
+          0
+        ),
+        closedRequestCount: ethers.utils.formatUnits(
+          res["closedRequestCount"],
+          0
+        ),
+      };
+    })
+    .catch((err) => {
+      return { status: "Failed", totalRequests: 0, pendingRequests: 0 };
+    });
+};
+export const getRequestData = async (requestId) => {
+  return await mySignerContract
+    .getRequestData(requestId)
+    .then((res) => {
+      return {
+        status: "Success",
+        studentId: ethers.utils.formatUnits(res["studentId"], 0),
+        title: res["title"],
+        description: res["description"],
+        file: res["file"],
+        status: res["status"],
+      };
+    })
+    .catch((err) => {
+      return {
+        status: "Failed",
+        studentId: 0,
+        title: "",
+        description: "",
+        file: "",
+        status: "",
+      };
+    });
+};
+
+export const getLatestBlock = async () => {
+  return await provider
+    .getBlockNumber()
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+export const getTxFromBlock = async (blockNumber) => {
+  return await provider
+    .getBlock(blockNumber)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const getModifier = async (blockNumber) => {
+  return await provider.getBlock(blockNumber).then((res) => {
+    let hash = res.transactions[0];
+    return provider.getTransaction(hash).then((res) => {
+      return mySignerContract.getAdminData(res.from).then((res) => {
+        return res;
+      });
+    });
+  });
+};
+
+export const getHistory = async (blockNumber) => {
+  // let tx = await provider.getTransaction(hash);
+  // return tx;
+
+  // return iface.functions;
+
+  return await provider.getBlock(blockNumber).then(async (res) => {
+    let hash = res.transactions[0];
+    return await provider
+      .getTransaction(hash)
+      .then((res) => {
+        // return res;
+        let decodeddata = iface.parseTransaction({
+          data: res.data,
+          value: res.value,
+        });
+        return decodeddata;
+      })
+      .catch((err) => {
+        return err;
+      });
+  });
+
+  // return await provider
+  //   .getBlock(800)
+  //   .then((res) => {
+  //     return res;
+  //   })
+  //   .catch((err) => {
+  //     return err;
+  //   });
+
+  // return await provider
+  //   .getTransaction(
+  //     "0x79071073e11922d50b2a827f95793c69352937b06a1154b584ee1e11e7418037"
+  //   )
+  //   .then((res) => {
+  //     return res;
+  //   })
+  //   .catch((err) => {
+  //     return err;
+  //   });
+
+  // let tx = await provider
+  //   .getBlockWithTransactions(800)
+  //   .then((res) => {
+  //     return res;
+  //   })
+  //   .catch((err) => {
+  //     return err;
+  //   });
+
+  // return await provider
+  //   .getBlockNumber()
+  //   .then((res) => {
+  //     return res;
+  //   })
+  //   .catch((err) => {
+  //     return err;
+  //   });
+};
+
+export const getBlockDetail = async (blockNumber) => {
+  return await provider
+    .getBlock(blockNumber)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const getBatchCount = async (grade) => {
+  return await mySignerContract
+    .getBatchCount(grade)
+    .then((res) => {
+      return ethers.utils.formatUnits(res, 0);
+    })
+    .catch((err) => {
+      return 0;
+    });
+};
+
+export const getPerformanceIndicator = async (batchId, grade) => {
+  return await mySignerContract
+    .getPerformanceIndicator(batchId, grade)
+    .then((res) => {
+      return {
+        batch: ethers.utils.formatUnits(res.batch, 0),
+        totalStudents: ethers.utils.formatUnits(res.totalStudents, 0),
+        passedStudents: ethers.utils.formatUnits(res.passedStudents, 0),
+        failedStudents: ethers.utils.formatUnits(res.failedStudents, 0),
+      };
+    })
+    .catch((err) => {
+      return {
+        batch: 0,
+        totalStudents: 0,
+        passedStudents: 0,
+        failedStudents: 0,
+      };
+    });
+};
+
+export const addPerformanceIndicator = async (
+  grade,
+  batch,
+  totalStudents,
+  passedStudents,
+  failedStudents
+) => {
+  return await mySignerContract
+    .addPerformanceIndicator(
+      grade,
+      batch,
+      totalStudents,
+      passedStudents,
+      failedStudents
+    )
+    .then((res) => {
+      return { status: "Success" };
+    })
+    .catch((err) => {
+      return { status: "Failed" };
+    });
+};
+
+export const getStudentsInGradeSection = async (grade, section) => {
+  return await mySignerContract
+    .getStudentsInGradeSection(grade, section)
+    .then((res) => {
+      return ethers.utils.formatUnits(res, 0);
+    })
+    .catch((err) => {
+      return err;
+    });
 };

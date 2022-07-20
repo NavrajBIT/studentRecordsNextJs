@@ -5,7 +5,7 @@
     #121543 15%,
     rgba(137, 70, 223, 0.8)
   );
-  width: 100%;
+  border: 2px solid rebeccapurple;
   height: 100px;
   color: var(--clr10);
   display: flex;
@@ -13,6 +13,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  width: 120% !important;
+  /* position: absolute; */
 }
 
 .navbar .navbar-right {
@@ -41,3 +43,6 @@
   width: 120%;
   transform: scale(1.001);
 }
+
+ 
+

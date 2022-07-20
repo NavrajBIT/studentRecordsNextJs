@@ -1,6 +1,7 @@
 .sidebar {
-  width: 320px;
-  min-height: 100vh;
+  width: 330px;
+  height: 100%;
+  /* border: 2px solid red; */
   font-size: 30px;
   white-space: nowrap;
   padding: 10px 5px;
@@ -8,8 +9,90 @@
   color: var(--clr10);
   display: flex;
   flex-direction: column;
-  /* animation-name: leftExit;
-  animation-duration: 0.5s; */
+  
+}
+.dashhead{
+  cursor: pointer;
+}
+
+
+.sidenav {
+  height: 100%;
+  /* width: 320px; */
+  /* position: fixed; */
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  position: relative;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  /* border: 2px solid red; */
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+
+
+
+
+
+.dashclickAnimation{
+  animation-name: leftExit;
+  animation-duration: 0.5s;
+  width: 320px !important;
+  /* border: 2px solid white; */
+
+  /* width: 120px; */
+}
+ 
+
+@keyframes leftEnter {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 320px;
+  }
+}
+@keyframes leftExit {
+  from{
+    width: 320px !important;
+  }
+  to{
+    width: 0px !important;
+  }
 }
 
 .sidebar h1 {
@@ -25,22 +108,6 @@
   justify-content: center;
 }
 
-@keyframes leftEnter {
-  from {
-    width: 0px;
-  }
-  to {
-    width: 320px;
-  }
-}
-@keyframes leftExit {
-  from {
-    width: 320px;
-  }
-  to {
-    width: 0px;
-  }
-}
 
 /* .sidebar:hover {
   animation-name: leftEnter;
@@ -60,6 +127,7 @@
   display: flex;
   align-items: center;
   justify-content: left;
+  /* border: 2px solid red; */
 }
 .sidebar-item-inner {
   border: 1px solid var(--clr2);
@@ -85,3 +153,25 @@
   cursor: context-menu;
   font-size: 16px;
 }
+
+
+
+@media only screen and (min-width: 300px) and (max-width:900px){
+  .sidebar{
+    /* background-color: #00e7e7; */
+    width: 200px;
+    height: 100%;
+
+
+    /* border: 2px solid red; */
+  }
+  .sidebar h1{
+    font-size: 20px;
+  }
+
+  .sidebar-item{
+    font-size: 14px;
+  }
+}
+
+

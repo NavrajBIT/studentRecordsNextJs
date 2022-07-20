@@ -9,7 +9,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     90deg,
     #4cd964,
     #5ac8fa,
@@ -17,7 +17,17 @@ body {
     #34aadc,
     #5856d6,
     #ff2d55
+  ); */
+  background-image: linear-gradient(
+    40deg,
+    rgba(26, 214, 255, 0.8),
+    #121543 15%,
+    rgba(137, 70, 223, 0.8)
   );
+  /* width: 100%; */
+  /* position: absolute; */
+  /* background-color: white; */
+  box-sizing: border-box;
 }
 
 a {
@@ -41,6 +51,10 @@ a {
   --clr5: #9ca49a;
   --clr9: rgb(248, 129, 129);
   --clr10: white;
+}
+
+.navbar{
+  width: 100% !important;
 }
 
 .login-page {
@@ -88,7 +102,7 @@ a {
 .login-container button {
   margin: 20px 0px;
   width: 100%;
-  min-height: 60px;
+  height: 60px;
   margin: 10px;
   border-radius: 15px;
   background-image: linear-gradient(90deg, #00e7e7, #8946df);
@@ -116,8 +130,8 @@ a {
   margin: 20px 0;
 }
 .login-container .inputField input {
-  min-height: 100px;
-  min-width: 540px;
+  height: 100px;
+  width: 540px;
   background: black;
   color: white;
   border: 1px solid black;
@@ -199,4 +213,477 @@ table tr td {
 }
 .myform .editButton button {
   margin: 0px;
+}
+
+
+@media only screen and (min-width: 1201px) {
+  .firstBox{
+    height: 400px;
+    /* border: 2px solid red; */
+   }
+  .firstBox h2{
+    font-size: 30px;
+    margin-top: 0px;
+  } 
+
+  .firstBox .box1{
+    /* border: 2px solid red; */
+    display: flex;
+    font-size: 20px;
+    margin-top: 50px;
+  }
+
+}
+
+@media only screen and (min-width: 800px) and (max-width : 1200px){
+  .navbar{
+    /* border: 2px solid red  !important; */
+    min-width: 100% !important;
+    /* position: absolute; */
+    /* top: 0px; */
+  }
+  .firstBox{
+    height: 400px;
+    /* border: 2px solid red; */
+   }
+  .firstBox h2{
+    font-size: 30px;
+    margin-top: 0px;
+  } 
+
+  .firstBox .box1{
+    /* border: 2px solid red; */
+    display: flex;
+    font-size: 20px;
+    margin-top: 50px;
+  }
+
+
+  .addstudentpanel{
+    /* border: 2px solid red ; */
+    padding: 0px;
+    /* font-size: 25px; */
+    width: 95%;
+    margin: auto;
+    /* padding: 0px; */
+  }
+  
+  .formheading{
+    margin-top: 0px !important;
+    /* display: flex; */
+    flex-direction: column;
+    font-size: 25px !important;
+
+    
+  }
+
+    .addstudentpanel  input{
+    min-width: 100%;
+    height: 35px !important;
+    padding: 0px;
+
+    font-size: 20px;
+  }
+
+  .addstudentpanel select{
+    /* min-width: 250px; */
+    height: 35px !important;
+    font-size: 15px;
+  }
+  .addstudentpanel{
+    /* border: 2px solid red ; */
+    padding: 0px;
+    font-size: 17px;
+    /* width: 300px; */
+    /* margin: 0px; */
+  }
+  .addstudentpanel  input{
+    width: 150px;
+    min-height: 3px;
+    padding: 0px;
+
+    font-size: 12px;
+  }
+
+
+  .markattendence{
+    /* border: 2px solid red; */
+  }
+
+  .markattendence h2{
+    font-size: 30px;
+    padding: 0px;
+    margin: auto;
+    margin-bottom: 40px;
+  }
+
+  .markattendence input{
+      width: 100%;
+  }
+  .markattendence button{
+    width: 50% !important;
+    margin-left: 175px !important;
+  }
+
+   .formelement{
+    margin: 10px 0px;
+    font-size: 20px;
+    grid-template-columns: 1fr  2fr;
+    gap: 10px;
+    align-items: center;
+
+  }
+
+}
+
+ 
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (min-width: 400px) and (max-width : 800px) {
+ 
+  .formPage{
+    /* border: 2px solid white !important; */
+    width: 100% !important;
+    background-color: wheat;
+    font-size: 20px;
+  }
+
+ 
+
+  .navbar{
+    /* border: 2px solid red  !important; */
+    /* min-width: 114% !important; */
+    /* position: absolute; */
+    /* top: 0px; */
+    /* margin-left: 10px; */
+    max-width: 120vw !important;
+    padding: 0px !important;
+  }
+
+  .login-container{
+    height: 400px;
+    width: 400px;
+    font-size: 20px;
+    
+  }
+
+  .login-container .inputField input{
+    width: 350px !important;
+    height: 50px;
+    background-position: 4%;
+    background-size: 20px;
+    padding: 0px 40px;
+    
+  }
+
+  .login-container .inputField button{
+    height: 10px;
+
+  }
+
+  .firstBox{
+    /* border: 2px solid red; */
+   }
+  .firstBox h2{
+    font-size: 14px;
+    margin-top: 0px;
+  } 
+
+  .firstBox .box1{
+    /* border: 2px solid red; */
+    display: flex;
+    font-size: 12px;
+  }
+
+
+
+  .addstudentpanel{
+    border: none !important;
+    padding: 0px;
+    width: 90%;
+    margin: auto;
+    /* padding: 0px; */
+    font-size: 15px !important;
+  }
+  
+  
+  .formheading{
+    margin-top: 0px !important;
+    /* display: flex; */
+    flex-direction: column;
+    font-size: 30px !important;
+    
+  }
+  .formheading h2{
+    /* font-size: 15px; */
+
+  }
+
+    .addstudentpanel  input{
+    min-width: 100%;
+    height: 35px !important;
+    padding: 0px;
+
+
+    width: 150px;
+    min-height: 3px;
+    padding: 0px;
+
+    font-size: 12px;
+  }
+
+  .addstudentpanel select{
+    /* min-width: 250px; */
+    height: 35px !important;
+    font-size: 15px;
+  }
+
+  .markattendence{
+    /* border: 2px solid red; */
+  }
+
+  .markattendence h2{
+    font-size: 30px;
+    padding: 0px;
+    margin: auto;
+    margin-bottom: 40px;
+  }
+
+  .markattendence input{
+      width: 100%;
+  }
+  .markattendence button{
+    width: 100% !important;
+  }
+
+  .formelement{
+    margin: 10px 0px;
+    font-size: 20px;
+    grid-template-columns: 1fr ;
+    gap: 10px;
+    align-items: center;
+
+  }
+  
+ 
+  
+
+
+}
+
+@media only screen and (min-width: 500px)  and (max-width:800px){
+  .navbar{
+    max-width: 100% !important;
+    /* border: 2px solid red !important; */
+  }
+
+  .formPage{
+    /* border: 2px solid red !important; */
+    max-width: 70% !important;
+  }
+
+  .viewrecord{
+    /* border: 2px solid white; */
+  }
+
+   .formelement{
+    /* border: 2px solid red; */
+    margin: 10px 0px;
+    font-size: 15px;
+    grid-template-columns: 1fr ;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .viewrecord .formelement input{
+    height: 45px !important;
+  }
+
+
+}
+
+
+@media only screen and (min-width:400px) and (max-width:500px){
+  .markattendence{
+    border: 2px solid red;
+  }
+
+  .markattendence h2{
+    font-size: 30px;
+    padding: 0px;
+    margin: auto;
+    margin-bottom: 40px;
+  }
+
+  .markattendence input{
+      width: 100%;
+  }
+  .markattendence button{
+    width: 100% !important;
+  }
+  
+}
+ 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 300px) and (max-width: 400px) {
+  .formPage{
+    /* border: 2px solid red !important; */
+    background-color: wheat;
+  }
+
+  .navbar{
+    /* border: 2px solid red  !important; */
+    min-width: 155% !important;
+    /* position: absolute; */
+    /* top: 0px; */
+  }
+  .addstudentpanel{
+    /* border: 2px solid red ; */
+    padding: 0px;
+    font-size: 15px;
+    /* width: 300px; */
+    /* margin: 0px; */
+    /* padding: 0px; */
+  }
+  
+  .formheading{
+    margin-top: 0px !important;
+    /* display: flex; */
+    flex-direction: column;
+    
+  }
+
+  
+   
+
+  .addstudentpanel  input{
+    min-width: 150px;
+    height: 35px !important;
+    padding: 0px;
+
+    font-size: 12px;
+  }
+
+  .addstudentpanel select{
+    /* min-width: 250px; */
+    height: 35px !important;
+    font-size: 15px;
+  }
+  .addstudentpanel{
+    /* border: 2px solid red ; */
+    padding: 0px;
+    font-size: 13px;
+    /* width: 300px; */
+    /* margin: 0px; */
+  }
+  .addstudentpanel  input{
+    width: 150px;
+    min-height: 3px;
+    padding: 0px;
+
+    font-size: 12px;
+  }
+
+  .login-container{
+    height: 350px;
+    width: 300px;
+    font-size: 12px;
+    /* border: 2px solid red; */
+    padding-bottom:70px;
+  }
+
+  .login-container .inputField input{
+    width: 250px !important;
+    height: 50px;
+    background-position: 4%;
+    background-size: 20px;
+    padding: 0px 40px;
+    font-size: 16px;
+    
+  }
+
+  .login-container .inputField button{
+    height: 10px;
+    margin-bottom: 20px;
+
+  }
+
+  .login-container h1{
+    font-size: 21px;
+    margin:  20px auto;
+  }
+
+  .logo{
+    height: 50px;
+    width: 100px;
+  }
+
+  .clientlogo{
+    height: 50px;
+    width: 100px;
+
+  }
+
+  .firstBox{
+    /* border: 2px solid white; */
+    padding-top: 0px;
+    font-size: 14px;
+    /* width: 100%; */
+    height: 100%;
+
+  }
+  .firstBox h2{
+    font-size: 15px;
+    /* border: 2px solid ; */
+    margin-top: 0px;
+
+  }
+
+  .box1{
+    /* border: 2px solid red; */
+    display: flex;
+
+  }
+
+ 
+}
+
+
+
+
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .markattendence{
+    font-size: 25px;
+    margin: auto;
+  }
+  
+  .markattendence input{
+    padding: 0px;
+    font-size: 20px;
+  }
+
+  .markattendence label{
+    font-size: 25px;
+
+  }
+
+  .markattendence .formelement{
+    padding: 0px;
+    /* margin: auto; */
+    margin-top: 10px;
+  }
+  .markattendence h2{
+    margin: auto;
+    margin-bottom: 30px;
+  }
 }

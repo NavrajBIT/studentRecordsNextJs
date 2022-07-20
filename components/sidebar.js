@@ -1,25 +1,57 @@
-import React from "react";
-import { useContext, useState } from "react";
+import { withCoalescedInvoke } from "next/dist/lib/coalesced-function";
+import React, { useEffect } from "react";
+import { useContext, useState  ,useMemo  } from "react";
 import userContext from "../context/userContext";
 
 const Sidebar = () => {
+  // const element =  document.getElementById("mySidenav")
   const user = useContext(userContext);
   const [attendanceToggle, setAttendanceToggle] = useState(false);
-
   const [assignmentToggle, setAssignmentToggle] = useState(false);
 
+  const [click , setClick] = useState();
+
+  // setClick(user.userState.sidebar)
+  // window.addEventListener("load", function(){
+    //everything is fully loaded, don't use me if you can use DOMContentLoaded
+    // useEffect(() => {
+      
+      // function openNav() {
+      //   document.getElementById("mySidenav").style.width = "250px";
+      //   document.getElementById("main").style.marginLeft = "250px";
+      // }
+      
+      function closeNav() {
+        alert("click")
+        document.getElementById("mySidenav").style.width = "20px";
+        document.getElementById("main").style.marginLeft= "0px";
+      }
+    // }, [click])
+    
+  
+  
+ 
   return (
     <>
-      <div className="sidebar" id="sidbar">
+      <div className="sidebar sidenav"   id="mySidenav"  >
+     
         <h1
+          className="dashhead"
+          id="dash"
           onClick={() => {
-            user.updateState(user.userState.type, user.userState.id, 1);
+            user.updateState(user.userState.type, user.userState.id, 1);  
+            // setClick(user.userState.sidebar)
+            // element.classList.add("dashclickAnimation")
+            alert("eh")
+            // closeNav()
           }}
         >
-          {" "}
           Dashboard
         </h1>
-        {user.userState.type === "Admin" ? (
+        {/* <span style={{fontSize:"30px" , marginLeft:"100px", cursor:"pointer"}} onclick={openNav}>&#9776; open</span> */}
+      
+        {user.userState.type === "Admin" ||
+        user.userState.type === "SuperAdmin" ? (
           <>
             <div
               className="sidebar-item"
@@ -45,7 +77,7 @@ const Sidebar = () => {
                 setAttendanceToggle(!attendanceToggle);
               }}
             >
-              Attendence{" "}
+              Attendence
             </div>
             {attendanceToggle ? (
               <>
@@ -78,20 +110,17 @@ const Sidebar = () => {
             <div
               className="sidebar-item"
               onClick={() => {
-                // user.updateState(user.userState.type, user.userState.id, 5);
                 setAssignmentToggle(!assignmentToggle);
-
               }}
             >
               Assignment
             </div>
-            {/* {assignmentToggle ? < */}
-            {assignmentToggle ? (
+            {assignmentToggle && (
               <>
                 <div
                   className="sidebar-item-inner"
                   onClick={() => {
-                    user.updateState(user.userState.type, user.userState.id, 5.2);
+                    user.updateState(user.userState.type, user.userState.id, 5);
                   }}
                 >
                   - Upload Assignment
@@ -106,20 +135,17 @@ const Sidebar = () => {
                     );
                   }}
                 >
-                  - View Assignment
+                  - Submitted Assignment
                 </div>
               </>
-            ) : (
-              <></>
             )}
-
             <div
               className="sidebar-item"
               onClick={() => {
                 user.updateState(user.userState.type, user.userState.id, 6);
               }}
             >
-              Marks card
+              Grade card
             </div>
             <div
               className="sidebar-item"
@@ -129,15 +155,29 @@ const Sidebar = () => {
             >
               Time Table
             </div>
-
+            <div
+              className="sidebar-item"
+              onClick={() => {
+                user.updateState(user.userState.type, user.userState.id, 7.1);
+              }}
+            >
+              Academic Performance
+            </div>
             <div
               className="sidebar-item"
               onClick={() => {
                 user.updateState(user.userState.type, user.userState.id, 8);
-                // alert(user.userState.id)
               }}
             >
-              View Assignment
+              Modification Requests
+            </div>
+            <div
+              className="sidebar-item"
+              onClick={() => {
+                user.updateState(user.userState.type, user.userState.id, 9);
+              }}
+            >
+              History
             </div>
           </>
         ) : (
@@ -164,7 +204,7 @@ const Sidebar = () => {
                 user.updateState(user.userState.type, user.userState.id, 6);
               }}
             >
-              Marks card
+              Grade card
             </div>
             <div
               className="sidebar-item"
@@ -173,6 +213,14 @@ const Sidebar = () => {
               }}
             >
               Time Table
+            </div>
+            <div
+              className="sidebar-item"
+              onClick={() => {
+                user.updateState(user.userState.type, user.userState.id, 8);
+              }}
+            >
+              Request Modification
             </div>
           </>
         )}

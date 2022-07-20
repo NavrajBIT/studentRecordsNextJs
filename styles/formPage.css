@@ -7,6 +7,7 @@
     rgba(137, 70, 223, 0.8)
   );
   width: 100%;
+  /* border: 2px solid red; */
 }
 
 .myform {
@@ -16,12 +17,15 @@
   flex-direction: column;
   padding: 50px 20px;
   border-radius: 20px;
+  /* border: 2px solid greenyellow; */
+  /* width: 100%; */
+
 }
 .formelement {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 20px;
-  align-items: center;
+  align-items: left;
 }
 
 .myform .formelement label {
@@ -130,4 +134,48 @@
 .myform .downloadButton {
   margin: 10px;
   padding: 10px;
+}
+
+
+
+@media only screen and (min-width: 300px) and (max-width: 400px){
+  .formelement{
+    /* border: 2px solid red; */
+    /* display: flex; */
+    grid-template-columns: 1fr ;
+    gap: 10px;
+    align-items: left;
+    font-size: 20px;
+  }
+  .formelement input{
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 400px) and (max-width : 500px){
+  .addstudentpanel{
+    border: 2px solid yellow;
+    /* padding: 0px; */
+    font-size: 18px;
+    /* width: 300px; */
+    /* margin: 0px; */
+  }
+  .addstudentpanel  input{
+    width: 100%;
+    min-height: 3px;
+    padding: 0px;
+
+    font-size: 16px;
+  }
+
+  .formelement{
+    /* border: 2px solid red; */
+    /* display: flex; */
+    grid-template-columns: 1fr ;
+    gap: 10px;
+    align-items: left;
+    font-size: 20px;
+  }
+
+
 }

@@ -12,14 +12,15 @@ const ViewRecords = () => {
   const getDate = (epochValue) => {
     epochValue = parseInt(epochValue) * 1000;
     let d = new Date(epochValue);
-    return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+    return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
   };
 
   const searchStudents = async () => {
     setStatus("Searching...");
     let studentName = document.getElementById("nameField").value;
     let studentGrade = document.getElementById("gradeField").value;
-    searchStudent(studentName, studentGrade).then((res) => {
+    let studentRollNumber = document.getElementById("idField").value;
+    searchStudent(studentName, studentGrade, studentRollNumber).then((res) => {
       setTimeout(() => {
         setSearchData(res.data);
         if (res.data.length === 0) {
@@ -72,7 +73,7 @@ const ViewRecords = () => {
   };
 
   return (
-    <div className="myform">
+    <div className="myform viewrecord">
       <div>
         <div className="formelement">
           <label htmlFor="nameField">Name :</label>
@@ -81,6 +82,10 @@ const ViewRecords = () => {
         <div className="formelement">
           <label htmlFor="gradeField">Grade :</label>
           <input type="number" placeholder="Enter grade" id="gradeField" />
+        </div>
+        <div className="formelement">
+          <label htmlFor="idField">Roll Number :</label>
+          <input type="number" placeholder="Enter roll number" id="idField" />
         </div>
       </div>
       <button

@@ -36,7 +36,7 @@ const Login = () => {
       // // });
   };
   return (
-    <>
+    <div className="login">
       <div className="logo">
         <img
           src="https://beimagine.tech/wp-content/uploads/2022/04/BITlogo-white.png"
@@ -82,7 +82,7 @@ const Login = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default Login;

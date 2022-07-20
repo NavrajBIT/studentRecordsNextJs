@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { studentData } from "../formData/studentDataForm";
 import {
+  fileDownload,
   fileHash,
   getStudentData,
   modifyStudentData,
@@ -24,6 +25,7 @@ const Profile = () => {
     dob: "loading...",
     rollNumber: "loading...",
     grade: "loading...",
+    section: "loading...",
     email: "loading...",
     religion: "loading...",
     caste: "loading...",
@@ -59,7 +61,7 @@ const Profile = () => {
   const getDate = (epochValue) => {
     epochValue = parseInt(epochValue) * 1000;
     let d = new Date(epochValue);
-    return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+    return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
   };
 
   const getHtmlDate = (epochValue) => {
@@ -67,7 +69,9 @@ const Profile = () => {
     let d = new Date(epochValue);
     let myYear = d.getFullYear();
     let myMonth =
-      parseInt(d.getMonth()) < 9 ? "0" + d.getMonth() : d.getMonth();
+      parseInt(d.getMonth()) + 1 < 9
+        ? "0" + (d.getMonth() + 1)
+        : d.getMonth() + 1;
     let myDay = parseInt(d.getDate()) < 9 ? "0" + d.getDate() : d.getDate();
 
     console.log(myYear + "-" + myMonth + "-" + myDay);
@@ -102,6 +106,7 @@ const Profile = () => {
       dob: dob,
       studentId: user.userState.id,
       grade: document.getElementById("grade").value,
+      section: document.getElementById("section").value,
       email: document.getElementById("email").value,
       religion: document.getElementById("religion").value,
       caste: document.getElementById("caste").value,
@@ -139,8 +144,9 @@ const Profile = () => {
       ).value,
     };
 
-    await modifyStudentData(enteredData)
+    await modifyStudentData(enteredData, user.userState.id)
       .then((res) => {
+        console.log(res);
         if (res.status === "Success") {
           setStatus("Student data saved successfully.");
           setIsEditing(!isEditing);
@@ -155,7 +161,8 @@ const Profile = () => {
   return (
     <>
       <div className="myform">
-        {user.userState.type === "Admin" && (
+        {(user.userState.type === "Admin" ||
+          user.userState.type === "SuperAdmin") && (
           <div className="editButton">
             <button
               onClick={() => {
@@ -214,10 +221,8 @@ const Profile = () => {
                           <button
                             className="downloadButton"
                             onClick={() => {
-                              let url =
-                                "http://ipfs.io/ipfs/" +
-                                mystudentData[label.id];
-                              window.open(url);
+                              let filename = label.id + ".pdf";
+                              fileDownload(mystudentData[label.id], filename);
                             }}
                           >
                             Download

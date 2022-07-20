@@ -99,3 +99,113 @@
   margin-top: 10px;
   color: white;
 }
+
+
+@media only screen and (min-width: 320px) and (max-width:400px){
+
+  .content1{
+    /* border: 2px solid red; */
+    /* margin-top: -30px; */
+    width: 260px;
+    padding: 10px;
+    padding-top: 0px;
+    position: relative;
+  }
+  .piechart{
+    /* border: 2px solid red; */
+    height: 100%;
+    /* margin-top: 0px; */
+    position: absolute;
+    left: 0px;
+    /* top: 5px; */
+  }
+  .box1content{
+    min-width: 50%;
+    /* border: 2px solid white; */
+  }
+
+ 
+}
+
+@media only screen and (min-width: 600px) and (max-width : 1200px){
+  .content1{
+    /* border: 2px solid red; */
+    /* margin-top: -30px; */
+    width: 260px;
+    /* padding: 10px; */
+    /* padding-top: 0px; */
+    position: relative;
+  }
+  .piechart{
+    /* border: 2px solid red; */
+    height: 300px;
+    /* margin-top: 0px; */
+    position: absolute;
+    right: 20px;
+    top: -10px;
+    
+    min-width: 250px;
+
+  }
+  .box1content{
+    min-width: 50%;
+    /* border: 2px solid white; */
+  }
+
+
+}
+
+
+@media only screen and (min-width: 1201px){
+  .content1{
+    /* border: 2px solid red; */
+    /* margin-top: -30px; */
+    width: 260px;
+    /* padding: 10px; */
+    /* padding-top: 0px; */
+    position: relative;
+  }
+  .piechart{
+    /* border: 2px solid red; */
+    height: 300px;
+    /* margin-top: 0px; */
+    position: absolute;
+    right: 20px;
+    top: -10px;
+    
+    min-width: 250px;
+
+  }
+  .box1content{
+    min-width: 50%;
+    /* border: 2px solid white; */
+  }
+
+
+}
+
+@media only screen and (min-width: 400px) and (max-width : 800px){
+  .content1{
+    /* border: 2px solid red; */
+    /* margin-top: -30px; */
+    width: 260px;
+    padding: 10px;
+    /* padding-top: 0px; */
+    position: relative;
+  }
+  .piechart{
+    /* border: 2px solid white; */
+    /* height: 100%; */
+    /* margin-top: 0px; */
+    position: absolute;
+    left: 0px;
+    top: -35px;
+    height: 100px;
+    min-width: 100px !important;
+  }
+
+  .resultsinglerow{
+    border: 2px solid red;
+  }
+
+}

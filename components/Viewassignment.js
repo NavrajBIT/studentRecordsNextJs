@@ -1,26 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 const Viewassignment = () => {
-  
   return (
     <>
       <h2>hello </h2>
-      <AssignmentData/>
-
+      <AssignmentData />
     </>
-  )
-}
+  );
+};
 
 const AssignmentData = () => {
-  const [myAssignments, setMyAssignments] = useState([{
-    file:"",
-    subject:"maths",
-    topic:"numbers",
-    expiry:"32/34/34",
-    grade:'A',
-    id:3,
-    getDate:"23/34/45"
-
-  }]);
+  const [myAssignments, setMyAssignments] = useState([
+    {
+      file: "",
+      subject: "maths",
+      topic: "numbers",
+      expiry: "32/34/34",
+      grade: "A",
+      id: 3,
+      getDate: "23/34/45",
+    },
+  ]);
   if (myAssignments.length === 0) {
     return (
       <>
@@ -46,7 +45,6 @@ const AssignmentData = () => {
               <div style={{ borderBottom: "1px solid white" }}>
                 {/* Due date: {getDate(assignment.expiry)} */}
                 Due date: {assignment.getDate}
-
               </div>
               <div style={{ borderBottom: "1px solid white" }}>
                 Grade: {assignment.grade}
@@ -55,8 +53,8 @@ const AssignmentData = () => {
             <div className="updownbuttons">
               <button
                 onClick={() => {
-                  let url = "http://ipfs.io/ipfs/" + assignment.file;
-                  window.open(url);
+                  // let url = "http://ipfs.io/ipfs/" + assignment.file;
+                  // window.open(url);
                 }}
               >
                 Download assignment
@@ -92,9 +90,7 @@ const AssignmentData = () => {
               />
               <button
                 onClick={() => {
-                  document
-                    .getElementById("fileField" + assignment.id)
-                    .click();
+                  document.getElementById("fileField" + assignment.id).click();
                 }}
               >
                 Submit assignment
@@ -107,5 +103,4 @@ const AssignmentData = () => {
   );
 };
 
-
-export default Viewassignment
+export default Viewassignment;
