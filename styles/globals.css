@@ -344,7 +344,11 @@ table tr td {
  
   .formPage{
     /* border: 2px solid white !important; */
-    width: 100% !important;
+    /* min-width: 80% ; */
+    /* min-width: 0%; */
+    /* flex: 100%; */
+    /* max-width: 200% !important; */
+    margin-left:0px  ;
     background-color: wheat;
     font-size: 20px;
   }
@@ -353,11 +357,11 @@ table tr td {
 
   .navbar{
     /* border: 2px solid red  !important; */
-    /* min-width: 114% !important; */
+    width: 100% !important;
     /* position: absolute; */
     /* top: 0px; */
     /* margin-left: 10px; */
-    max-width: 120vw !important;
+    /* max-width: 120vw !important; */
     padding: 0px !important;
   }
 
@@ -399,9 +403,10 @@ table tr td {
 
 
   .addstudentpanel{
-    border: none !important;
+    /* border: 2px solid red !important; */
     padding: 0px;
-    width: 90%;
+
+    max-width: 100%;
     margin: auto;
     /* padding: 0px; */
     font-size: 15px !important;
@@ -465,6 +470,38 @@ table tr td {
     align-items: center;
 
   }
+/* 
+  .firstBox{
+  }
+    border: 2px solid red !important; */
+
+
+    
+  .transactions{
+    /* border: 2px solid red !important; */
+  }
+  
+  .transactions .header{
+    /* border: 2px solid red !important; */
+    display: grid;
+    grid-template-columns: 1fr  1fr !important;
+    gap: 40px 10px;
+    padding: 10px 20px !important;
+    
+
+  }
+  .transactions .header div{
+    font-size: 25px !important;
+
+  }
+  .historyHeading {
+    font-size: 25px !important;
+    grid-template-columns:1fr !important;
+    gap: 20px;
+
+  }
+
+  /* Media query for history.js page */
   
  
   
@@ -475,19 +512,24 @@ table tr td {
 @media only screen and (min-width: 500px)  and (max-width:800px){
   .navbar{
     max-width: 100% !important;
-    /* border: 2px solid red !important; */
+    /* border: 2px solid white !important; */
   }
 
   .formPage{
     /* border: 2px solid red !important; */
-    max-width: 70% !important;
+    max-width: 100% !important;
+    /* padding: 10px; */
+
   }
 
-  .viewrecord{
-    /* border: 2px solid white; */
+  .addstudentpanel{
+    /* border: 2px solid greenyellow !important; */
+    margin: 0px;  
+    /* width: 80%; */
+
   }
 
-   .formelement{
+  .formelement{
     /* border: 2px solid red; */
     margin: 10px 0px;
     font-size: 15px;
@@ -495,18 +537,58 @@ table tr td {
     gap: 10px;
     align-items: center;
   }
-
+  
+  .viewrecord{
+    /* border: 2px solid white; */
+  }
   .viewrecord .formelement input{
     height: 45px !important;
   }
 
+  .pageLayout{
+    /* border: 2px solid #ff0000; */
+    flex-direction: row;
+    /* padding: 10px; */
+    /* flex-wrap: wrap; */
+    width: 100% !important;
+  }
+
+  .main_inner_nav_heading {
+    font-size: 20px;
+  }
+
+  .transactions{
+    /* border: 2px solid red !important; */
+  }
+  
+  .transactions .header{
+    /* border: 2px solid red !important; */
+    display: grid;
+    grid-template-columns: 1fr  1fr !important;
+    gap: 40px 10px;
+    padding: 10px 20px !important;
+    
+
+  }
+  .transactions .header div{
+    font-size: 25px !important;
+
+  }
+  .historyHeading {
+    font-size: 25px !important;
+    grid-template-columns:1fr !important;
+    gap: 20px;
+
+  }
+
+  /* Media query for history.js page */
 
 }
 
 
 @media only screen and (min-width:400px) and (max-width:500px){
   .markattendence{
-    border: 2px solid red;
+    /* border: 2px solid red; */
   }
 
   .markattendence h2{
@@ -522,7 +604,24 @@ table tr td {
   .markattendence button{
     width: 100% !important;
   }
+
+  .pageLayout{
+    /* border: 2px solid red; */
+    flex-direction: column;
+  }
+
+  .addstudentpanel{
+    /* border: 2px solid red; */
+    max-width: 100% !important;
+    /* margin: 0px !important; */
+    /*  */
+  }
+
+  /* Media query for history.js page */
   
+  /* Media query for history.js page */
+
+
 }
  
 
@@ -531,11 +630,13 @@ table tr td {
   .formPage{
     /* border: 2px solid red !important; */
     background-color: wheat;
+    min-width: 0% !important;
+    max-width: 100% !important;
   }
 
   .navbar{
     /* border: 2px solid red  !important; */
-    min-width: 155% !important;
+    min-width: 100% !important;
     /* position: absolute; */
     /* top: 0px; */
   }
@@ -543,7 +644,7 @@ table tr td {
     /* border: 2px solid red ; */
     padding: 0px;
     font-size: 15px;
-    /* width: 300px; */
+    /* width: 100%; */
     /* margin: 0px; */
     /* padding: 0px; */
   }
@@ -631,7 +732,7 @@ table tr td {
     padding-top: 0px;
     font-size: 14px;
     /* width: 100%; */
-    height: 100%;
+    height: 400px;
 
   }
   .firstBox h2{
@@ -644,9 +745,43 @@ table tr td {
   .box1{
     /* border: 2px solid red; */
     display: flex;
+    flex-direction: column;
 
   }
 
+  .secondBox{
+    padding-top: 10px;
+    font-size: 14px;
+    /* width: 100%; */
+    height: 100%;
+    /* border: 2px solid red; */
+    /* padding: 0px; */
+
+  }
+  .secondBox h2{
+    
+    font-size: 15px;
+  }
+
+  .thirdBox{
+    padding-top: 10px;
+    font-size: 14px;
+    /* width: 100%; */
+    height: 100%;
+
+  }
+  .thirdBox h2{
+    font-size: 15px;
+
+  }
+  .thirdBox select{
+    font-size: 15px !important;
+  }
+
+  .pageLayout{
+    /* border: 2px solid red; */
+    flex-direction: column;
+  }
  
 }
 
@@ -656,7 +791,8 @@ table tr td {
 
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media only screen and (max-width: 500px) {
+  
   
 } 
 

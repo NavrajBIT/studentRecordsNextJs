@@ -5,21 +5,20 @@ const UserState = (props) => {
   const [userType, setUserType] = useState(null);
   const [userId, setUserId] = useState(null);
   const [userView, setUserView] = useState(1);
-  const [userSidebar, setUserSidebar] = useState(true);
+  const [sidebar, setSidebar] = useState(true);
 
-
-  const updateState = (usertype, userId, userView , userSidebar) => {
+  const updateState = (usertype, userId, userView, sidebarView) => {
     setUserType(usertype);
     setUserId(userId);
     setUserView(userView);
-    setUserSidebar(userSidebar)
+    setSidebar(sidebarView);
   };
 
   const userState = {
     type: userType,
     id: userId,
     view: userView,
-    sidebar : userSidebar
+    sidebar: sidebar
   };
   return (
     <UserContext.Provider value={{ userState, updateState }}>

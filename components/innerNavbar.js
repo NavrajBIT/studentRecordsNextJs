@@ -5,6 +5,15 @@ import userContext from "../context/userContext";
 const InnerNavbar = () => {
   const user = useContext(userContext);
 
+  const toggleSidebar = () => {
+    user.updateState(
+      user.userState.type,
+      user.userState.userId,
+      user.userState.view,
+      !user.userState.sidebar
+    );
+  };
+
   const dashboardName = {
     Admin: "School Dashboard",
     SuperAdmin: "School Dashboard",
@@ -37,12 +46,18 @@ const InnerNavbar = () => {
   return (
     <>
       <div className="innerNavbar">
-        <div className="iconHolder"   >
-          <img src="./menu.svg" id="icon" alt="" 
-          
-           />
+        <div className="iconHolder">
+          <img
+            src="./menu.svg"
+            alt=""
+            onClick={() => {
+              toggleSidebar();
+            }}
+          />
         </div>
-        {navContent[user.userState.view]}
+        <div className="main_inner_nav_heading">
+          {navContent[user.userState.view]}
+        </div>
       </div>
     </>
   );

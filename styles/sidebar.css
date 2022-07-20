@@ -9,60 +9,43 @@
   color: var(--clr10);
   display: flex;
   flex-direction: column;
-  
+
+  -webkit-transition: all 350ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
+  transition: all 350ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
+ 
 }
 .dashhead{
   cursor: pointer;
 }
 
+.upToDownAnimation{
+  animation-name: uptodown;
+  animation-duration: 0.2s;
 
-.sidenav {
-  height: 100%;
-  /* width: 320px; */
-  /* position: fixed; */
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-  position: relative;
+}
+@keyframes uptodown {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
 }
 
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+.downToUpAnimation{
+  animation-name: downtoup;
+  animation-duration: 2s;
+
 }
-
-.sidenav a:hover {
-  color: #f1f1f1;
+ 
+@keyframes downtoup {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0%;
+  }
 }
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 10px;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-  /* border: 2px solid red; */
-}
-
-#main {
-  transition: margin-left .5s;
-  padding: 16px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-
-
 
 
 
@@ -71,7 +54,7 @@
 .dashclickAnimation{
   animation-name: leftExit;
   animation-duration: 0.5s;
-  width: 320px !important;
+  /* width: 320px !important; */
   /* border: 2px solid white; */
 
   /* width: 120px; */
@@ -155,23 +138,49 @@
 }
 
 
+/*  */
 
-@media only screen and (min-width: 300px) and (max-width:900px){
-  .sidebar{
-    /* background-color: #00e7e7; */
-    width: 200px;
-    height: 100%;
+@media screen and (max-width: 700px) {
+    .sidebar {
+      margin: 0px;
+      /* max-width: 120% !important; */
+      width: 100% !important;
+      height: 100%; 
+      flex-wrap: wrap;
+      /* border: 2px solid white ; */
+      /* flex-direction: row !important; */
 
 
-    /* border: 2px solid red; */
+      /* position: relative; */
+    }
+    .sidebar h1 {
+      font-size: 15px;
+    }
+    .sidebar div {
+      font-size: 12px;
+      margin-left: 0;
+    }
   }
-  .sidebar h1{
+  
+  
+  
+  /* @media only screen and (min-width: 400px) and (max-width:800px){
+    .sidebar{
+      /* background-color: #00e7e7; */
+      /* min-width: 0% !important; */
+    /* max-width: 50% !important; */
+    /* height: 100%; */
+    /* border: 2px solid red; */
+    /* flex-direction: row; */
+    /* order: 3; */
+    /* }
+    .sidebar h1{
     font-size: 20px;
   }
 
   .sidebar-item{
     font-size: 14px;
-  }
-}
+  } */ 
+  /* } */
 
-
+  

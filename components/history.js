@@ -9,7 +9,7 @@ const History = () => {
 
   return (
     <div className="myform">
-      <div className="formelement">
+      <div className="formelement historyHeading">
         <label htmlFor="rollNumberField">Filter by student Roll Number: </label>
         <input
           type="number"

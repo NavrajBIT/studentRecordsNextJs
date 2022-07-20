@@ -89,14 +89,14 @@ const AdminDash = () => {
 
       </div>
 
-      <div className="myform">
+      <div className="myform secondBox">
         <div>
           <h2>2. Grade distribution of students</h2>
         </div>
 
         <BarChart />
       </div>
-      <div className="myform">
+      <div className="myform thirdBox">
         <div>
           <h2>3. Academic Performance Indicators</h2>
         </div>

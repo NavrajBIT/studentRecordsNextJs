@@ -135,7 +135,7 @@ const AddStudent = () => {
                               {option}
                             </option>
                           );
-                        })}
+                        })}   
                       </select>
                     </div>
                   );
