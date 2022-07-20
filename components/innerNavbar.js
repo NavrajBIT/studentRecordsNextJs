@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext, useState , useMemo } from "react";
 import userContext from "../context/userContext";
 
 const InnerNavbar = () => {
@@ -38,7 +38,11 @@ const InnerNavbar = () => {
         : "Request Modification",
     9: "History",
   };
+  // console.log(user.userState);
 
+  // const [click , setClick ] = useState(false)
+ 
+  
   return (
     <>
       <div className="innerNavbar">
@@ -51,7 +55,9 @@ const InnerNavbar = () => {
             }}
           />
         </div>
-        {navContent[user.userState.view]}
+        <div className="main_inner_nav_heading">
+          {navContent[user.userState.view]}
+        </div>
       </div>
     </>
   );

@@ -10,12 +10,18 @@ import {
 import userContext from "../context/userContext";
 import AssignmentView from "./assignmentAnswers";
 
+import Viewassignment from "./Viewassignment";
+import { useNavigate } from "react-router-dom";
 const Assignment = () => {
+  // const navigate = useNavigaate
+  // const navigate = useNavigate()
   const [status, setStatus] = useState("");
   const user = useContext(userContext);
 
   const [myAssignments, setMyAssignments] = useState([]);
   const [selectedGrade, setSelectedGrade] = useState(0);
+
+  const [click , setClick] = useState('false')
   useEffect(() => {
     if (user.userState.type === "Student") {
       setStatus("loading assignments...");
@@ -56,9 +62,9 @@ const Assignment = () => {
           } else {
             setStatus("Could not upload assignment. Check data and try again.");
           }
-        })
+        })  
         .catch((err) => {
-          setStatus("Could not upload assignment. Check data and try again.");
+          setStatus(`Could not upload assignment. Check data and try again. ${err} ` );
         });
     };
     return (
@@ -94,6 +100,7 @@ const Assignment = () => {
               id="fileField"
               style={{ display: "none" }}
               onChange={async (e) => {
+                alert(e)
                 let domItem = document.getElementById("fileField" + "label");
                 domItem.innerHTML = "Uploading...";
                 await fileHash(e.target.files[0])
@@ -103,6 +110,7 @@ const Assignment = () => {
                   })
                   .catch((err) => {
                     domItem.innerHTML = "Error. Choose file again.";
+                    console.log(err)
                   });
               }}
             />

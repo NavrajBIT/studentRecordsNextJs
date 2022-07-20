@@ -23,7 +23,7 @@ const Attendance = () => {
   }, [selectedGrade]);
   let sNo = 0;
   return (
-    <div className="myform">
+    <div className="myform markattendence">
       <h2>Upload full month attendance</h2>
       <div className="formelement">
         <label htmlFor="fullattendanceupload">Select file</label>

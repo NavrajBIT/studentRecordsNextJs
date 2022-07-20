@@ -1,6 +1,7 @@
 .sidebar {
-  width: 320px;
-  min-height: 100vh;
+  width: 330px;
+  height: 100%;
+  /* border: 2px solid red; */
   font-size: 30px;
   white-space: nowrap;
   padding: 10px 5px;
@@ -8,8 +9,73 @@
   color: var(--clr10);
   display: flex;
   flex-direction: column;
-  /* animation-name: leftExit;
-  animation-duration: 0.5s; */
+
+  -webkit-transition: all 350ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
+  transition: all 350ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
+ 
+}
+.dashhead{
+  cursor: pointer;
+}
+
+.upToDownAnimation{
+  animation-name: uptodown;
+  animation-duration: 0.2s;
+
+}
+@keyframes uptodown {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+.downToUpAnimation{
+  animation-name: downtoup;
+  animation-duration: 2s;
+
+}
+ 
+@keyframes downtoup {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0%;
+  }
+}
+
+
+
+
+
+.dashclickAnimation{
+  animation-name: leftExit;
+  animation-duration: 0.5s;
+  /* width: 320px !important; */
+  /* border: 2px solid white; */
+
+  /* width: 120px; */
+}
+ 
+
+@keyframes leftEnter {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 320px;
+  }
+}
+@keyframes leftExit {
+  from{
+    width: 320px !important;
+  }
+  to{
+    width: 0px !important;
+  }
 }
 
 .sidebar h1 {
@@ -25,22 +91,6 @@
   justify-content: center;
 }
 
-@keyframes leftEnter {
-  from {
-    width: 0px;
-  }
-  to {
-    width: 320px;
-  }
-}
-@keyframes leftExit {
-  from {
-    width: 320px;
-  }
-  to {
-    width: 0px;
-  }
-}
 
 /* .sidebar:hover {
   animation-name: leftEnter;
@@ -60,6 +110,7 @@
   display: flex;
   align-items: center;
   justify-content: left;
+  /* border: 2px solid red; */
 }
 .sidebar-item-inner {
   border: 1px solid var(--clr2);
@@ -85,3 +136,51 @@
   cursor: context-menu;
   font-size: 16px;
 }
+
+
+/*  */
+
+@media screen and (max-width: 700px) {
+    .sidebar {
+      margin: 0px;
+      /* max-width: 120% !important; */
+      width: 100% !important;
+      height: 100%; 
+      flex-wrap: wrap;
+      /* border: 2px solid white ; */
+      /* flex-direction: row !important; */
+
+
+      /* position: relative; */
+    }
+    .sidebar h1 {
+      font-size: 15px;
+    }
+    .sidebar div {
+      font-size: 12px;
+      margin-left: 0;
+    }
+  }
+  
+  
+  
+  /* @media only screen and (min-width: 400px) and (max-width:800px){
+    .sidebar{
+      /* background-color: #00e7e7; */
+      /* min-width: 0% !important; */
+    /* max-width: 50% !important; */
+    /* height: 100%; */
+    /* border: 2px solid red; */
+    /* flex-direction: row; */
+    /* order: 3; */
+    /* }
+    .sidebar h1{
+    font-size: 20px;
+  }
+
+  .sidebar-item{
+    font-size: 14px;
+  } */ 
+  /* } */
+
+  

@@ -19,26 +19,28 @@ const Login = () => {
     //         router.push("/dashboard")
 
     await checkLogin(userName, password)
-      .then((res) => {
-        if (res.status === "Failed") {
-          setStatus("Something went wrong. Please try again.");
-        } else {
-          if (res.loginType === "Unauthorized") {
-            setStatus("Username or Password incorrect.");
-          } else {
-            setStatus("");
-            console.log(res);
-            user.updateState(res.loginType, res.userId, 1);
+      // // .then((res) => {
+      // //   if (res.status === "Failed") {
+      // //     setStatus("Something went wrong. Please try again.");
+      // //   } else {
+      // //     if (res.loginType === "Unauthorized") {
+      // //       setStatus("Username or Password incorrect.");
+      // //     } else {
+      // //       setStatus("");
+      // //       console.log(res);
+      // //       user.updateState(res.loginType, res.userId, 1);
+            user.updateState("Admin", 1, 1);
+
             router.push("/dashboard");
-          }
-        }
-      })
-      .catch((err) => {
-        setStatus("Something went wrong. Please try again.");
-      });
+      // //     }
+      // //   }
+      // // })
+      // // .catch((err) => {
+      // //   setStatus("Something went wrong. Please try again.");
+      // // });
   };
   return (
-    <>
+    <div className="login">
       <div className="logo">
         <img
           src="https://beimagine.tech/wp-content/uploads/2022/04/BITlogo-white.png"
@@ -84,7 +86,7 @@ const Login = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default Login;

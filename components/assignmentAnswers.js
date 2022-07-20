@@ -68,7 +68,7 @@ const AssignmentView = (props) => {
                     fileDownload(solution.file, filename);
                   }}
                 >
-                  Download{" "}
+                  Download
                   <img src="./download.svg" alt="" width="25" height="25" />
                 </a>
               </div>
@@ -85,7 +85,6 @@ const AssignmentView = (props) => {
         <div>Subject: {props.assignmentSubject}</div>
         <div>Topic: {props.assignmentTopic}</div>
       </div>
-
       <div>
         <Solutions />
       </div>

@@ -24,7 +24,7 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <div className="navbar">
+      <div className="navbar" width='100%'>
         <div className="navbar-left">
           <img
             src="https://kvsangathan.nic.in/sites/all/themes/kvs/logo.png"

@@ -80,7 +80,7 @@ const AddStudent = () => {
   };
   return (
     <>
-      <div className="myform">
+      <div className="myform addstudentpanel">
         {studentData.map((field) => {
           return (
             <React.Fragment key={field.field}>
@@ -90,7 +90,7 @@ const AddStudent = () => {
               {field.data.map((label) => {
                 if (label.type === "file") {
                   return (
-                    <div className="formelement" key={label.id}>
+                    <div className="formelement"  key={label.id}>
                       <label htmlFor={label.id}>
                         {label.label} :
                         <span>{label.required === "y" && "*"}</span>
@@ -135,7 +135,7 @@ const AddStudent = () => {
                               {option}
                             </option>
                           );
-                        })}
+                        })}   
                       </select>
                     </div>
                   );

@@ -17,7 +17,8 @@ import AcademicPerformance from "./academicPerformance";
 import { useContext } from "react";
 import userContext from "../context/userContext";
 import AttendanceMark from "./attendanceMark";
-
+import Viewassignment from "./Viewassignment";
+import UploadAssignment from "./UploadAssignment";
 const AppContent = () => {
   const user = useContext(userContext);
   return (
@@ -36,6 +37,7 @@ const AppContent = () => {
         {user.userState.view === 4 && <AttendanceMark />}
         {user.userState.view === 4.1 && <AttendanceView />}
         {user.userState.view === 4.2 && <AttendanceViewStudent />}
+
         {user.userState.view === 5 && <Assignment />}
         {user.userState.view === 5.1 && <SubmittedAssignmentView />}
         {user.userState.view === 6 && <MarksCard />}

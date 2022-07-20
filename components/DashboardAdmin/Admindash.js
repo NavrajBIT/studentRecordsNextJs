@@ -56,10 +56,13 @@ const AdminDash = () => {
 
   return (
     <>
-      <div className="myform">
+      <div className="myform firstBox" >
         <div>
           <h2>1. Gender distribution of students</h2>
         </div>
+
+        <div className="box1">
+
         <div
           style={{
             display: "flex",
@@ -69,6 +72,8 @@ const AdminDash = () => {
             justifyContent: "left",
             alignItems: "left",
           }}
+          className={dash.box1content}
+          
         >
           <div>Total Students : {totalNumber}</div>
           <div>Male : {maleNumber}</div>
@@ -79,16 +84,19 @@ const AdminDash = () => {
             <PieChart />
           </div>
         </div>
+        </div>
+
+
       </div>
 
-      <div className="myform">
+      <div className="myform secondBox">
         <div>
           <h2>2. Grade distribution of students</h2>
         </div>
 
         <BarChart />
       </div>
-      <div className="myform">
+      <div className="myform thirdBox">
         <div>
           <h2>3. Academic Performance Indicators</h2>
         </div>

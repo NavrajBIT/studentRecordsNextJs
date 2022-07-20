@@ -7,6 +7,7 @@
     rgba(137, 70, 223, 0.8)
   );
   width: 100%;
+  /* border: 2px solid red; */
 }
 
 .myform {
@@ -16,6 +17,9 @@
   flex-direction: column;
   padding: 50px 20px;
   border-radius: 20px;
+  /* border: 2px solid greenyellow; */
+  /* width: 100%; */
+
 }
 .formelement {
   display: grid;
@@ -130,4 +134,117 @@
 .myform .downloadButton {
   margin: 10px;
   padding: 10px;
+}
+
+
+
+@media only screen and (min-width: 300px) and (max-width: 400px){
+  .formelement{
+    /* border: 2px solid red !important; */
+    /* display: flex; */
+    grid-template-columns: 1fr ;
+    gap: 10px;
+    align-items: left;
+    font-size: 15px;
+    flex-wrap: wrap;
+
+  }
+  .formelement input{
+    width: 100% !important;
+  }
+  /* .formPage{
+    border: 2px solid white !important;
+
+   
+  } */
+  .sidebar{
+    /* border: 2px solid red !important; */
+    flex-direction: column;
+    /* width: 100px !important; */
+    /* flex-wrap: wrap; */
+  }
+  .sidebar div{
+    font-size: 10px !important;
+
+  }
+  
+  .formelement input{
+    width: 100%;
+  }
+
+  .iconHolder{
+    /* border: 2px solid red; */
+    /* margin:auto !important; */
+    /* margin-right: 10px !important; */
+    height: 40px !important;
+    width: 40px !important;
+
+    padding: 0 !important;
+  }
+  .iconHolder img{
+    height: 100%;
+    width: 100%;
+  }
+  .main_inner_nav_heading{
+    /* border: 2px solid red; */
+    font-size: 15px;
+   
+    /* width: 400px; */
+  }
+}
+
+@media only screen and (min-width: 400px) and (max-width : 500px){
+  .addstudentpanel{
+    /* border: 2px solid yellow; */
+    /* padding: 0px; */
+    font-size: 15px;
+    width: 80% !important;
+    margin: auto;
+    margin-top: 20px;
+
+  }
+  .addstudentpanel  input{
+    width: 100%;
+    min-height: 3px;
+    padding: 0px;
+    font-size: 16px;
+  }
+
+  .formelement{
+    /* border: 2px solid red; */
+    /* display: flex; */
+    width: 100%;
+    grid-template-columns: 1fr ;
+    gap: 10px;
+    align-items: left;
+    font-size: 17px;
+  }
+
+   .formheading h2{
+    font-size: 29px !important;
+
+  }
+
+
+  .iconHolder{
+    /* border: 2px solid red; */
+    /* margin:auto !important; */
+    /* margin-right: 10px !important; */
+    height: 40px !important;
+    width: 40px !important;
+
+    padding: 0 !important;
+  }
+  .iconHolder img{
+    height: 100%;
+    width: 100%;
+  }
+  .main_inner_nav_heading{
+    /* border: 2px solid red; */
+    font-size: 15px;
+   
+    /* width: 400px; */
+  }
+
+
 }

@@ -73,7 +73,7 @@ const ViewRecords = () => {
   };
 
   return (
-    <div className="myform">
+    <div className="myform viewrecord">
       <div>
         <div className="formelement">
           <label htmlFor="nameField">Name :</label>
