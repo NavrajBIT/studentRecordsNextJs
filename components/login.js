@@ -14,6 +14,10 @@ const Login = () => {
     setStatus("logging in...");
     let userName = document.getElementById("userName").value;
     let password = document.getElementById("userPassword").value;
+
+    // user.updateState("Admin", 1, 1);
+    //         router.push("/dashboard")
+
     await checkLogin(userName, password)
       .then((res) => {
         if (res.status === "Failed") {

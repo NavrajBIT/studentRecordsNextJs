@@ -9,7 +9,11 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="sidebar" id="sidbar">
+      <div
+        className="sidebar"
+        id="sidbar"
+        style={user.userState.sidebar ? { width: "320px" } : { width: "0px" }}
+      >
         <h1
           onClick={() => {
             user.updateState(user.userState.type, user.userState.id, 1);
