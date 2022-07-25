@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import userContext from "../context/userContext";
 import IndividualAttendence from "./Attendence/individualAttendence";
 import StudentName from "./Attendence/studentName";
+import { Bars } from 'react-loading-icons'
 
 import {
   getStudentAttendence,

@@ -5,6 +5,8 @@ import {
   getAssignmentSolutions,
   getStudentData,
 } from "../api/contractCall";
+import { Bars } from 'react-loading-icons'
+
 
 const AssignmentView = (props) => {
   const [mySolutions, setMySolutions] = useState([]);
@@ -12,7 +14,7 @@ const AssignmentView = (props) => {
     "No submissions found."
   );
   useEffect(() => {
-    setMySubmissionStatus("Loading submissions...");
+    setMySubmissionStatus(<Bars height={35} />);
     getAssignmentSolutions(props.assignmentId)
       .then(async (res) => {
         setTimeout(() => {

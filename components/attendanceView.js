@@ -1,3 +1,4 @@
+import { BaseNextResponse } from "next/dist/server/base-http";
 import React from "react";
 import { useState, useEffect } from "react";
 import {
@@ -7,6 +8,9 @@ import {
 } from "../api/contractCall";
 import IndividualAttendence from "./Attendence/individualAttendence";
 import StudentName from "./Attendence/studentName";
+
+import { Bars } from 'react-loading-icons'
+
 
 const AttendanceView = () => {
   const [status, setStatus] = useState("");
@@ -61,7 +65,7 @@ const AttendanceView = () => {
 
   const poppulateAttendanceData = async () => {
     if (selectedGrade > 0) {
-      setStatus("Loading students...");
+      setStatus(<Bars height={35}/>);
       await getStudentsFromGrade(parseInt(selectedGrade))
         .then((res) => {
           console.log(res);

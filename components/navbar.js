@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import userContext from "../context/userContext";
 import { useRouter } from "next/dist/client/router";
 import { getStudentData } from "../api/contractCall";
-
+import {GrUserAdmin} from "react-icons/gr"
 const Navbar = () => {
   const user = useContext(userContext);
   const [myName, setMyName] = useState("_name_");
@@ -26,6 +26,7 @@ const Navbar = () => {
     <>
       <div className="navbar" width='100%'>
         <div className="navbar-left">
+        
           <img
             src="https://kvsangathan.nic.in/sites/all/themes/kvs/logo.png"
             alt="Hughes Chem"
@@ -33,8 +34,11 @@ const Navbar = () => {
             height="50"
           />
         </div>
-        <div className="navbar-right">
-          {myName}
+        <div className="navbar-right" style={{fontSize:'25px' , color:"white"}}>
+        {/* <div className="icons" style={{fontSize:'30px' , color:"white" , marginTop:"10px" , marginRight:"10px"}}>
+          {/* <GrUserAdmin/>  */}
+        {/* </div> */} 
+        {myName}
           <div style={{ margin: "0px 20px" }}>
             <button
               onClick={() => {

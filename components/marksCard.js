@@ -3,6 +3,7 @@ import { fileDownload, fileHash } from "../api/contractCall";
 import { useState, useContext, useEffect } from "react";
 import { addMarksCard, getMarksCard } from "../api/contractCall";
 import userContext from "../context/userContext";
+import { Bars } from 'react-loading-icons'
 
 const MarksCard = () => {
   const [status, setStatus] = useState("");
@@ -12,7 +13,7 @@ const MarksCard = () => {
   ////student hooks
   const [myMarks, setMyMarks] = useState([]);
   useEffect(() => {
-    setStatus("loading grade card...");
+    setStatus(<Bars height={35} />);
     getMarksCard(user.userState.id)
       .then((res) => {
         console.log(res);

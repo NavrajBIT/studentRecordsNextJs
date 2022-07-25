@@ -37,7 +37,6 @@ const AppContent = () => {
         {user.userState.view === 4 && <AttendanceMark />}
         {user.userState.view === 4.1 && <AttendanceView />}
         {user.userState.view === 4.2 && <AttendanceViewStudent />}
-
         {user.userState.view === 5 && <Assignment />}
         {user.userState.view === 5.1 && <SubmittedAssignmentView />}
         {user.userState.view === 6 && <MarksCard />}

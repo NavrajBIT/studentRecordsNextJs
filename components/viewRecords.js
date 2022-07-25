@@ -3,11 +3,17 @@ import { searchStudent } from "../api/contractCall";
 import { useState } from "react";
 import { useContext } from "react";
 import userContext from "../context/userContext";
+// import {AiOutlineLoading3Quarters} from "react-icons/ai"
+// import { Circles } from 'react-loading-icons'
+import { SpinningCircles } from 'react-loading-icons'
+
+
+
 
 const ViewRecords = () => {
   const user = useContext(userContext);
   const [searchData, setSearchData] = useState([]);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState()
 
   const getDate = (epochValue) => {
     epochValue = parseInt(epochValue) * 1000;
@@ -16,7 +22,11 @@ const ViewRecords = () => {
   };
 
   const searchStudents = async () => {
-    setStatus("Searching...");
+    // setStatus(<Circles  height={50}/>);
+    
+    setStatus(<SpinningCircles  height={50} stroke="#98ff98" strokeOpacity={.125}/>);
+
+    
     let studentName = document.getElementById("nameField").value;
     let studentGrade = document.getElementById("gradeField").value;
     let studentRollNumber = document.getElementById("idField").value;

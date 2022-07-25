@@ -3,15 +3,16 @@ import { useState, useContext } from "react";
 import userContext from "../context/userContext";
 import { checkLogin } from "../api/contractCall";
 import { useRouter } from "next/router";
+import { Bars } from 'react-loading-icons'
 
 const Login = () => {
   const [name, setName] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("")
   const user = useContext(userContext);
   const router = useRouter();
 
   const loginUser = async () => {
-    setStatus("logging in...");
+    setStatus(<Bars height={25} width={50}/>);
     let userName = document.getElementById("userName").value;
     let password = document.getElementById("userPassword").value;
 

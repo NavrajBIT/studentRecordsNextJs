@@ -9,6 +9,9 @@ import {
 import { useState, useContext } from "react";
 import userContext from "../context/userContext";
 
+import { Bars } from 'react-loading-icons'
+
+
 const Profile = () => {
   const user = useContext(userContext);
   const [status, setStatus] = useState("");
@@ -97,7 +100,7 @@ const Profile = () => {
   }, [isEditing]);
 
   const submitData = async () => {
-    setStatus("Updating student data...");
+    setStatus(<Bars height={35}/>);
     let defaultDob = document.getElementById("dob").value;
     let DateDob = new Date(defaultDob);
     let dob = parseInt(DateDob.getTime() / 1000);

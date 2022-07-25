@@ -18,8 +18,10 @@ const Layout = () => {
     <>
       <Navbar />
       <div className="pageLayout">
+      {/* <div className="sidebar_content"> */}
         <Sidebar />
-        <AppContent />
+      {/* </div> */}
+        <AppContent />  
       </div>
     </>
   );

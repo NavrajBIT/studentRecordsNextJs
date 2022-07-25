@@ -9,6 +9,8 @@ import {
   fileDownload,
 } from "../api/contractCall";
 import userContext from "../context/userContext";
+import { Bars } from 'react-loading-icons'
+
 
 const TimeTable = () => {
   const [status, setStatus] = useState("");
@@ -24,7 +26,7 @@ const TimeTable = () => {
   const [myExamTableTime, setMyExamTableTime] = useState(0);
 
   useEffect(() => {
-    setStatus("loading time tables...");
+    setStatus(<Bars height={35} />);
     getStudentData(user.userState.id)
       .then((res) => {
         let grade = res.grade;

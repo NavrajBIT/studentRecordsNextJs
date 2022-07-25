@@ -4,10 +4,20 @@ import { fileHash, addStudentData } from "../api/contractCall";
 import { useState } from "react";
 import { useContext } from "react";
 import userContext from "../context/userContext";
+import { SpinningCircles } from 'react-loading-icons'
+import { Puff } from 'react-loading-icons'
+import { ThreeDots } from 'react-loading-icons'
+import { TailSpin } from 'react-loading-icons'
+import {BsUpload} from "react-icons/bs"
+
+
+
+
+ 
 
 const AddStudent = () => {
   const user = useContext(userContext);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState();
   const [fileData, setFileData] = useState({
     uploadAadharFront: "",
     uploadAadharBack: "",
@@ -17,7 +27,9 @@ const AddStudent = () => {
   });
 
   const submitData = async () => {
-    setStatus("Adding student...");
+    // setStatus(<SpinningCircles  height={80} stroke="#98ff98" strokeOpacity={.125}/>);
+    // setStatus(<ThreeDots height={50}  stroke="#98ff98" strokeOpacity={.125} />)
+    setStatus(<TailSpin height={150} left={200} width={70} stroke="#98ff98" strokeOpacity={1.125}  />)
     let defaultDob = document.getElementById("dob").value;
     let DateDob = new Date(defaultDob);
     let dob = parseInt(DateDob.getTime() / 1000);
@@ -91,8 +103,8 @@ const AddStudent = () => {
                 if (label.type === "file") {
                   return (
                     <div className="formelement"  key={label.id}>
-                      <label htmlFor={label.id}>
-                        {label.label} :
+                      <label htmlFor={label.id} style={{cursor:"pointer"}}>
+                        <BsUpload/> {label.label} :
                         <span>{label.required === "y" && "*"}</span>
                       </label>
                       <label

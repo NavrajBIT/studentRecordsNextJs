@@ -53,6 +53,7 @@ const InnerNavbar = () => {
             onClick={() => {
               toggleSidebar();
             }}
+            style={{cursor:"pointer"}}
           />
         </div>
         <div className="main_inner_nav_heading">

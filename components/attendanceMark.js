@@ -1,5 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
+// import Bars from "react-loading-icons/dist/esm/components/bars";
+import { Bars } from 'react-loading-icons'
+
 import { getStudentsFromGrade, markAttendance } from "../api/contractCall";
 import StudentName from "./Attendence/studentName";
 
@@ -10,7 +13,7 @@ const Attendance = () => {
   const [students, setStudents] = useState([]);
   useEffect(() => {
     if (selectedGrade > 0) {
-      setStatus("Loading students...");
+      setStatus(<Bars  height={35}/>);
       getStudentsFromGrade(parseInt(selectedGrade))
         .then((res) => {
           setStudents(res.data);

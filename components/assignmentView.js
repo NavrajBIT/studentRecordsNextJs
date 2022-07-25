@@ -9,6 +9,8 @@ import {
 } from "../api/contractCall";
 import userContext from "../context/userContext";
 import AssignmentView from "./assignmentAnswers";
+import { Bars } from 'react-loading-icons'
+
 
 const SubmittedAssignmentView = () => {
   const [status, setStatus] = useState("");
@@ -18,7 +20,7 @@ const SubmittedAssignmentView = () => {
   const [selectedGrade, setSelectedGrade] = useState(0);
   useEffect(() => {
     if (parseInt(document.getElementById("gradeSelector").value) > 0) {
-      setStatus("loading assignments...");
+      setStatus(<Bars height={35}/>);
       let grade = parseInt(document.getElementById("gradeSelector").value);
       let today = new Date();
       let todayDate = parseInt(today.getTime() / 1000);

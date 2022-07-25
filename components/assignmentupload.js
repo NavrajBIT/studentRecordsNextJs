@@ -12,6 +12,9 @@ import AssignmentView from "./assignmentAnswers";
 
 import Viewassignment from "./Viewassignment";
 import { useNavigate } from "react-router-dom";
+
+import { Bars } from 'react-loading-icons'
+
 const Assignment = () => {
   // const navigate = useNavigaate
   // const navigate = useNavigate()
@@ -24,7 +27,7 @@ const Assignment = () => {
   const [click , setClick] = useState('false')
   useEffect(() => {
     if (user.userState.type === "Student") {
-      setStatus("loading assignments...");
+      setStatus(<Bars height={35} />);
       getStudentData(user.userState.id)
         .then((res) => {
           let grade = res.grade;
