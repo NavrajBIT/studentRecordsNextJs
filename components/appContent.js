@@ -17,8 +17,7 @@ import AcademicPerformance from "./academicPerformance";
 import { useContext } from "react";
 import userContext from "../context/userContext";
 import AttendanceMark from "./attendanceMark";
-import Viewassignment from "./Viewassignment";
-import UploadAssignment from "./UploadAssignment";
+
 const AppContent = () => {
   const user = useContext(userContext);
   return (

@@ -1,5 +1,12 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
+
+import dynamic from "next/dynamic";
+
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
+
+// import ReactApexChart from "react-apexcharts";
 // import box from "./box.module.css";
 import { useState, useEffect } from "react";
 import { getStudentsInGradeSection } from "../../api/contractCall";
