@@ -18,75 +18,82 @@ const AdminDash = () => {
   const [femaleNumber, setfemaleNumber] = useState(0);
   const [gradeSectionData, setGradeSectionData] = useState([]);
 
-  const [performanceIndicators, setPerformanceIndicators] = useState([]);
+  const [performanceIndicators, setPerformanceIndicators] = useState([
+    { passedStudents: 100, failedStudents: 30, batch: 2000 },
+    { passedStudents: 120, failedStudents: 16, batch: 2001 },
+    { passedStudents: 95, failedStudents: 18, batch: 2002 },
+    { passedStudents: 65, failedStudents: 25, batch: 2003 },
+    { passedStudents: 80, failedStudents: 11, batch: 2004 },
+    { passedStudents: 125, failedStudents: 9, batch: 2005 },
+    { passedStudents: 113, failedStudents: 5, batch: 2006 },
+    { passedStudents: 125, failedStudents: 2, batch: 2007 },
+    { passedStudents: 94, failedStudents: 2, batch: 2008 },
+    { passedStudents: 100, failedStudents: 1, batch: 2009 },
+  ]);
 
-  useEffect(() => {
-    getGenderKPI().then((res) => {
-      settotalNumber(res.totalNumber);
-      setmaleNumber(res.maleNumber);
-      setfemaleNumber(res.femaleNumber);
-    });
-    poppulateKPI();
-  }, []);
+  // useEffect(() => {
+  //   getGenderKPI().then((res) => {
+  //     settotalNumber(res.totalNumber);
+  //     setmaleNumber(res.maleNumber);
+  //     setfemaleNumber(res.femaleNumber);
+  //   });
+  //   poppulateKPI();
+  // }, []);
 
-  const poppulateKPI = async () => {
-    gradeSectionData = [];
-    setGradeSectionData(gradeSectionData);
+  // const poppulateKPI = async () => {
+  //   gradeSectionData = [];
+  //   setGradeSectionData(gradeSectionData);
 
-    for (let grade = 1; grade <= 10; grade++) {
-      let gradeData = { a: 0, b: 0, c: 0, d: 0 };
+  //   for (let grade = 1; grade <= 10; grade++) {
+  //     let gradeData = { a: 0, b: 0, c: 0, d: 0 };
 
-      await getStudentsInGradeSection(grade, "a").then((res) => {
-        gradeData.a = res;
-      });
-      await getStudentsInGradeSection(grade, "b").then((res) => {
-        gradeData.b = res;
-      });
-      await getStudentsInGradeSection(grade, "c").then((res) => {
-        gradeData.c = res;
-      });
-      await getStudentsInGradeSection(grade, "d").then((res) => {
-        gradeData.d = res;
-      });
-      gradeSectionData.push(gradeData);
-    }
+  //     await getStudentsInGradeSection(grade, "a").then((res) => {
+  //       gradeData.a = res;
+  //     });
+  //     await getStudentsInGradeSection(grade, "b").then((res) => {
+  //       gradeData.b = res;
+  //     });
+  //     await getStudentsInGradeSection(grade, "c").then((res) => {
+  //       gradeData.c = res;
+  //     });
+  //     await getStudentsInGradeSection(grade, "d").then((res) => {
+  //       gradeData.d = res;
+  //     });
+  //     gradeSectionData.push(gradeData);
+  //   }
 
-    setGradeSectionData(gradeSectionData);
-  };
+  //   setGradeSectionData(gradeSectionData);
+  // };
 
   return (
     <>
-      <div className="myform firstBox" >
+      <div className="myform firstBox">
         <div>
           <h2>1. Gender distribution of students</h2>
         </div>
 
         <div className="box1">
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            color: "white",
-            width: "100%",
-            justifyContent: "left",
-            alignItems: "left",
-          }}
-          className={dash.box1content}
-          
-        >
-          <div>Total Students : {totalNumber}</div>
-          <div>Male : {maleNumber}</div>
-          <div>Female : {femaleNumber}</div>
-        </div>
-        <div className={dash.content1}>
-          <div className={dash.piechart}>
-            <PieChart />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              color: "white",
+              width: "100%",
+              justifyContent: "left",
+              alignItems: "left",
+            }}
+            className={dash.box1content}
+          >
+            <div>Total Students : 8000</div>
+            <div>Male : 4505</div>
+            <div>Female : 3495</div>
+          </div>
+          <div className={dash.content1}>
+            <div className={dash.piechart}>
+              <PieChart />
+            </div>
           </div>
         </div>
-        </div>
-
-
       </div>
 
       <div className="myform secondBox">
@@ -106,34 +113,34 @@ const AdminDash = () => {
           <select
             name="gradeField"
             id="gradeField"
-            onChange={() => {
-              let grade = parseInt(document.getElementById("gradeField").value);
-              if (grade > 0) {
-                getBatchCount(grade)
-                  .then(async (res) => {
-                    if (res > 0) {
-                      let performanceIndicators = [];
-                      for (let i = 1; i <= 10; i++) {
-                        await getPerformanceIndicator(i, grade)
-                          .then((indicator) => {
-                            performanceIndicators.push(indicator);
-                            if (i == 10) {
-                              setPerformanceIndicators(performanceIndicators);
-                            }
-                          })
-                          .then((err) => {
-                            console.log(err);
-                          });
-                      }
-                    } else {
-                      setPerformanceIndicators([]);
-                    }
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
-              }
-            }}
+            // onChange={() => {
+            //   let grade = parseInt(document.getElementById("gradeField").value);
+            //   if (grade > 0) {
+            //     getBatchCount(grade)
+            //       .then(async (res) => {
+            //         if (res > 0) {
+            //           let performanceIndicators = [];
+            //           for (let i = 1; i <= 10; i++) {
+            //             await getPerformanceIndicator(i, grade)
+            //               .then((indicator) => {
+            //                 performanceIndicators.push(indicator);
+            //                 if (i == 10) {
+            //                   setPerformanceIndicators(performanceIndicators);
+            //                 }
+            //               })
+            //               .then((err) => {
+            //                 console.log(err);
+            //               });
+            //           }
+            //         } else {
+            //           setPerformanceIndicators([]);
+            //         }
+            //       })
+            //       .catch((err) => {
+            //         console.log(err);
+            //       });
+            //   }
+            // }}
           >
             <option value="0">Choose Grade</option>
             <option value="1">1st</option>

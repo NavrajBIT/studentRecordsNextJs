@@ -21,41 +21,41 @@ const Profile = () => {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [mystudentData, setMyStudentData] = useState({
-    studentName: "loading...",
+    studentName: "Ramesh Kumar",
     dob: "loading...",
-    rollNumber: "loading...",
-    grade: "loading...",
-    section: "loading...",
-    email: "loading...",
-    religion: "loading...",
-    caste: "loading...",
-    nationality: "loading...",
-    aadharNumber: "loading...",
-    gender: "loading...",
-    fatherName: "loading...",
-    currentAddress: "loading...",
-    officeAddress: "loading...",
-    fatherOccupation: "loading...",
-    fatherEducation: "loading...",
-    motherName: "loading...",
-    motherOccupation: "loading...",
-    motherEducation: "loading...",
-    guardianName: "loading...",
-    guardianAddress: "loading...",
-    familyIncome: "loading...",
-    primaryContact: "loading...",
-    secondaryContact: "loading...",
+    rollNumber: "2065",
+    grade: "7th",
+    section: "a",
+    email: "ramesh@sampleschool.com",
+    religion: "Hindu",
+    caste: "General",
+    nationality: "Indian",
+    aadharNumber: "123456789",
+    gender: "male",
+    fatherName: "Suresh Kumar",
+    currentAddress: "H.No.123, Current street, Current City",
+    officeAddress: "#632, Office plaza, Office Street, Office City",
+    fatherOccupation: "Salesman",
+    fatherEducation: "B.A.",
+    motherName: "Radha Kumari",
+    motherOccupation: "Teacher",
+    motherEducation: "M.A. B.Ed.",
+    guardianName: "Harish Kumar",
+    guardianAddress: "H.No. 654, Guardian Street, Guardian City",
+    familyIncome: "10,00,000",
+    primaryContact: "+91 9876543210",
+    secondaryContact: "+91 9812345678",
     uploadAadharFront: "loading...",
     uploadAadharBack: "loading...",
     uploadIncomeCertificate: "loading...",
     uploadBirthCertificate: "loading...",
     uploadCasteCertificate: "loading...",
-    sportsInvolved: "loading...",
-    sportsAchievements: "loading...",
-    extraCurricullum: "loading...",
-    extraCurricullumAchievements: "loading...",
-    personalityDevelopment: "loading...",
-    personalityDevelopmentAchievements: "loading...",
+    sportsInvolved: "Cricket",
+    sportsAchievements: "State team captain",
+    extraCurricullum: "Dancing",
+    extraCurricullumAchievements: "Won national Competition",
+    personalityDevelopment: "Took English Speaking Course",
+    personalityDevelopmentAchievements: "Certification",
   });
 
   const getDate = (epochValue) => {
@@ -78,23 +78,23 @@ const Profile = () => {
     return myYear + "-" + myMonth + "-" + myDay;
   };
 
-  useEffect(() => {
-    if (user.userState.id > 0) {
-      getStudentData(user.userState.id).then((res) => {
-        setMyStudentData(res);
-        fileData = {
-          uploadAadharFront: res.uploadAadharFront,
-          uploadAadharBack: res.uploadAadharBack,
-          uploadIncomeCertificate: res.uploadIncomeCertificate,
-          uploadBirthCertificate: res.uploadBirthCertificate,
-          uploadCasteCertificate: res.uploadCasteCertificate,
-        };
-        setFileData(fileData);
-      });
-    } else {
-      user.updateState(user.userState.type, user.userState.type, 2);
-    }
-  }, [isEditing]);
+  // useEffect(() => {
+  //   if (user.userState.id > 0) {
+  //     getStudentData(user.userState.id).then((res) => {
+  //       setMyStudentData(res);
+  //       fileData = {
+  //         uploadAadharFront: res.uploadAadharFront,
+  //         uploadAadharBack: res.uploadAadharBack,
+  //         uploadIncomeCertificate: res.uploadIncomeCertificate,
+  //         uploadBirthCertificate: res.uploadBirthCertificate,
+  //         uploadCasteCertificate: res.uploadCasteCertificate,
+  //       };
+  //       setFileData(fileData);
+  //     });
+  //   } else {
+  //     user.updateState(user.userState.type, user.userState.type, 2);
+  //   }
+  // }, [isEditing]);
 
   const submitData = async () => {
     setStatus("Updating student data...");

@@ -108,10 +108,12 @@ const TimeTable = () => {
                 domItem.innerHTML = "Uploading...";
                 await fileHash(e.target.files[0])
                   .then((res) => {
+                    console.log(res);
                     setFileData(res);
                     domItem.innerHTML = e.target.files[0].name;
                   })
                   .catch((err) => {
+                    console.log(err);
                     domItem.innerHTML = "Error. Choose file again.";
                   });
               }}

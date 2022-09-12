@@ -55,6 +55,7 @@ const AssignmentData = () => {
                 onClick={() => {
                   // let url = "http://ipfs.io/ipfs/" + assignment.file;
                   // window.open(url);
+                  console.log("Clicked here");
                 }}
               >
                 Download assignment

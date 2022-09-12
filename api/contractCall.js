@@ -2,21 +2,22 @@ import { ethers } from "ethers";
 import contractData from "./contractData.json";
 import compiledContract from "./compiledContract.json";
 import { create } from "ipfs-http-client";
+import { Web3Storage } from "web3.storage";
 
 export const mainAdmins = {
-  1: "e84de22f5d5726600a1e3fd4df53b0bc8b8844901911961349f7aa9a38c037ad",
-  2: "3b08e5d5339499a5dcaf562e5617b64125be1eddcb0dda513c737125c794cd97",
-  3: "f56573e1593727f1eb09e42567ee603dcf5c1a5c3a848bbcca1aac25ff39216c",
+  1: "0bdcbd60a73c33b212cabfaa64826ab5697b0c8678cccdc1ad1c6d7238f91245",
+  2: "22bccf7763541eb0ef72887064314978f4f0451eadca1a473bd7fdcb22ae96ca",
+  3: "459be641c65d575692a3108826a1df456dca1391849941d92b9062ca0bd53306",
 };
 
-const client = create("http://localhost:5001");
+// const client = create("http://localhost:5001");
 
 //Provider
 const provider = new ethers.providers.JsonRpcProvider("");
 const iface = new ethers.utils.Interface(compiledContract["abi"]);
 //Signer
 const wallet = new ethers.Wallet(
-  "e84de22f5d5726600a1e3fd4df53b0bc8b8844901911961349f7aa9a38c037ad",
+  "0bdcbd60a73c33b212cabfaa64826ab5697b0c8678cccdc1ad1c6d7238f91245",
   provider
 );
 //Conrtact
@@ -28,9 +29,20 @@ const myContract = new ethers.Contract(
 
 const mySignerContract = myContract.connect(wallet);
 
+const makeStorageClient = () => {
+  return new Web3Storage({
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGQyRjVFZkI5QmZFOThhOGQ4YkQ0NzVmMTg4OTU5N2YxQ2M2QzBiMkIiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTgzMzQ0NDY4NDMsIm5hbWUiOiJzdHVkZW50cmVjb3JkcyJ9.y6rtpa_8sY6j4dMO8LteeqLdS4JmsBub29sN7Olz9MY",
+  });
+};
+
 export const fileHash = async (file) => {
-  let response = await client.add(file);
-  return response["path"];
+  // let response = await client.add(file);
+  // return response["path"];
+  let files = [file];
+  const client = makeStorageClient();
+  const cid = await client.put(files);
+  return cid;
 };
 
 export const fileDownload = async (hash, fileName) => {

@@ -16,7 +16,7 @@ function PieChart() {
   const [data, setData] = useState({
     datasets: [
       {
-        data: [10, 10],
+        data: [4505, 3495],
         backgroundColor: ["#69d2e7", "#f9a3a4"],
         radius: "90%",
         hoverOffset: 12,
@@ -25,25 +25,25 @@ function PieChart() {
     labels: ["Male", "Female"],
   });
 
-  useEffect(() => {
-    getGenderKPI().then((res) => {
-      console.log(res)
-      settotalNumber(res.totalNumber);
-      setmaleNumber(res.maleNumber);
-      setfemaleNumber(res.femaleNumber);
-      setData({
-        datasets: [
-          {
-            data: [res.maleNumber, res.femaleNumber],
-            backgroundColor: ["#69d2e7", "#f9a3a4"],
-            radius: "90%",
-            hoverOffset: 12,
-          },
-        ],
-        labels: ["Male", "Female"],
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   getGenderKPI().then((res) => {
+  //     console.log(res)
+  //     settotalNumber(res.totalNumber);
+  //     setmaleNumber(res.maleNumber);
+  //     setfemaleNumber(res.femaleNumber);
+  //     setData({
+  //       datasets: [
+  //         {
+  //           data: [res.maleNumber, res.femaleNumber],
+  //           backgroundColor: ["#69d2e7", "#f9a3a4"],
+  //           radius: "90%",
+  //           hoverOffset: 12,
+  //         },
+  //       ],
+  //       labels: ["Male", "Female"],
+  //     });
+  //   });
+  // }, []);
 
   return (
     <div>
