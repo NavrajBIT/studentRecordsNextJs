@@ -1,5 +1,11 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
+
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
+
+// import ReactApexChart from "react-apexcharts";
 // import box from "./box.module.css";
 
 const PerformanceChart = (props) => {
@@ -206,12 +212,14 @@ const PerformanceChart = (props) => {
   return (
     <>
       <div id="box">
-        <ReactApexChart
-          options={state.options}
-          series={state.series}
-          type="bar"
-          height={350}
-        />
+        {typeof window !== "undefined" && (
+          <ReactApexChart
+            options={state.options}
+            series={state.series}
+            type="bar"
+            height={350}
+          />
+        )}
       </div>
     </>
   );

@@ -22,7 +22,7 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [mystudentData, setMyStudentData] = useState({
     studentName: "Ramesh Kumar",
-    dob: "loading...",
+    dob: "1000298445",
     rollNumber: "2065",
     grade: "7th",
     section: "a",

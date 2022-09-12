@@ -1,16 +1,19 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
+
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
+
+// import ReactApexChart from "react-apexcharts";
 import box from "./box.module.css";
 
 const UploadAssignment = () => {
   const state = {
     series: [
-
       {
         name: "Section A",
-        data: [4, 5, 4, 7, 2] ,
-
-
+        data: [4, 5, 4, 7, 2],
       },
       {
         name: "Section B",
@@ -24,27 +27,24 @@ const UploadAssignment = () => {
         name: "Section D",
         data: [2, 7, 2, 3, 2],
       },
-      
     ],
     options: {
-      tooltip:{
-        enabled:true,
+      tooltip: {
+        enabled: true,
         followCursor: true,
-        theme: 'dark'
+        theme: "dark",
       },
-      title:{
-        text:"Student Details",
-        style:{
-          color:"white",
-
-        }
+      title: {
+        text: "Student Details",
+        style: {
+          color: "white",
+        },
       },
       chart: {
-        
         type: "bar",
         height: 350,
         stacked: true,
-        
+
         toolbar: {
           show: true,
         },
@@ -71,122 +71,104 @@ const UploadAssignment = () => {
         },
       },
       xaxis: {
-        title:{
-          text:"Number of Classes",
-          style:{
-            color:"white",
-            fontSize:'15',
-            color:'white'
-          }
+        title: {
+          text: "Number of Classes",
+          style: {
+            color: "white",
+            fontSize: "15",
+            color: "white",
+          },
         },
-        categories: [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-        ],
+        categories: ["1", "2", "3", "4", "5"],
         labels: {
-          style:{
-            colors:["white" ,"white","white" ,"white" ,"white"  ]           
-          }
+          style: {
+            colors: ["white", "white", "white", "white", "white"],
+          },
         },
       },
-      
-      yaxis:{
-        show:true,
+
+      yaxis: {
+        show: true,
         min: 0,
         max: 22,
-        tickAmount: 12, // this will control the jump between the numbers 
-        title:{
-          text:"Number of Students",
+        tickAmount: 12, // this will control the jump between the numbers
+        title: {
+          text: "Number of Students",
           offsetX: -5,
-          style:{
-            fontSize:'15',
-            color:'white',
-
-          }
+          style: {
+            fontSize: "15",
+            color: "white",
+          },
         },
-       
+
         labels: {
-          show:true,
+          show: true,
           offsetX: -5,
-          style:{
-            colors:["white" ,"white","white" ,"white" ,"white" , ] 
-          }
+          style: {
+            colors: ["white", "white", "white", "white", "white"],
+          },
         },
-
-
       },
       legend: {
         position: "right",
         labels: {
-          style:{
-            colors:["white" ,"white","white" ,"white" ]      ,
-            text: "white"     
-          }
+          style: {
+            colors: ["white", "white", "white", "white"],
+            text: "white",
+          },
         },
 
         // offsetY: 40,
       },
-      dataLabels:{
-        enabled:true,
-        color:"black"
+      dataLabels: {
+        enabled: true,
+        color: "black",
       },
-      
-      
-grid: {
-  show: true,
-  borderColor: '#90A4AE',
-  strokeDashArray: 0,
-  position: 'back',
-  xaxis: {
-      lines: {
-          show: false
-      }
-  },   
-  yaxis: {
-      lines: {
-          show: false
-      }
-  },  
-  row: {
 
-      opacity: 0.5
-  },  
-  column: {
-      opacity: 0.5
-  },  
-  padding: {
-      top:  10,
-      right: 0,
-      bottom: 0,
-      left: 20
-  },  
-},
-
-
+      grid: {
+        show: true,
+        borderColor: "#90A4AE",
+        strokeDashArray: 0,
+        position: "back",
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+        yaxis: {
+          lines: {
+            show: false,
+          },
+        },
+        row: {
+          opacity: 0.5,
+        },
+        column: {
+          opacity: 0.5,
+        },
+        padding: {
+          top: 10,
+          right: 0,
+          bottom: 0,
+          left: 20,
+        },
+      },
 
       stroke: {
         width: 1,
-        colors: ['white']
+        colors: ["white"],
       },
       fill: {
         opacity: 1,
-        
       },
       theme: {
         monochrome: {
           enabled: false,
-          shadeTo: 'dark',
+          shadeTo: "dark",
           shadeIntensity: 1,
-        }
+        },
       },
-      
-      
-
     },
-    
   };
   return (
     <>
@@ -195,7 +177,7 @@ grid: {
           options={state.options}
           series={state.series}
           type="bar"
-          height={350}        
+          height={350}
         />
       </div>
     </>

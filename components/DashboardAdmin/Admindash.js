@@ -1,7 +1,17 @@
 import React from "react";
-import BarChart from "./BarChart";
 import dash from "./dash.module.css";
-import PieChart from "./PieChart";
+
+import dynamic from "next/dynamic";
+
+// const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+// const BarChart = dynamic(() => import("./BarChart"), { ssr: false });
+const PieChart = dynamic(() => import("./PieChart"), { ssr: false });
+// const PerformanceChart = dynamic(() => import("./PerformanceChart"), {
+//   ssr: false,
+// });
+
+import BarChart from "./BarChart";
+// import PieChart from "./PieChart";
 import PerformanceChart from "./PerformanceChart";
 
 import { useState, useEffect } from "react";
@@ -90,7 +100,7 @@ const AdminDash = () => {
           </div>
           <div className={dash.content1}>
             <div className={dash.piechart}>
-              <PieChart />
+              {typeof window !== "undefined" && <PieChart />}
             </div>
           </div>
         </div>
@@ -100,7 +110,6 @@ const AdminDash = () => {
         <div>
           <h2>2. Grade distribution of students</h2>
         </div>
-
         <BarChart />
       </div>
       <div className="myform thirdBox">

@@ -1,5 +1,11 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
+// import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
+
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
+
 // import box from "./box.module.css";
 import { useState, useEffect } from "react";
 import { getStudentsInGradeSection } from "../../api/contractCall";
@@ -600,12 +606,14 @@ const BarChart = () => {
   return (
     <>
       <div id="box">
-        <ReactApexChart
-          options={state.options}
-          series={state.series}
-          type="bar"
-          height={350}
-        />
+        {
+          <ReactApexChart
+            options={state.options}
+            series={state.series}
+            type="bar"
+            height={350}
+          />
+        }
       </div>
     </>
   );
